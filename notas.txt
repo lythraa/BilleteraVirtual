@@ -1,0 +1,19 @@
+Crear una rama:
+git checkout -b mi-rama
+
+Subir la rama al repositorio remoto:
+git push -u origin mi-rama
+
+Para tu compañero:
+git fetch origin (para traer todas las ramas remotas)
+git checkout rama-compañero (para cambiarse a su propia rama)
+
+Realizar cambios y commits en la rama.
+
+Hacer merge de tu rama en main:
+git checkout main
+git pull origin main
+git merge mi-rama
+
+Subir los cambios a main:
+git push origin main
