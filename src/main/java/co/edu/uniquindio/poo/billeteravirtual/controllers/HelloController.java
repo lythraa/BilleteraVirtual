@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual;
+package co.edu.uniquindio.poo.billeteravirtual.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
