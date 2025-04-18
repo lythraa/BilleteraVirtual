@@ -31,12 +31,12 @@ public class Administrador extends Usuario {
         usuario.modificarPerfil(nuevoNombre, nuevoCorreo, nuevoTelefono);
     }
 
-    public void agregarCuentaAUsuario(Usuario usuario, Cuenta cuenta) {
-        usuario.agregarCuenta(cuenta);
+    public void agregarCuentaAUsuario(Usuario usuario, CuentaBancaria cuentaBancaria) {
+        usuario.agregarCuenta(cuentaBancaria);
     }
 
-    public void eliminarCuentaDeUsuario(Usuario usuario, Cuenta cuenta) {
-        usuario.eliminarCuenta(cuenta);
+    public void eliminarCuentaDeUsuario(Usuario usuario, CuentaBancaria cuentaBancaria) {
+        usuario.eliminarCuenta(cuentaBancaria);
     }
 
     public void listarUsuarios(List<Usuario> usuarios) {

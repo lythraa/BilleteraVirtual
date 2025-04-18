@@ -8,19 +8,19 @@ public class Transaccion {
     private String tipo; // Depósito, Retiro, Transferencia
     private double monto;
     private String descripcion;
-    private Cuenta cuentaOrigen;
-    private Cuenta cuentaDestino;
+    private CuentaBancaria cuentaBancariaOrigen;
+    private CuentaBancaria cuentaBancariaDestino;
     private Categoria categoria;
 
     public Transaccion(String idTransaccion, LocalDate fecha, String tipo, double monto, String descripcion,
-                       Cuenta cuentaOrigen, Cuenta cuentaDestino, Categoria categoria) {
+                       CuentaBancaria cuentaBancariaOrigen, CuentaBancaria cuentaBancariaDestino, Categoria categoria) {
         this.idTransaccion = idTransaccion;
         this.fecha = fecha;
         this.tipo = tipo;
         this.monto = monto;
         this.descripcion = descripcion;
-        this.cuentaOrigen = cuentaOrigen;
-        this.cuentaDestino = cuentaDestino;
+        this.cuentaBancariaOrigen = cuentaBancariaOrigen;
+        this.cuentaBancariaDestino = cuentaBancariaDestino;
         this.categoria = categoria;
     }
 
@@ -64,20 +64,20 @@ public class Transaccion {
         this.descripcion = descripcion;
     }
 
-    public Cuenta getCuentaOrigen() {
-        return cuentaOrigen;
+    public CuentaBancaria getCuentaOrigen() {
+        return cuentaBancariaOrigen;
     }
 
-    public void setCuentaOrigen(Cuenta cuentaOrigen) {
-        this.cuentaOrigen = cuentaOrigen;
+    public void setCuentaOrigen(CuentaBancaria cuentaBancariaOrigen) {
+        this.cuentaBancariaOrigen = cuentaBancariaOrigen;
     }
 
-    public Cuenta getCuentaDestino() {
-        return cuentaDestino;
+    public CuentaBancaria getCuentaDestino() {
+        return cuentaBancariaDestino;
     }
 
-    public void setCuentaDestino(Cuenta cuentaDestino) {
-        this.cuentaDestino = cuentaDestino;
+    public void setCuentaDestino(CuentaBancaria cuentaBancariaDestino) {
+        this.cuentaBancariaDestino = cuentaBancariaDestino;
     }
 
     public Categoria getCategoria() {

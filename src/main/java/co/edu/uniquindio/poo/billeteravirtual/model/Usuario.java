@@ -11,7 +11,7 @@ public class Usuario {
     private String direccion;
     private double saldo;
 
-    private List<Cuenta> cuentas = new ArrayList<>();
+    private List<CuentaBancaria> cuentaBancarias = new ArrayList<>();
     private List<Transaccion> transacciones = new ArrayList<>();
     private List<Presupuesto> presupuestos = new ArrayList<>();
 
@@ -58,12 +58,12 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public void agregarCuenta(Cuenta cuenta) {
-        cuentas.add(cuenta);
+    public void agregarCuenta(CuentaBancaria cuentaBancaria) {
+        cuentaBancarias.add(cuentaBancaria);
     }
 
-    public void eliminarCuenta(Cuenta cuenta) {
-        cuentas.remove(cuenta);
+    public void eliminarCuenta(CuentaBancaria cuentaBancaria) {
+        cuentaBancarias.remove(cuentaBancaria);
     }
 
     public void agregarPresupuesto(Presupuesto presupuesto) {
@@ -145,12 +145,12 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public List<Cuenta> getCuentas() {
-        return cuentas;
+    public List<CuentaBancaria> getCuentas() {
+        return cuentaBancarias;
     }
 
-    public void setCuentas(List<Cuenta> cuentas) {
-        this.cuentas = cuentas;
+    public void setCuentas(List<CuentaBancaria> cuentaBancarias) {
+        this.cuentaBancarias = cuentaBancarias;
     }
 
     public List<Transaccion> getTransacciones() {
