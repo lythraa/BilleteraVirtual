@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario extends Perfil {
     private String idUsuario;
     private String nombreCompleto;
     private String correo;
