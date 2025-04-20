@@ -3,32 +3,89 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 import java.time.LocalDate;
 
 public class Transaccion {
-    private String idTransaccion;
+    private int idTransaccion;
     private LocalDate fecha;
-    private String tipo; // Depósito, Retiro, Transferencia
+    private String tipo;
     private double monto;
-    private String descripcion;
-    private CuentaBancaria cuentaBancariaOrigen;
-    private CuentaBancaria cuentaBancariaDestino;
-    private Categoria categoria;
+    private String descripcionOpcional;
+    private CuentaBancaria cuentaOrigen;
+    private CuentaBancaria cuentaDestino;
 
-    public Transaccion(String idTransaccion, LocalDate fecha, String tipo, double monto, String descripcion,
-                       CuentaBancaria cuentaBancariaOrigen, CuentaBancaria cuentaBancariaDestino, Categoria categoria) {
-        this.idTransaccion = idTransaccion;
-        this.fecha = fecha;
-        this.tipo = tipo;
-        this.monto = monto;
-        this.descripcion = descripcion;
-        this.cuentaBancariaOrigen = cuentaBancariaOrigen;
-        this.cuentaBancariaDestino = cuentaBancariaDestino;
-        this.categoria = categoria;
+    /**
+     * Constructor de la clase Transaccion,
+     * Un objeto de tipo Transaccion se construye mediante el Builder
+     * @param builder
+     */
+    private Transaccion(Builder builder) {
+        this.idTransaccion = builder.idTransaccion;
+        this.fecha = builder.fecha;
+        this.tipo = builder.tipo;
+        this.monto = builder.monto;
+        this.descripcionOpcional = builder.descripcionOpcional;
+        this.cuentaOrigen = builder.cuentaOrigen;
+        this.cuentaDestino = builder.cuentaDestino;
     }
 
-    public String getIdTransaccion() {
+    //=====================CLASE INTERNA BUILDER====================//
+
+    public static class Builder {
+        private int idTransaccion;
+        private LocalDate fecha;
+        private String tipo;
+        private double monto;
+        private String descripcionOpcional;
+        private CuentaBancaria cuentaOrigen;
+        private CuentaBancaria cuentaDestino;
+
+        public Transaccion build() {
+            return new Transaccion(this);
+        }
+
+        public Builder idTransaccion(int id) {
+            this.idTransaccion = id;
+            return this;
+        }
+
+        public Builder fecha(LocalDate fecha) {
+            this.fecha = fecha;
+            return this;
+        }
+
+        public Builder tipo(String tipo) {
+            this.tipo = tipo;
+            return this;
+        }
+
+        public Builder monto(double monto) {
+            this.monto = monto;
+            return this;
+        }
+
+        public Builder descripcion(String desc) {
+            this.descripcionOpcional = desc;
+            return this;
+        }
+
+        public Builder cuentaOrigen(CuentaBancaria origen) {
+            this.cuentaOrigen = origen;
+            return this;
+        }
+
+        public Builder cuentaDestino(CuentaBancaria destino) {
+            this.cuentaDestino = destino;
+            return this;
+        }
+
+    }
+
+    //=====================GETTERS Y SETTERS====================//
+
+
+    public int getIdTransaccion() {
         return idTransaccion;
     }
 
-    public void setIdTransaccion(String idTransaccion) {
+    public void setIdTransaccion(int idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
 
@@ -56,35 +113,27 @@ public class Transaccion {
         this.monto = monto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionOpcional() {
+        return descripcionOpcional;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionOpcional(String descripcionOpcional) {
+        this.descripcionOpcional = descripcionOpcional;
     }
 
     public CuentaBancaria getCuentaOrigen() {
-        return cuentaBancariaOrigen;
+        return cuentaOrigen;
     }
 
-    public void setCuentaOrigen(CuentaBancaria cuentaBancariaOrigen) {
-        this.cuentaBancariaOrigen = cuentaBancariaOrigen;
+    public void setCuentaOrigen(CuentaBancaria cuentaOrigen) {
+        this.cuentaOrigen = cuentaOrigen;
     }
 
     public CuentaBancaria getCuentaDestino() {
-        return cuentaBancariaDestino;
+        return cuentaDestino;
     }
 
-    public void setCuentaDestino(CuentaBancaria cuentaBancariaDestino) {
-        this.cuentaBancariaDestino = cuentaBancariaDestino;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCuentaDestino(CuentaBancaria cuentaDestino) {
+        this.cuentaDestino = cuentaDestino;
     }
 }
