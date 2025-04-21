@@ -1,9 +1,11 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import java.util.ArrayList;
+
 public class GestorSesion {
 
     private static GestorSesion instance;
-    private Usuario usuarioActual;
+    private Perfil perfilActual;
 
     /**
      * Constructor privado de la clase para evitar múltiples instancias de la misma
@@ -29,17 +31,24 @@ public class GestorSesion {
      * @param contrasenia contrasenia del perfil
      * @return true en caso de iniciar sesion
      */
-    public void iniciarSesion(Usuario usuario) {
-        this.usuarioActual = usuario;
+    public boolean iniciarSesion(String id, String contrasenia) {
+        ArrayList<Perfil> perfiles = BaseDatos.getInstancia().getPerfiles();
+        for (Perfil perfil : perfiles) {
+            if (id.equals(perfil.getId()) && contrasenia.equals(perfil.getContrasenia())) {
+                this.perfilActual =perfil;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Método que cierra la sesión de usuario.
-     * Al ser llamado, el usuario actual regresará a ser nulo
+     * Método que cierra la sesión de perfil.
+     * Al ser llamado, el perfil actual regresará a ser nulo
      * hasta que se inicie una nueva sesión.
      */
     public void cerrarSesion() {
-        this.usuarioActual = null;
+        this.perfilActual = null;
     }
 
     //=========================GETTERS============================//
