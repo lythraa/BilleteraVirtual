@@ -2,29 +2,48 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 
 public class Perfil {
 
-    private int id;
+    private String id;
     private String nombre;
     private String correo;
     private String telefono;
     private String direccion;
+    private String contrasenia;
 
-    public Perfil(int id, String nombre, String correo, String telefono, String direccion) {
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param correo
+     * @param telefono
+     * @param direccion
+     * @param contrasenia Contraseña de acceso del usuario
+     */
+    public Perfil(String id, String contrasenia, String nombre, String correo, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.contrasenia = contrasenia;
     }
 
-    //=========================GETTERS Y SETTERS============================//
+    //====================GETTERS Y SETTERS=======================//
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {
@@ -58,4 +77,6 @@ public class Perfil {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+
 }

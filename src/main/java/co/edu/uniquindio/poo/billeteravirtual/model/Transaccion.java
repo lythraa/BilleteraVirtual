@@ -3,13 +3,14 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 import java.time.LocalDate;
 
 public class Transaccion {
-    private int idTransaccion;
+    private String idTransaccion;
     private LocalDate fecha;
     private String tipo;
     private double monto;
     private String descripcionOpcional;
     private CuentaBancaria cuentaOrigen;
     private CuentaBancaria cuentaDestino;
+    private Categoria categoria;
 
     /**
      * Constructor de la clase Transaccion,
@@ -29,7 +30,7 @@ public class Transaccion {
     //=====================CLASE INTERNA BUILDER====================//
 
     public static class Builder {
-        private int idTransaccion;
+        private String idTransaccion;
         private LocalDate fecha;
         private String tipo;
         private double monto;
@@ -41,7 +42,7 @@ public class Transaccion {
             return new Transaccion(this);
         }
 
-        public Builder idTransaccion(int id) {
+        public Builder idTransaccion(String id) {
             this.idTransaccion = id;
             return this;
         }
@@ -81,11 +82,11 @@ public class Transaccion {
     //=====================GETTERS Y SETTERS====================//
 
 
-    public int getIdTransaccion() {
+    public String getIdTransaccion() {
         return idTransaccion;
     }
 
-    public void setIdTransaccion(int idTransaccion) {
+    public void setIdTransaccion(String idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
 
