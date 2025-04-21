@@ -1,16 +1,10 @@
-package co.edu.uniquindio.poo.billeteravirtual.viewcontroller;
+package co.edu.uniquindio.poo.billeteravirtual.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class AdministradorController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Label textoHolaUsuario;

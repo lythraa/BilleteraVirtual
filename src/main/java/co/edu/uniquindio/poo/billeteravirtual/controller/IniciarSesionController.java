@@ -1,9 +1,8 @@
-package co.edu.uniquindio.poo.billeteravirtual.viewcontroller;
+package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
