@@ -5,113 +5,104 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="687.0" prefWidth="1194.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <HBox alignment="CENTER">
-                    <children>
-                        <Label styleClass="nebula-title" text="Gestión de Usuarios" />
-                    </children>
+<AnchorPane fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarcuentasController"
+            prefHeight="687.0" prefWidth="1194.0" styleClass="root" stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <HBox alignment="CENTER">
+            <Label styleClass="nebula-title" text="Gestión de Usuarios"/>
+        </HBox>
+        <HBox alignment="CENTER" spacing="30.0">
+            <VBox prefHeight="569.0" prefWidth="332.0" spacing="15.0" styleClass="formulario-box">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" top="20.0"/>
+                </padding>
+                <Label styleClass="label-title" text="Formulario Usuario">
+                    <padding>
+                        <Insets bottom="10.0"/>
+                    </padding>
+                </Label>
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT"/>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                    <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="campoNombre" promptText="Nombre completo" GridPane.columnIndex="1"
+                               GridPane.rowIndex="0"/>
+
+                    <Label text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <TextField fx:id="campoCorreo" promptText="correo@ejemplo.com"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="campoTelefono" promptText="3001234567" GridPane.columnIndex="1"
+                               GridPane.rowIndex="2"/>
+
+                    <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextField fx:id="campoDireccion" promptText="Calle 123 #45-67"
+                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label text="Saldo:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <TextField fx:id="campoSaldo" promptText="0.00" GridPane.columnIndex="1"
+                               GridPane.rowIndex="4"/>
+
+                    <Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                    <TextField fx:id="campoId" promptText="10000000" GridPane.columnIndex="1"
+                               GridPane.rowIndex="5"/>
+
+                    <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                    <PasswordField fx:id="campoContrasena" promptText="••••••••"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                </GridPane>
+                <HBox alignment="CENTER" spacing="10.0">
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                    <Button onAction="#onAgregar" styleClass="button" text="Agregar"/>
+                    <Button onAction="#onEditar" styleClass="button" text="Editar"/>
                 </HBox>
-                <HBox alignment="CENTER" spacing="30.0">
-                    <children>
-                        <VBox prefHeight="569.0" prefWidth="332.0" spacing="15.0" styleClass="formulario-box">
-                            <padding>
-                                <Insets bottom="20.0" left="20.0" top="20.0" />
-                            </padding>
-                            <children>
-                                <Label styleClass="label-title" text="Formulario Usuario">
-                                    <padding>
-                                        <Insets bottom="10.0" />
-                                    </padding>
-                                </Label>
-                                <GridPane hgap="15" vgap="15">
-                                    <columnConstraints>
-                                        <ColumnConstraints halignment="RIGHT" />
-                                        <ColumnConstraints />
-                                    </columnConstraints>
-                                    <children>
-                                        <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <TextField fx:id="campoNombre" promptText="Nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                                        <Label text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField fx:id="campoCorreo" promptText="correo@ejemplo.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                                        <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField fx:id="campoTelefono" promptText="3001234567" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                                        <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                        <TextField fx:id="campoDireccion" promptText="Calle 123 #45-67" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                                        <Label text="Saldo:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <TextField fx:id="campoSaldo" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-                                        <Label text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                                        <TextField fx:id="campoUsuario" promptText="nombreUsuario" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-                                        <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                                        <PasswordField fx:id="campoContrasena" promptText="••••••••" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    </children>
-                                    <rowConstraints>
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                    </rowConstraints>
-                                </GridPane>
-                                <HBox alignment="CENTER" spacing="10.0">
-                                    <children>
-                                        <Button onAction="#onAgregar" styleClass="button" text="Agregar" />
-                                        <Button onAction="#onEditar" styleClass="button" text="Editar" />
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets top="30.0" />
-                                    </VBox.margin>
-                                </HBox>
-                            </children>
-                        </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="751.0" spacing="15.0">
-                            <children>
-                                <HBox alignment="CENTER" spacing="10.0">
-                                    <children>
-                                        <TextField fx:id="campoBusqueda" promptText="Buscar usuario por nombre o ID..." styleClass="search-bar" />
-                                        <Button onAction="#onBuscar" styleClass="button" text="Buscar" />
-                                    </children>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
-                                </HBox>
-                                <VBox prefHeight="451.0" prefWidth="751.0">
-                                    <padding>
-                                        <Insets top="10" />
-                                    </padding>
-                                    <children>
-                                        <TableView fx:id="tablaUsuarios" prefHeight="356.0" prefWidth="751.0" styleClass="table-view-custom">
-                                            <columns>
-                                                <TableColumn fx:id="columnaId" prefWidth="102.0" text="ID Usuario" />
-                                                <TableColumn fx:id="columnaNombre" prefWidth="163.0" text="Nombre" />
-                                                <TableColumn fx:id="columnaCorreo" prefWidth="155.0" text="Correo" />
-                                                <TableColumn fx:id="columnaTelefono" prefWidth="82.0" text="Teléfono" />
-                                                <TableColumn fx:id="columnaDireccion" prefWidth="97.0" text="Dirección" />
-                                                <TableColumn fx:id="columnaSaldo" prefWidth="131.0" text="Saldo" />
-                                            </columns>
-                                        </TableView>
-                                    </children>
-                                </VBox>
-                                <HBox alignment="BOTTOM_RIGHT" prefHeight="15.0" prefWidth="556.0">
-                                    <children>
-                                        <Button onAction="#onEliminar" prefHeight="29.0" prefWidth="94.0" styleClass="button" text="Eliminar" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-                    </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="751.0" spacing="15.0">
+                <HBox alignment="CENTER" spacing="10.0">
+                    <padding>
+                        <Insets top="10.0"/>
+                    </padding>
+                    <TextField fx:id="campoBusqueda" promptText="Buscar usuario por nombre o ID..."
+                               styleClass="search-bar"/>
+                    <Button onAction="#onBuscar" styleClass="button" text="Buscar"/>
                 </HBox>
-            </children>
-        </VBox>
-    </children>
+                <VBox prefHeight="451.0" prefWidth="751.0">
+                    <padding>
+                        <Insets top="10"/>
+                    </padding>
+                    <TableView fx:id="tablaUsuarios" prefHeight="356.0" prefWidth="751.0"
+                               styleClass="table-view-custom">
+                        <columns>
+                            <TableColumn fx:id="columnaId" prefWidth="102.0" text="ID Usuario"/>
+                            <TableColumn fx:id="columnaNombre" prefWidth="163.0" text="Nombre"/>
+                            <TableColumn fx:id="columnaCorreo" prefWidth="155.0" text="Correo"/>
+                            <TableColumn fx:id="columnaTelefono" prefWidth="82.0" text="Teléfono"/>
+                            <TableColumn fx:id="columnaDireccion" prefWidth="97.0" text="Dirección"/>
+                            <TableColumn fx:id="columnaSaldo" prefWidth="131.0" text="Saldo"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="15.0" prefWidth="556.0">
+                    <Button onAction="#onEliminar" prefHeight="29.0" prefWidth="94.0"
+                            styleClass="button" text="Eliminar"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </VBox>
 </AnchorPane>
