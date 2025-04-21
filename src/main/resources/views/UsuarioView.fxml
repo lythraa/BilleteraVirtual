@@ -5,39 +5,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
+<AnchorPane fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController" prefHeight="600.0"
+            prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label fx:id="textoHolaUsuario" prefHeight="35.0" prefWidth="360.0" styleClass="label-title"
+               text="Hola de nuevo," textAlignment="CENTER" wrapText="true"/>
 
-                <Label fx:id="textoHolaUsuario" prefHeight="35.0" prefWidth="360.0" styleClass="label-title" text="Hola de nuevo," textAlignment="CENTER" wrapText="true" />
+        <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </Label>
 
-                <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Label>
-
-                <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15; -fx-padding: 20;">
-                    <children>
-                        <Button fx:id="botonVerSaldo" maxWidth="Infinity" styleClass="button" text="Ver Saldo" />
-                        <Button fx:id="botonTransferir" maxWidth="Infinity" styleClass="button" text="Transferir" />
-                        <Button fx:id="botonHistorial" maxWidth="Infinity" styleClass="button" text="Historial de Movimientos" />
-                        <Button fx:id="botonEditarPerfil" maxWidth="Infinity" styleClass="button" text="Editar Perfil" />
-                        <Button fx:id="botonCerrarSesion" maxWidth="Infinity" styleClass="button" text="Cerrar Sesión" />
-                    </children>
-                    <VBox.margin>
-                        <Insets bottom="15.0" top="15.0" />
-                    </VBox.margin>
-                </VBox>
-
-                <HBox alignment="CENTER" spacing="8.0">
-                    <children>
-                        <Label styleClass="label-subtitle" text="¿Problemas?" />
-                        <Hyperlink fx:id="enlaceSoporte" styleClass="hyperlink" text="Soporte" />
-                    </children>
-                </HBox>
-            </children>
+        <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0"
+              style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15; -fx-padding: 20;">
+            <VBox.margin>
+                <Insets bottom="15.0" top="15.0"/>
+            </VBox.margin>
+            <Label fx:id="textoSaldo" prefHeight="35.0" prefWidth="360.0" styleClass="label-title"
+                   text="Saldo: " textAlignment="CENTER" wrapText="true"/>
+            <Button maxWidth="Infinity" onAction="#onTransacciones" styleClass="button" text="Transacciones"/>
+            <Button maxWidth="Infinity" onAction="#onPresupuestos" styleClass="button" text="Presupuestos"/>
+            <Button maxWidth="Infinity" onAction="#onCuentas" styleClass="button" text="Cuentas"/>
+            <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil"/>
+            <Button maxWidth="Infinity" onAction="#onCerrarSesion" styleClass="button" text="Cerrar Sesión"/>
         </VBox>
-    </children>
+
+        <HBox alignment="CENTER" spacing="8.0">
+            <Label styleClass="label-subtitle" text="¿Problemas?"/>
+            <Hyperlink onAction="#enlaceSoporte" styleClass="hyperlink" text="Soporte"/>
+        </HBox>
+    </VBox>
 </AnchorPane>

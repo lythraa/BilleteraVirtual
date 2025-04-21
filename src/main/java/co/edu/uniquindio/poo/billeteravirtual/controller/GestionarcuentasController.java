@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.viewcontroller;
+package co.edu.uniquindio.poo.billeteravirtual.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -10,13 +10,7 @@ import javafx.scene.control.TextField;
 public class GestionarcuentasController{
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField campoUsuario;
+    private TextField campoId;
 
     @FXML
     private TableColumn<?, ?> columnaDireccion;
@@ -82,7 +76,7 @@ public class GestionarcuentasController{
 
     @FXML
     void initialize() {
-        assert campoUsuario != null : "fx:id=\"campoUsuario\" was not injected: check your FXML file 'GestionarCuentasView.fxml'.";
+        assert campoId != null : "fx:id=\"campoId\" was not injected: check your FXML file 'GestionarCuentasView.fxml'.";
         assert columnaDireccion != null : "fx:id=\"columnaDireccion\" was not injected: check your FXML file 'GestionarCuentasView.fxml'.";
         assert campoCorreo != null : "fx:id=\"campoCorreo\" was not injected: check your FXML file 'GestionarCuentasView.fxml'.";
         assert campoSaldo != null : "fx:id=\"campoSaldo\" was not injected: check your FXML file 'GestionarCuentasView.fxml'.";

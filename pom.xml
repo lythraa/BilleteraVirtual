@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                co.edu.uniquindio.poo.billeteravirtual/co.edu.uniquindio.poo.billeteravirtual.app.HelloApplication
+                                co.edu.uniquindio.poo.billeteravirtual/co.edu.uniquindio.poo.billeteravirtual.app.App
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
