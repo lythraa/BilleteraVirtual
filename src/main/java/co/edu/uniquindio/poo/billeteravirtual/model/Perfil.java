@@ -2,7 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 
 public class Perfil {
 
-    private int id;
+    private String id;
     private String nombre;
     private String correo;
     private String telefono;
@@ -16,15 +16,23 @@ public class Perfil {
         this.direccion = direccion;
     }
 
-    //=========================GETTERS Y SETTERS============================//
+    //====================GETTERS Y SETTERS=======================//
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {

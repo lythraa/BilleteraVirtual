@@ -22,23 +22,12 @@ public class GestorSesion {
     }
 
     /**
-     * Método para obtener el usuario actualmente en sesión
-     * @return
-     */
-    public Usuario getUsuarioActual() {
-        return usuarioActual;
-    }
-
-    /**
      * Método que permite iniciar sesión.
-     * Al recibir el usuario que ingresó a la aplicación, se
-     * asigna como usuario actual de la aplicación.
-     *
-     * NOTA (18/04): La aplicación debe manejar el inicio de sesión
-     * mediante usuario y contraseña, aún no tengo claro si se modificará
-     * desde aquí, por ahora, esta clase recibe el objeto Usuario
-     *
-     * @param usuario
+     * Al recibir el perfil que ingresó a la aplicación, se
+     * asigna como perfil actual de la aplicación.
+     * @param id id del perfil
+     * @param contrasenia contrasenia del perfil
+     * @return true en caso de iniciar sesion
      */
     public void iniciarSesion(Usuario usuario) {
         this.usuarioActual = usuario;
@@ -51,6 +40,17 @@ public class GestorSesion {
      */
     public void cerrarSesion() {
         this.usuarioActual = null;
+    }
+
+    //=========================GETTERS============================//
+
+    /**
+     * Método para obtener el perfil actualmente en sesión
+     *
+     * @return
+     */
+    public Perfil getPerfilActual() {
+        return perfilActual;
     }
 
 }
