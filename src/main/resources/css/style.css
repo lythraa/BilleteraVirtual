@@ -112,6 +112,8 @@
     -fx-background-color: #9c27b0;
 }
 
+.table-view .cell { -fx-text-fill: #f0f0f0 }
+
 /* === Buscador === */
 .search-bar {
     -fx-background-color: rgba(255,255,255,0.08);
