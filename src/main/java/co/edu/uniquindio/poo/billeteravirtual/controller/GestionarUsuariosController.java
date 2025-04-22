@@ -1,4 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
+import co.edu.uniquindio.poo.billeteravirtual.app.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -13,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -66,6 +69,10 @@ public class GestionarUsuariosController {
     @FXML
     private ImageView iconoVolver;
 
+    //Se obtiene la instancia única del gestorUsuarios para obtener sus datos
+    private final GestorUsuarios gestorUsuarios = GestorUsuarios.getInstancia();
+
+
     private ObservableList<Usuario> listaObservableUsuarios = FXCollections.observableArrayList();
 
 
@@ -77,28 +84,70 @@ public class GestionarUsuariosController {
     @FXML
     void onAgregar() {
         Usuario usuario = buildUsuario();
-        GestorUsuarios.getInstancia().agregar(usuario);
-        listaObservableUsuarios.add(usuario);
+        gestorUsuarios.agregar(usuario);
+        cargarUsuarios();
         limpiarCampos();
     }
 
     @FXML
     void onEditar() {
+        Usuario seleccionado = getUsuarioSeleccionado();
+        if (seleccionado != null) {
+            seleccionado.setNombre(campoNombre.getText());
+            seleccionado.setCorreo(campoCorreo.getText());
+            seleccionado.setTelefono(campoTelefono.getText());
+            seleccionado.setDireccion(campoDireccion.getText());
+            seleccionado.setSaldoTotal(Double.parseDouble(campoSaldo.getText()));
 
+            cargarUsuarios();
+            limpiarCampos();
+        }
     }
 
     @FXML
     void onBuscar() {
+        String idBuscado = campoBusqueda.getText().trim();
 
+        if (idBuscado.isEmpty()) {
+            UtilAlerta.mostrarAlertaError("Búsqueda incorrecta.","Por favor, ingresa un ID válido para buscar.");
+            return;
+        }
+
+        Usuario encontrado = gestorUsuarios.buscar(idBuscado);
+
+        if (encontrado != null) {
+            listaObservableUsuarios.setAll(encontrado); // solo muestra ese usuario
+        } else {
+            UtilAlerta.mostrarAlertaError("Sin coincidencias", "No se encontró ningún usuario con el ID ingresado.");
+            listaObservableUsuarios.clear(); // limpia la tabla si no encuentra nada
+        }
     }
 
     @FXML
     void onEliminar() {
-
+        Usuario seleccionado = getUsuarioSeleccionado();
+        if (seleccionado != null) {
+            gestorUsuarios.eliminar(seleccionado);
+            listaObservableUsuarios.remove(seleccionado);
+            limpiarCampos();
+            cargarUsuarios();
+        }
+        else{
+            UtilAlerta.mostrarAlertaError("Selección vacía.","No se ha seleccionado ningún usuario para eliminar.");
+        }
     }
 
     public void onVolver(ActionEvent actionEvent) {
+        Stage stage = (Stage) campoId.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage,"AdministradorView.fxml","Vista Administrador");
     }
+
+    @FXML
+    void onLimpiar(ActionEvent event) {
+        limpiarCampos();
+        tablaUsuarios.getSelectionModel().clearSelection();
+    }
+
 
     @FXML
     void initialize() {
@@ -115,6 +164,13 @@ public class GestionarUsuariosController {
         columnaDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
         columnaSaldo.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSaldoTotal()).asObject());
 
+        //Permite escuchar el evento de selección en la tabla (Listener Selección)
+        tablaUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            if (newSel != null) {
+                llenarCamposConUsuario(newSel);
+            }
+        });
+
         // Llenar la tabla con la lista de usuarios desde GestorUsuarios
         tablaUsuarios.setItems(listaObservableUsuarios);
 
@@ -123,7 +179,21 @@ public class GestionarUsuariosController {
     }
 
     private void cargarUsuarios() {
+        listaObservableUsuarios.setAll(gestorUsuarios.filtrarUsuarios());
+    }
 
+    /**
+     * Método para autocompletar los campos con información del usuario seleccionado
+     * @param usuario el usuario seleccionado
+     */
+    private void llenarCamposConUsuario(Usuario usuario) {
+        campoId.setText(usuario.getId());
+        campoContrasena.setText(usuario.getContrasenia());
+        campoNombre.setText(usuario.getNombre());
+        campoCorreo.setText(usuario.getCorreo());
+        campoTelefono.setText(usuario.getTelefono());
+        campoDireccion.setText(usuario.getDireccion());
+        campoSaldo.setText(String.valueOf(usuario.getSaldoTotal()));
     }
 
     private void limpiarCampos() {
@@ -134,6 +204,10 @@ public class GestionarUsuariosController {
         campoTelefono.clear();
         campoDireccion.clear();
         campoSaldo.clear();
+    }
+
+    private Usuario getUsuarioSeleccionado() {
+        return tablaUsuarios.getSelectionModel().getSelectedItem();
     }
 
 }

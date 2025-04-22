@@ -37,7 +37,7 @@ public class GestorUsuarios extends GestorBaseCRUD<Usuario> {
      *
      * Al ser static, puede ejecutarse sin necesidad de que exista una instancia de GestorUsuarios.
      */
-    private static ArrayList<Usuario> filtrarUsuarios() {
+    public static ArrayList<Usuario> filtrarUsuarios() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         for (Perfil perfil : BaseDatos.getInstancia().getPerfiles()) {
             if (perfil instanceof Usuario) {
@@ -47,5 +47,42 @@ public class GestorUsuarios extends GestorBaseCRUD<Usuario> {
         return usuarios;
     }
 
+    /**
+     * Método agregar personalizado del gestor de usuarios,
+     * permite actualizar la lista global simultáneamente
+     * @param usuario objeto a agregar
+     */
+    @Override
+    public void agregar(Usuario usuario) {
+        super.agregar(usuario);
+        if (!BaseDatos.getInstancia().getPerfiles().contains(usuario)) {
+            BaseDatos.getInstancia().getPerfiles().add(usuario);
+        }
+    }
 
+    /**
+     * Elimina un usuario tanto de la lista local como de la global
+     */
+    @Override
+    public void eliminar(Usuario usuario) {
+        super.eliminar(usuario);
+        BaseDatos.getInstancia().getPerfiles().remove(usuario);
+    }
+
+    /**
+     * Reemplaza un usuario tanto en la lista local como en la global
+     */
+    @Override
+    public void reemplazar(String id, Usuario nuevoUsuario) {
+        Usuario existente = buscar(id);
+        if (existente != null) {
+            super.reemplazar(id, nuevoUsuario);
+
+            ArrayList<Perfil> perfiles = BaseDatos.getInstancia().getPerfiles();
+            int index = perfiles.indexOf(existente);
+            if (index != -1) {
+                perfiles.set(index, nuevoUsuario);
+            }
+        }
+    }
 }
