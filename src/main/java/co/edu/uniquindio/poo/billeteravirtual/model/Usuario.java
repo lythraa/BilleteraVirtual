@@ -1,7 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Usuario extends Perfil {
 
@@ -27,7 +26,7 @@ public class Usuario extends Perfil {
         listaCuentasBancarias = new ArrayList<>();
     }
 
-    public double calularSaldoTotal(){
+    public double calcularSaldoTotal(){
         double total = 0;
         for (CuentaBancaria c : listaCuentasBancarias){
             total+=c.getSaldo();
@@ -36,7 +35,7 @@ public class Usuario extends Perfil {
     }
 
     public void actualizarSaldoTotal(){
-        this.saldoTotal = calularSaldoTotal();
+        this.saldoTotal = calcularSaldoTotal();
     }
 
     //====================GETTERS Y SETTERS=======================//

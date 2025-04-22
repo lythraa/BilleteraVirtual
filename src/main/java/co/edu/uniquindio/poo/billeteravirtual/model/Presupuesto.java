@@ -1,14 +1,14 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class Presupuesto {
-    private String idPresupuesto;
+public class Presupuesto implements Identificable{
+    private String id;
     private String nombre;
     private double presupuestoAsignado;
     private double gastosAcumulados;
     private Categoria categoria;
 
-    public Presupuesto(String idPresupuesto, String nombre, double presupuestoAsignado, Categoria categoria) {
-        this.idPresupuesto = idPresupuesto;
+    public Presupuesto(String id, String nombre, double presupuestoAsignado, Categoria categoria) {
+        this.id = id;
         this.nombre = nombre;
         this.presupuestoAsignado = presupuestoAsignado;
         this.gastosAcumulados = 0.0;
@@ -18,4 +18,10 @@ public class Presupuesto {
     public void registrarGasto(double monto) {
         this.gastosAcumulados += monto;
     }
+
+    @Override
+    public String getId() {
+        return id;
+    }
 }
+

@@ -2,8 +2,8 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.time.LocalDate;
 
-public class Transaccion {
-    private String idTransaccion;
+public class Transaccion implements Identificable{
+    private String id;
     private LocalDate fecha;
     private String tipo;
     private double monto;
@@ -18,7 +18,7 @@ public class Transaccion {
      * @param builder
      */
     private Transaccion(Builder builder) {
-        this.idTransaccion = builder.idTransaccion;
+        this.id = builder.idTransaccion;
         this.fecha = builder.fecha;
         this.tipo = builder.tipo;
         this.monto = builder.monto;
@@ -82,12 +82,12 @@ public class Transaccion {
     //=====================GETTERS Y SETTERS====================//
 
 
-    public String getIdTransaccion() {
-        return idTransaccion;
+    public String getId() {
+        return id;
     }
 
-    public void setIdTransaccion(String idTransaccion) {
-        this.idTransaccion = idTransaccion;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public LocalDate getFecha() {

@@ -45,4 +45,10 @@ public class BaseDatos {
         return transaccionesGlobales;
     }
 
+
+    //Eliminar este set en el futuro !!!!!!!!!!!!!!!!!!!
+
+    public void setPerfiles(ArrayList<Perfil> perfiles) {
+        this.perfiles = perfiles;
+    }
 }

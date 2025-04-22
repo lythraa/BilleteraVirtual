@@ -1,19 +1,31 @@
-Crear una rama:
-git checkout -b mi-rama
+//=========================CRUD USUARIO============================//
 
-Subir la rama al repositorio remoto:
-git push -u origin mi-rama
+    /**
+     * Método para agregar un nuevo usuario
+     * @param usuario
+     */
+    public void agregarUsuario(Usuario usuario) {
+        baseDatos.getPerfiles().add(usuario);
+    }
 
-Para tu compañero:
-git fetch origin (para traer todas las ramas remotas)
-git checkout rama-compañero (para cambiarse a su propia rama)
+    /**
+     * Método para buscar un usuario mediante su número de identificación único
+     * @param id Número de identificación del usuario
+     * @return
+     */
+    public Usuario buscarUsuario(String id) {
+        for (Perfil perfil : baseDatos.getPerfiles()) {
+            if (perfil instanceof Usuario usuario && usuario.getId().equals(id)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
 
-Realizar cambios y commits en la rama.
-
-Hacer merge de tu rama en main:
-git checkout main
-git pull origin main
-git merge mi-rama
-
-Subir los cambios a main:
-git push origin main
+    /**
+     * Método para eliminar un usuario mediante el id
+     * @param usuario usuario a eliminar
+     */
+    public void eliminarUsuario(Usuario usuario) {
+        baseDatos.getPerfiles().remove(usuario);
+    }

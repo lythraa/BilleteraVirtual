@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class Perfil {
+public class Perfil implements Identificable {
 
     private String id;
     private String nombre;

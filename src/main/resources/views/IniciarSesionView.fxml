@@ -22,7 +22,7 @@
             <padding>
                 <Insets top="15.0"/>
             </padding>
-            <TextField fx:id="campoUsuario" promptText="Id de Usuario" styleClass="text-field"/>
+            <TextField fx:id="campoId" promptText="Id de Usuario" styleClass="text-field"/>
 
             <PasswordField fx:id="campoContrasena" promptText="Contraseña" styleClass="password-field"/>
 
