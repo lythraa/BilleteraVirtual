@@ -1,9 +1,36 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.gestores;
-import co.edu.uniquindio.poo.billeteravirtual.model.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.Transaccion;
 
-public class GestorTransacciones {
+import java.util.ArrayList;
 
-    //Acceso a la base de datos del programa
-    private BaseDatos baseDatos = BaseDatos.getInstancia();
+public class GestorTransacciones extends GestorBaseCRUD<Transaccion> {
+
+    private static GestorTransacciones instancia;
+
+    private GestorTransacciones() {
+        super(new ArrayList<Transaccion>());
+    }
+
+    public static GestorTransacciones getInstancia() {
+        if (instancia == null) {
+            instancia = new GestorTransacciones();
+        }
+        return instancia;
+    }
+
+    @Override
+    public void agregar(Transaccion transaccion) {
+        super.agregar(transaccion);
+    }
+
+    @Override
+    public void eliminar(Transaccion transaccion) {
+        super.eliminar(transaccion);
+    }
+
+    @Override
+    public void reemplazar(String id, Transaccion nuevaTransaccion) {
+        super.reemplazar(id, nuevaTransaccion);
+    }
 
 }

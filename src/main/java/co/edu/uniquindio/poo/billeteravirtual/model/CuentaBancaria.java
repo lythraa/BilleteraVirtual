@@ -1,14 +1,14 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class CuentaBancaria {
-    private String idCuenta;
+public class CuentaBancaria implements Identificable {
+    private String id;
     private double saldo;
     private String nombreBanco;
     private String numeroCuenta;
     private TipoCuenta tipoCuenta; // Ahorros o Corriente
 
-    public CuentaBancaria(String idCuenta, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
-        this.idCuenta = idCuenta;
+    public CuentaBancaria(String id, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
+        this.id = id;
         this.saldo = saldo;
         this.nombreBanco = nombreBanco;
         this.numeroCuenta = numeroCuenta;
@@ -18,12 +18,12 @@ public class CuentaBancaria {
     //======================GETTERS Y SETTERS=========================//
 
 
-    public String getIdCuenta() {
-        return idCuenta;
+    public String getId() {
+        return id;
     }
 
-    public void setIdCuenta(String idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getSaldo() {

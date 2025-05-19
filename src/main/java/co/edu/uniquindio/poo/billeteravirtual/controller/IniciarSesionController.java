@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorVistas;
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import co.edu.uniquindio.poo.billeteravirtual.model.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import javafx.fxml.FXML;

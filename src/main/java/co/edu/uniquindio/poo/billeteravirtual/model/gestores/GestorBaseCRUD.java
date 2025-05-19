@@ -1,6 +1,5 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.gestores;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.BaseDatos;
 import co.edu.uniquindio.poo.billeteravirtual.model.Identificable;
 
 import java.util.ArrayList;

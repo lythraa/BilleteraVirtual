@@ -1,4 +1,6 @@
-package co.edu.uniquindio.poo.billeteravirtual.model;
+package co.edu.uniquindio.poo.billeteravirtual.controller;
+
+import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 
 import java.util.ArrayList;
 

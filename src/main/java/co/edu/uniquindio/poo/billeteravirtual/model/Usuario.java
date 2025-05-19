@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.Transaccion;
+
 import java.util.ArrayList;
 
 public class Usuario extends Perfil {
