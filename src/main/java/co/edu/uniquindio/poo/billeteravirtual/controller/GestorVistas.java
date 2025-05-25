@@ -1,10 +1,11 @@
-package co.edu.uniquindio.poo.billeteravirtual.app;
+package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.controller.EditarPerfilController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.function.Consumer;
 
 public class GestorVistas {
 
@@ -40,21 +41,42 @@ public class GestorVistas {
         }
     }
 
-    public static void abrirVistaEditarPerfilDesde(Stage stageActual, String vistaOrigen) {
+    public static void abrirVistaConOrigen(String rutaFXML, String tituloVentana, Stage stageActual, String vistaOrigen, Consumer<Object> configController) {
         try {
-            FXMLLoader loader = new FXMLLoader(GestorVistas.class.getResource("/views/EditarPerfilView.fxml"));
+            FXMLLoader loader = new FXMLLoader(GestorVistas.class.getResource(rutaFXML));
             Parent root = loader.load();
 
-            EditarPerfilController controller = loader.getController();
-            controller.setVistaOrigen(vistaOrigen);
+            Object controller = loader.getController();
 
-            stageActual.setTitle("Editar Perfil");
+            if (controller instanceof ContactoController) {
+                ((ContactoController) controller).setVistaOrigen(vistaOrigen);
+            } else if (controller instanceof EditarPerfilController) {
+                ((EditarPerfilController) controller).setVistaOrigen(vistaOrigen);
+            }
+
+            if (configController != null) {
+                configController.accept(controller);
+            }
+
+            stageActual.setTitle(tituloVentana);
             stageActual.setScene(new Scene(root));
             stageActual.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
+    // Usos específicos:
+    public static void abrirVistaEditarPerfilDesde(Stage stageActual, String vistaOrigen) {
+        abrirVistaConOrigen("/views/EditarPerfilView.fxml", "Editar Perfil", stageActual, vistaOrigen, controller -> {
+            ((EditarPerfilController) controller).setVistaOrigen(vistaOrigen);
+        });
+    }
+
+    public static void abrirVistaContactoController(Stage stageActual, String vistaOrigen) {
+        abrirVistaConOrigen("/views/ContactoView.fxml", "Contacto Vista", stageActual, vistaOrigen, controller -> {
+            ((ContactoController) controller).setVistaOrigen(vistaOrigen);
+        });
+    }
 }

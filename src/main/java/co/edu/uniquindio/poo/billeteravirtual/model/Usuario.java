@@ -13,12 +13,15 @@ public class Usuario extends Perfil {
     private ArrayList<CuentaBancaria> listaCuentasBancarias;
 
     /**
-     * Constructor público de la clase Usuario
-     * @param id Cédula del usuario
+     * Constructor público de la clase Usuario que hereda de Perfil.
+     * Inicializa el saldo total en 0 y las listas vacías para transacciones,
+     * presupuestos y cuentas bancarias.
+     *
+     * @param id        Cédula del usuario
      * @param contrasenia Clave de acceso del usuario
-     * @param nombre Nombre y apellido del usuario
-     * @param correo Dirección de correo electrónico del usuario
-     * @param telefono Número de teléfono del usuario
+     * @param nombre    Nombre y apellido del usuario
+     * @param correo    Dirección de correo electrónico del usuario
+     * @param telefono  Número de teléfono del usuario
      * @param direccion Dirección de residencia del usuario
      */
     public Usuario(String id, String contrasenia, String nombre, String correo, String telefono, String direccion){
@@ -29,14 +32,24 @@ public class Usuario extends Perfil {
         listaCuentasBancarias = new ArrayList<>();
     }
 
+    /**
+     * Calcula la suma del saldo de todas las cuentas bancarias asociadas
+     * al usuario.
+     *
+     * @return suma del saldo de todas las cuentas bancarias
+     */
     public double calcularSaldoTotal(){
         double total = 0;
         for (CuentaBancaria c : listaCuentasBancarias){
             total+=c.getSaldo();
         }
-        return saldoTotal;
+        return total;
     }
 
+    /**
+     * Actualiza el atributo saldoTotal con la suma de los saldos actuales
+     * de las cuentas bancarias del usuario.
+     */
     public void actualizarSaldoTotal(){
         this.saldoTotal = calcularSaldoTotal();
     }
@@ -74,5 +87,6 @@ public class Usuario extends Perfil {
     public void setListaCuentasBancarias(ArrayList<CuentaBancaria> listaCuentasBancarias) {
         this.listaCuentasBancarias = listaCuentasBancarias;
     }
+
 }
 

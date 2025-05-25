@@ -7,8 +7,16 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
     private String id;
     private double saldo;
     private String nombreBanco;
-    private TipoCuenta tipoCuenta; // Ahorros o Corriente
+    private TipoCuenta tipoCuenta;
 
+    /**
+     * Constructor de CuentaBancaria
+     * @param id Identificador único de la cuenta
+     * @param saldo Saldo inicial de la cuenta
+     * @param nombreBanco Nombre del banco asociado
+     * @param numeroCuenta (No usado en la clase, puede eliminarse o usarse)
+     * @param tipoCuenta Tipo de cuenta: AHORRO o CORRIENTE
+     */
     public CuentaBancaria(String id, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
         this.id = id;
         this.saldo = saldo;
@@ -16,10 +24,18 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
         this.tipoCuenta = tipoCuenta;
     }
 
+    /**
+     * Agrega un monto al saldo actual
+     * @param monto Cantidad a sumar
+     */
     public void agregarSaldo(double monto){
         setSaldo(getSaldo() + monto);
     }
 
+    /**
+     * Resta un monto al saldo actual
+     * @param monto Cantidad a retirar
+     */
     public void retirarSaldo(double monto){
         setSaldo(getSaldo() - monto);
     }

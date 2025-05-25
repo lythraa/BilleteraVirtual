@@ -1,21 +1,35 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
 
-import co.edu.uniquindio.poo.billeteravirtual.controller.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
-/**
- * Clase pensada para manejar la seguridad de las cuentas. Un usuario no puede cambiar el saldo por ejemplo
- */
 
+
+/**
+ * Proxy para la clase CuentaBancaria que controla el acceso y modificación
+ * de los datos sensibles de la cuenta, restringiendo acciones según el perfil
+ * del usuario actual.
+ */
 public class CuentaBancariaProxy implements ICuentaBancaria {
 
     private final CuentaBancaria cuentaReal;
 
+
+    /**
+     * Constructor que recibe la cuenta bancaria real a proteger.
+     * @param cuentaReal instancia real de CuentaBancaria
+     */
     public CuentaBancariaProxy(CuentaBancaria cuentaReal) {
         this.cuentaReal = cuentaReal;
     }
 
+
+    /**
+     * Obtiene la cuenta real solo si el perfil actual es Administrador.
+     * @return CuentaBancaria real
+     * @throws RuntimeException si el perfil no tiene permiso
+     */
     public CuentaBancaria getCuentaBancariaReal() {
         Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
         if (perfilActual instanceof Administrador) {
@@ -25,6 +39,7 @@ public class CuentaBancariaProxy implements ICuentaBancaria {
         }
     }
 
+    //========================GETTERS AND SETTERS LÓGICA CON ACCESO=============================
     @Override
     public String getId() {
         return cuentaReal.getId();

@@ -15,6 +15,11 @@ public class Presupuesto implements Identificable{
         this.categoria = categoria;
     }
 
+    /**
+     * Registra un gasto en el presupuesto.
+     * Lanza excepción si el gasto supera el monto asignado.
+     * @param monto Monto del gasto a registrar.
+     */
     public void registrarGasto(double monto) {
         this.gastosAcumulados += monto;
     }

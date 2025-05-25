@@ -2,13 +2,21 @@ package co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
 
+/**
+ * Clase base abstracta para la implementación del patrón Chain of Responsibility
+ * en la validación de transacciones. Define la estructura general para encadenar
+ * múltiples validadores y ejecutar sus validaciones secuencialmente.
+ */
 public abstract class ValidadorTransaccion {
+
     protected ValidadorTransaccion siguiente;
 
     /**
-     * Método para establecer el siguiente validador en la cadena.
-     * @param siguiente
-     * @return
+     * Establece el siguiente validador en la cadena.
+     * Permite construir la cadena de validación de manera fluida.
+     *
+     * @param siguiente El siguiente validador en la cadena.
+     * @return El validador recién asignado para permitir el encadenamiento.
      */
     public ValidadorTransaccion setSiguiente(ValidadorTransaccion siguiente) {
         this.siguiente = siguiente;
@@ -16,10 +24,12 @@ public abstract class ValidadorTransaccion {
     }
 
     /**
-     * Método para ejecutar la validación, si se ha establecido
-     * la siguiente en la cadena, continúa, de lo contrario se detiene.
-     * @param movimiento
+     * Ejecuta la validación definida en el validador actual.
+     * Si hay un siguiente validador en la cadena, delega la validación.
+     *
+     * @param movimiento El movimiento sobre el cual se realiza la validación.
      */
+
     public void validar(Movimiento movimiento) {
         realizarValidacion(movimiento);
         if (siguiente != null) {
@@ -28,8 +38,10 @@ public abstract class ValidadorTransaccion {
     }
 
     /**
-     * Método abstracto que valida según criterios propios de las clases que lo implementan.
-     * @param movimiento
+     * Método abstracto que debe ser implementado por las subclases
+     * para definir una validación específica del movimiento.
+     *
+     * @param movimiento Movimiento a validar.
      */
     protected abstract void realizarValidacion(Movimiento movimiento);
 }

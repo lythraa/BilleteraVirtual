@@ -1,5 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+/**
+ * Clase que representa un perfil genérico de usuario en el sistema.
+ * Puede ser extendida por tipos específicos como Usuario o Administrador.
+ */
 public class Perfil implements Identificable {
 
     private String id;
@@ -10,13 +14,14 @@ public class Perfil implements Identificable {
     private String contrasenia;
 
     /**
+     * Constructor de la clase Perfil.
      *
-     * @param id
-     * @param nombre
-     * @param correo
-     * @param telefono
-     * @param direccion
-     * @param contrasenia Contraseña de acceso del usuario
+     * @param id           Identificador único del perfil (por ejemplo, cédula)
+     * @param contrasenia  Contraseña de acceso
+     * @param nombre       Nombre completo
+     * @param correo       Correo electrónico
+     * @param telefono     Número de teléfono
+     * @param direccion    Dirección de residencia
      */
     public Perfil(String id, String contrasenia, String nombre, String correo, String telefono, String direccion) {
         this.id = id;

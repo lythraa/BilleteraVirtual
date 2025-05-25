@@ -2,6 +2,7 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.jetbrains.annotations;
+    requires java.desktop;
 
 
     opens co.edu.uniquindio.poo.billeteravirtual.model to javafx.fxml;

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.controller;
+package co.edu.uniquindio.poo.billeteravirtual.app;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
@@ -8,21 +8,29 @@ import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase GestorSesion que implementa el patrón Singleton para manejar la sesión actual de un perfil (usuario o administrador).
+ * Permite iniciar y cerrar sesión, y obtener el perfil actualmente autenticado.
+ */
 public class GestorSesion {
 
     private static GestorSesion instance;
     private Perfil perfilActual;
 
     /**
-     * Constructor privado de la clase para evitar múltiples instancias de la misma
+     * Constructor privado para evitar la creación directa de instancias.
+     * Garantiza que solo exista una instancia única (Singleton).
      */
+
     private GestorSesion() {}
 
     /**
-     * Método para obtener la instancia única del gestor de sesión (Singleton)
-     * @return instance Instancia del gestor
+     * Obtiene la instancia única de GestorSesion.
+     * Si no existe, la crea.
+     *
+     * @return instancia única de GestorSesion
      */
+
     public static GestorSesion getInstance() {
         if (instance == null) {
             instance = new GestorSesion();
@@ -31,12 +39,13 @@ public class GestorSesion {
     }
 
     /**
-     * Método que permite iniciar sesión.
-     * Al recibir el perfil que ingresó a la aplicación, se
-     * asigna como perfil actual de la aplicación.
-     * @param id id del perfil
-     * @param contrasenia contrasenia del perfil
-     * @return true en caso de iniciar sesion
+     * Intenta iniciar sesión con el id y contraseña dados.
+     * Busca en las listas de usuarios y administradores para validar las credenciales.
+     * Si se encuentra un perfil válido, se asigna como perfilActual.
+     *
+     * @param id Identificador del perfil (usuario o administrador)
+     * @param contrasenia Contraseña correspondiente al perfil
+     * @return true si el inicio de sesión fue exitoso, false en caso contrario
      */
     public boolean iniciarSesion(String id, String contrasenia) {
         List<Perfil> perfiles = new ArrayList<>();
@@ -55,10 +64,10 @@ public class GestorSesion {
     }
 
     /**
-     * Método que cierra la sesión de perfil.
-     * Al ser llamado, el perfil actual regresará a ser nulo
-     * hasta que se inicie una nueva sesión.
+     * Cierra la sesión actual, estableciendo el perfilActual en null.
+     * Esto implica que no hay ningún perfil autenticado en la aplicación.
      */
+
     public void cerrarSesion() {
         this.perfilActual = null;
     }
@@ -66,9 +75,9 @@ public class GestorSesion {
     //=========================GETTERS============================//
 
     /**
-     * Método para obtener el perfil actualmente en sesión
+     * Obtiene el perfil actualmente autenticado en la sesión.
      *
-     * @return
+     * @return perfilActual Perfil en sesión o null si no hay sesión activa
      */
     public Perfil getPerfilActual() {
         return perfilActual;

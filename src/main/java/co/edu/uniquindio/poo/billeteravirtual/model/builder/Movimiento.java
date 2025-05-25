@@ -5,6 +5,12 @@ import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 import co.edu.uniquindio.poo.billeteravirtual.model.Identificable;
 
 import java.time.LocalDate;
+
+/**
+ * Representa un movimiento financiero en la billetera virtual.
+ * Implementa el patrón Builder para facilitar la creación de instancias complejas.
+ * Incluye información de cuentas de origen y destino, monto, fecha, categoría, descripción y estrategia de procesamiento.
+ */
 public class Movimiento implements Identificable {
 
     private final CuentaBancaria cuentaBancariaOrigen;
@@ -17,9 +23,8 @@ public class Movimiento implements Identificable {
     private final MovimientoStrategy estrategia;
 
     /**
-     * Constructor privado de la clase Movimiento, para que pueda ser creado
-     * mediante el Builder
-     * @param builder
+     * Constructor privado. Solo puede ser instanciado mediante el Builder.
+     * @param builder Objeto Builder con los datos para construir el movimiento.
      */
     private Movimiento(Builder builder) {
         this.cuentaBancariaOrigen = builder.cuentaBancariaOrigen;
@@ -33,10 +38,8 @@ public class Movimiento implements Identificable {
     }
 
     /**
-     * Clase interna Builder para manejar la creación de movimientos
-     * Permite la creación dinámica de objetos de este tipo mediante el director,
-     * el cual solicita los atributos necesarios según se requiera (Transacción, Depósito,
-     * Retiro)
+     * Clase Builder para construir objetos Movimiento de manera flexible y legible.
+     * Permite establecer solo los atributos deseados antes de crear la instancia final.
      */
     public static class Builder {
         private CuentaBancaria cuentaBancariaOrigen;
@@ -88,17 +91,27 @@ public class Movimiento implements Identificable {
             return this;
         }
 
+
+        /**
+         * Construye el objeto Movimiento validando que la estrategia no sea nula.
+         * @return Nueva instancia de Movimiento.
+         * @throws IllegalStateException si no se ha asignado una estrategia.
+         */
         public Movimiento build() {
             if (estrategia == null) throw new IllegalStateException("Estrategia requerida");
             return new Movimiento(this);
         }
     }
 
+
+    /**
+     * Ejecuta el procesamiento del movimiento según la estrategia asignada.
+     */
     public void procesarTransaccion() {
         estrategia.procesarTransaccion(this);
     }
 
-    //===============GETTERS==================//
+    //===============GETTERS AND SETTERS==================//
 
     public CuentaBancaria getCuentaBancariaOrigen() {
         return cuentaBancariaOrigen;
@@ -128,6 +141,10 @@ public class Movimiento implements Identificable {
         return estrategia;
     }
 
+    /**
+     * Obtiene el identificador único del movimiento.
+     * @return ID del movimiento.
+     */
     @Override
     public String getId() {
         return id;

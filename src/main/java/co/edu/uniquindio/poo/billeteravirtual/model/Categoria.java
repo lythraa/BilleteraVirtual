@@ -15,12 +15,9 @@ public class Categoria {
         return idCategoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public String getNombre() {
-        return nombre;
+    //==============================GETTERS AND SETTERS=========================
+    public String getId_Nombre() {
+        return id_Nombre;
     }
 
     public void setNombre(String nombre) {
