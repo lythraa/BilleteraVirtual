@@ -135,3 +135,47 @@
     -fx-border-radius: 15;
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 4, 0, 0, 2);
 }
+
+.combo-box {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #bbbbbb;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+.combo-box:focused {
+    -fx-border-color: #9c27b0;
+    -fx-background-color: rgba(255,255,255,0.12);
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: rgba(30, 30, 47, 0.95);
+    -fx-border-radius: 10;
+    -fx-padding: 5;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #9c27b0;
+    -fx-text-fill: white;
+}
+
+.titulo-editar {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, #ba68c8, #9c27b0);
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.5), 6, 0.4, 0, 3);
+    -fx-alignment: center;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    -fx-padding: 0 0 20 0;
+}
+

@@ -7,14 +7,12 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
     private String id;
     private double saldo;
     private String nombreBanco;
-    private String numeroCuenta;
     private TipoCuenta tipoCuenta; // Ahorros o Corriente
 
     public CuentaBancaria(String id, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
         this.id = id;
         this.saldo = saldo;
         this.nombreBanco = nombreBanco;
-        this.numeroCuenta = numeroCuenta;
         this.tipoCuenta = tipoCuenta;
     }
 
@@ -51,14 +49,6 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
 
     public void setNombreBanco(String nombreBanco) {
         this.nombreBanco = nombreBanco;
-    }
-
-    public String getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
     }
 
     public TipoCuenta getTipoCuenta() {
