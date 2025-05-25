@@ -6,7 +6,7 @@ public abstract class ValidadorTransaccion {
     protected ValidadorTransaccion siguiente;
 
     /**
-     * Método para establecer el siguiente validador en la cadena
+     * Método para establecer el siguiente validador en la cadena.
      * @param siguiente
      * @return
      */
@@ -15,6 +15,11 @@ public abstract class ValidadorTransaccion {
         return siguiente;
     }
 
+    /**
+     * Método para ejecutar la validación, si se ha establecido
+     * la siguiente en la cadena, continúa, de lo contrario se detiene.
+     * @param movimiento
+     */
     public void validar(Movimiento movimiento) {
         realizarValidacion(movimiento);
         if (siguiente != null) {
@@ -22,5 +27,9 @@ public abstract class ValidadorTransaccion {
         }
     }
 
+    /**
+     * Método abstracto que valida según criterios propios de las clases que lo implementan.
+     * @param movimiento
+     */
     protected abstract void realizarValidacion(Movimiento movimiento);
 }
