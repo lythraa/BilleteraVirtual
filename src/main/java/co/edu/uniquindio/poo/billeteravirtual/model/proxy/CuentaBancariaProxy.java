@@ -32,7 +32,7 @@ public class CuentaBancariaProxy implements ICuentaBancaria {
 
     @Override
     public double getSaldo() {
-        System.out.println("Accediendo al saldo de la cuenta " + cuentaReal.getNumeroCuenta());
+        System.out.println("Accediendo al saldo de la cuenta " + cuentaReal.getId());
         return cuentaReal.getSaldo();
     }
 
@@ -57,20 +57,6 @@ public class CuentaBancariaProxy implements ICuentaBancaria {
             throw new RuntimeException("No tienes permiso para modificar el nombre del banco.");
         }
         cuentaReal.setNombreBanco(nombreBanco);
-    }
-
-    @Override
-    public String getNumeroCuenta() {
-        return cuentaReal.getNumeroCuenta();
-    }
-
-    @Override
-    public void setNumeroCuenta(String numeroCuenta) {
-        Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
-        if (!(perfilActual instanceof Administrador)) {
-            throw new RuntimeException("No tienes permiso para modificar el número de cuenta.");
-        }
-        cuentaReal.setNumeroCuenta(numeroCuenta);
     }
 
     @Override

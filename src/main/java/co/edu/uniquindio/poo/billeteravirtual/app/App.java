@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
+import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
+import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +20,7 @@ public class App extends Application {
         primaryStage.setTitle("Billetera Virtual");
         primaryStage.setScene(scene);
         primaryStage.show();
+        GestorAdministradores.getInstancia().agregar(new Administrador("111", "111","111","111","111","111"));
     }
 
     public static void main(String[] args) {

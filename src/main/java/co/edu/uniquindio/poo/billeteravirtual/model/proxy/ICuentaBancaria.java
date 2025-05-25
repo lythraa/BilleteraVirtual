@@ -11,9 +11,6 @@ public interface ICuentaBancaria {
     String getNombreBanco();
     void setNombreBanco(String nombreBanco);
 
-    String getNumeroCuenta();
-    void setNumeroCuenta(String numeroCuenta);
-
     TipoCuenta getTipoCuenta();
     void setTipoCuenta(TipoCuenta tipoCuenta);
 }

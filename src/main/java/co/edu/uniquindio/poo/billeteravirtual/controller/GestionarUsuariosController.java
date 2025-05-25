@@ -178,8 +178,9 @@ public class GestionarUsuariosController {
         cargarUsuarios();
     }
 
+
     private void cargarUsuarios() {
-        listaObservableUsuarios.setAll(gestorUsuarios.filtrarUsuarios());
+        //listaObservableUsuarios.setAll(gestorUsuarios.filtrarUsuarios());
     }
 
     /**
