@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
+import co.edu.uniquindio.poo.billeteravirtual.controller.EditarPerfilController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,4 +39,22 @@ public class GestorVistas {
             e.printStackTrace();
         }
     }
+
+    public static void abrirVistaEditarPerfilDesde(Stage stageActual, String vistaOrigen) {
+        try {
+            FXMLLoader loader = new FXMLLoader(GestorVistas.class.getResource("/views/EditarPerfilView.fxml"));
+            Parent root = loader.load();
+
+            EditarPerfilController controller = loader.getController();
+            controller.setVistaOrigen(vistaOrigen);
+
+            stageActual.setTitle("Editar Perfil");
+            stageActual.setScene(new Scene(root));
+            stageActual.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

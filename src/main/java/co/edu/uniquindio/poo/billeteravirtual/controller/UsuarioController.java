@@ -38,21 +38,8 @@ public class UsuarioController {
 
     @FXML
     void onEditarPerfil() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditarPerfilView.fxml"));
-            Parent root = loader.load();
-
-            EditarPerfilController controller = loader.getController();
-            controller.setVistaOrigen("admin");
-
-            Stage stage = (Stage) textoHolaUsuario.getScene().getWindow();
-            stage.setTitle("Editar Perfil");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.abrirVistaEditarPerfilDesde(stage, "Us");
     }
 
     @FXML

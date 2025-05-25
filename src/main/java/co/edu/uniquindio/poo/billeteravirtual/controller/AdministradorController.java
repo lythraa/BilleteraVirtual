@@ -21,7 +21,8 @@ public class AdministradorController {
 
     @FXML
     void onGestionarTransacciones() {
-
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "GestionarTransaccionesView.fxml","Vista Gestionar Transacciones");
     }
 
     @FXML
@@ -32,31 +33,21 @@ public class AdministradorController {
 
     @FXML
     void onGestionarCuentasBancarias() {
-
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "GestionarCuentasBancariasView.fxml","Vista Gestionar Cuentas Bancarias");
     }
 
     @FXML
     void onVerEstadisticas() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "EstadisticasView.fxml","Vista Estadísticas");
 
     }
 
     @FXML
     void onEditarPerfil() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditarPerfilView.fxml"));
-            Parent root = loader.load();
-
-            EditarPerfilController controller = loader.getController();
-            controller.setVistaOrigen("admin");
-
             Stage stage = (Stage) textoHolaUsuario.getScene().getWindow();
-            stage.setTitle("Editar Perfil");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            GestorVistas.abrirVistaEditarPerfilDesde(stage, "admin");
     }
 
 
