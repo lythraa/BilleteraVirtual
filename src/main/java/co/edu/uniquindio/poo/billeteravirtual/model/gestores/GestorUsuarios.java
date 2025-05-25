@@ -18,19 +18,4 @@ public class GestorUsuarios extends GestorBaseCRUD<Usuario> {
         }
         return instancia;
     }
-
-    @Override
-    public void agregar(Usuario usuario) {
-        super.agregar(usuario);
-    }
-
-    @Override
-    public void eliminar(Usuario usuario) {
-        super.eliminar(usuario);
-    }
-
-    @Override
-    public void reemplazar(String id, Usuario nuevoUsuario) {
-        super.reemplazar(id, nuevoUsuario);
-    }
 }

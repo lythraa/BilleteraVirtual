@@ -1,8 +1,13 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
+import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
+import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
+import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestorSesion {
 
@@ -34,7 +39,12 @@ public class GestorSesion {
      * @return true en caso de iniciar sesion
      */
     public boolean iniciarSesion(String id, String contrasenia) {
-        ArrayList<Perfil> perfiles = BaseDatos.getInstancia().getPerfiles();
+        List<Perfil> perfiles = new ArrayList<>();
+        List<Usuario> usuarios = GestorUsuarios.getInstancia().getListaObjetos();
+        List<Administrador> administradores = GestorAdministradores.getInstancia().getListaObjetos();
+        perfiles.addAll(usuarios);
+        perfiles.addAll(administradores);
+
         for (Perfil perfil : perfiles) {
             if (id.equals(perfil.getId()) && contrasenia.equals(perfil.getContrasenia())) {
                 this.perfilActual =perfil;

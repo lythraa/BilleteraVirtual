@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.gestores;
-import co.edu.uniquindio.poo.billeteravirtual.model.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
+import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
+import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancariaProxy;
 
 import java.util.ArrayList;
 
@@ -16,21 +18,17 @@ public class GestorCuentasBancarias extends GestorBaseCRUD<CuentaBancaria> {
         }
         return instancia;
     }
-
+    /**
+     * Sobrescribe el método buscar para devolver siempre un proxy.
+     * @param id ID de la cuenta
+     * @return ICuentaBancaria (proxy)
+     */
     @Override
-    public void agregar(CuentaBancaria cuentaBancaria) {
-        super.agregar(cuentaBancaria);
+    public CuentaBancaria buscar(String id) {
+        CuentaBancaria cuenta = super.buscar(id);
+        if (cuenta != null) {
+            return new CuentaBancariaProxy(cuenta).getCuentaBancariaReal();
+        }
+        return null;
     }
-
-    @Override
-    public void eliminar(CuentaBancaria cuentaBancaria) {
-        super.eliminar(cuentaBancaria);
-    }
-
-    @Override
-    public void reemplazar(String id, CuentaBancaria cuentaBancaria) {
-        super.reemplazar(id, cuentaBancaria);
-    }
-
-
 }

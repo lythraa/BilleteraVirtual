@@ -1,13 +1,14 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Transaccion;
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
 import java.util.ArrayList;
 
 public class Usuario extends Perfil {
 
     private double saldoTotal;
-    private ArrayList<Transaccion> historialTransacciones;
+    private ArrayList<Movimiento> historialTransacciones;
     private ArrayList<Presupuesto> listaPresupuestos;
     private ArrayList<CuentaBancaria> listaCuentasBancarias;
 
@@ -50,11 +51,11 @@ public class Usuario extends Perfil {
         this.saldoTotal = saldoTotal;
     }
 
-    public ArrayList<Transaccion> getHistorialTransacciones() {
+    public ArrayList<Movimiento> getHistorialTransacciones() {
         return historialTransacciones;
     }
 
-    public void setHistorialTransacciones(ArrayList<Transaccion> historialTransacciones) {
+    public void setHistorialTransacciones(ArrayList<Movimiento> historialTransacciones) {
         this.historialTransacciones = historialTransacciones;
     }
 

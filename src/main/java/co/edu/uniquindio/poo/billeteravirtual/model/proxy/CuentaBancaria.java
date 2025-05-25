@@ -1,6 +1,9 @@
-package co.edu.uniquindio.poo.billeteravirtual.model;
+package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
 
-public class CuentaBancaria implements Identificable {
+import co.edu.uniquindio.poo.billeteravirtual.model.Identificable;
+import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
+
+public class CuentaBancaria implements Identificable, ICuentaBancaria {
     private String id;
     private double saldo;
     private String nombreBanco;
@@ -13,6 +16,14 @@ public class CuentaBancaria implements Identificable {
         this.nombreBanco = nombreBanco;
         this.numeroCuenta = numeroCuenta;
         this.tipoCuenta = tipoCuenta;
+    }
+
+    public void agregarSaldo(double monto){
+        setSaldo(getSaldo() + monto);
+    }
+
+    public void retirarSaldo(double monto){
+        setSaldo(getSaldo() - monto);
     }
 
     //======================GETTERS Y SETTERS=========================//

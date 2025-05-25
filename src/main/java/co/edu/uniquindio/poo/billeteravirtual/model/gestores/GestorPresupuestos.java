@@ -18,19 +18,4 @@ public class GestorPresupuestos extends GestorBaseCRUD<Presupuesto> {
         return instancia;
     }
 
-    @Override
-    public void agregar(Presupuesto presupuesto) {
-        super.agregar(presupuesto);
-    }
-
-    @Override
-    public void eliminar(Presupuesto presupuesto) {
-        super.eliminar(presupuesto);
-    }
-
-    @Override
-    public void reemplazar(String id, Presupuesto nuevoPresupuesto) {
-        super.reemplazar(id, nuevoPresupuesto);
-    }
-
 }
