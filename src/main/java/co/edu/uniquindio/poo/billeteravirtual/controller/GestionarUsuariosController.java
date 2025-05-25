@@ -13,27 +13,49 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+/**
+ * Controlador para gestionar usuarios desde el panel de administrador.
+ * Permite agregar, editar, buscar, eliminar y listar usuarios del sistema.
+ */
 public class GestionarUsuariosController {
 
-    @FXML private TextField campoId;
-    @FXML private TextField campoCorreo;
-    @FXML private TextField campoTelefono;
-    @FXML private PasswordField campoContrasena;
-    @FXML private TextField campoDireccion;
-    @FXML private TextField campoNombre;
-    @FXML private TextField campoIdBusqueda;
+    @FXML
+    private TextField campoId;
+    @FXML
+    private TextField campoCorreo;
+    @FXML
+    private TextField campoTelefono;
+    @FXML
+    private PasswordField campoContrasena;
+    @FXML
+    private TextField campoDireccion;
+    @FXML
+    private TextField campoNombre;
+    @FXML
+    private TextField campoIdBusqueda;
 
-    @FXML private TableColumn<Usuario, String> columnaId;
-    @FXML private TableColumn<Usuario, String> columnaNombre;
-    @FXML private TableColumn<Usuario, String> columnaCorreo;
-    @FXML private TableColumn<Usuario, String> columnaTelefono;
-    @FXML private TableColumn<Usuario, String> columnaDireccion;
-    @FXML private TableColumn<Usuario, Double> columnaSaldo;
-    @FXML private TableView<Usuario> tablaUsuarios;
+    @FXML
+    private TableColumn<Usuario, String> columnaId;
+    @FXML
+    private TableColumn<Usuario, String> columnaNombre;
+    @FXML
+    private TableColumn<Usuario, String> columnaCorreo;
+    @FXML
+    private TableColumn<Usuario, String> columnaTelefono;
+    @FXML
+    private TableColumn<Usuario, String> columnaDireccion;
+    @FXML
+    private TableColumn<Usuario, Double> columnaSaldo;
+    @FXML
+    private TableView<Usuario> tablaUsuarios;
 
     private final ObservableList<Usuario> listaObservableUsuarios = FXCollections.observableArrayList();
 
+    /**
+     * Verifica si hay campos obligatorios vacíos.
+     *
+     * @return true si hay campos inválidos, false si todo está completo.
+     */
     private boolean camposInvalidos() {
         if (campoId.getText().isEmpty() || campoContrasena.getText().isEmpty() ||
                 campoNombre.getText().isEmpty() || campoCorreo.getText().isEmpty()) {
@@ -44,6 +66,11 @@ public class GestionarUsuariosController {
     }
 
 
+    /**
+     * Crea un nuevo objeto Usuario con los datos ingresados en los campos.
+     *
+     * @return Usuario creado.
+     */
     private Usuario buildUsuario() {
         return new Usuario(
                 campoId.getText(),
@@ -55,6 +82,11 @@ public class GestionarUsuariosController {
         );
     }
 
+    /**
+     * Actualiza un usuario existente con los datos actuales del formulario.
+     *
+     * @param usuario Usuario a actualizar.
+     */
     private void actualizarUsuarioDesdeCampos(Usuario usuario) {
         usuario.setId(campoId.getText());
         usuario.setContrasenia(campoContrasena.getText());
@@ -64,6 +96,9 @@ public class GestionarUsuariosController {
         usuario.setDireccion(campoDireccion.getText());
     }
 
+    /**
+     * Agrega un nuevo usuario si no existe otro con el mismo ID.
+     */
     @FXML
     void onAgregar() {
         if (camposInvalidos()) return;
@@ -80,6 +115,9 @@ public class GestionarUsuariosController {
         limpiarCampos();
     }
 
+    /**
+     * Edita los datos del usuario seleccionado en la tabla.
+     */
     @FXML
     void onEditar() {
         Usuario seleccionado = getUsuarioSeleccionado();
@@ -91,6 +129,9 @@ public class GestionarUsuariosController {
         }
     }
 
+    /**
+     * Busca un usuario por su ID e actualiza la tabla con el resultado.
+     */
     @FXML
     void onBuscar() {
         String idBuscado = campoIdBusqueda.getText().trim();
@@ -110,6 +151,9 @@ public class GestionarUsuariosController {
         }
     }
 
+    /**
+     * Elimina el usuario seleccionado, tras confirmación.
+     */
     @FXML
     void onEliminar() {
         Usuario seleccionado = getUsuarioSeleccionado();
@@ -126,11 +170,17 @@ public class GestionarUsuariosController {
         }
     }
 
+    /**
+     * Vuelve a la vista principal del administrador.
+     */
     public void onVolver() {
         Stage stage = (Stage) campoId.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Vista Administrador");
     }
 
+    /**
+     * Limpia y recarga la tabla de usuarios.
+     */
     @FXML
     void onRefrescarTabla() {
         limpiarCampos();
@@ -138,10 +188,18 @@ public class GestionarUsuariosController {
         cargarUsuarios();
     }
 
+    /**
+     * Carga todos los usuarios registrados en la tabla.
+     */
     private void cargarUsuarios() {
         listaObservableUsuarios.setAll(GestorUsuarios.getInstancia().getListaObjetos());
     }
 
+
+    /**
+     * Llena los campos del formulario con los datos del usuario seleccionado.
+     * @param usuario Usuario cuyos datos se van a mostrar.
+     */
     private void llenarCamposConUsuario(Usuario usuario) {
         campoId.setText(usuario.getId());
         campoContrasena.setText(usuario.getContrasenia());
@@ -151,6 +209,10 @@ public class GestionarUsuariosController {
         campoDireccion.setText(usuario.getDireccion());
     }
 
+
+    /**
+     * Limpia todos los campos del formulario.
+     */
     private void limpiarCampos() {
         campoId.clear();
         campoContrasena.clear();
@@ -160,10 +222,19 @@ public class GestionarUsuariosController {
         campoDireccion.clear();
     }
 
+
+    /**
+     * Obtiene el usuario actualmente seleccionado en la tabla.
+     * @return Usuario seleccionado o null si no hay selección.
+     */
     private Usuario getUsuarioSeleccionado() {
         return tablaUsuarios.getSelectionModel().getSelectedItem();
     }
 
+
+    /**
+     * Inicializa la tabla de usuarios y configura la selección.
+     */
     @FXML
     void initialize() {
         columnaId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));

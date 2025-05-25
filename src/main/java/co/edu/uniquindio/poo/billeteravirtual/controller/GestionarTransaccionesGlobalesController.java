@@ -13,7 +13,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Controlador para la vista de gestión global de transacciones.
+ * Permite visualizar y eliminar movimientos desde la vista del administrador.
+ */
 public class GestionarTransaccionesGlobalesController {
 
     @FXML
@@ -37,6 +40,9 @@ public class GestionarTransaccionesGlobalesController {
     @FXML
     private TableColumn<Movimiento, Double> columnaMonto;
 
+    /**
+     * Inicializa la tabla de movimientos y carga los datos disponibles.
+     */
     @FXML
     public void initialize() {
         columnaId.setCellValueFactory(cellData ->
@@ -80,13 +86,18 @@ public class GestionarTransaccionesGlobalesController {
         cargarDatos();
     }
 
-
+    /**
+     * Carga todos los movimientos registrados en la tabla.
+     */
     private void cargarDatos() {
         tablaMovimientos.setItems(FXCollections.observableArrayList(
                 GestorMovimientos.getInstancia().getListaObjetos()
         ));
     }
 
+    /**
+     * Elimina el movimiento seleccionado en la tabla, previa confirmación.
+     */
     @FXML
     private void onEliminar() {
         Movimiento movimientoSeleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
@@ -113,11 +124,18 @@ public class GestionarTransaccionesGlobalesController {
         }
     }
 
+    /**
+     * Refresca la tabla de movimientos recargando los datos.
+     */
     @FXML
     private void onRefrescarTabla() {
         cargarDatos();
     }
 
+
+    /**
+     * Vuelve a la vista del panel del administrador.
+     */
     @FXML
     private void onVolver() {
         Stage stage = (Stage) tablaMovimientos.getScene().getWindow();

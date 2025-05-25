@@ -55,7 +55,6 @@ public class GestorVistas {
             stageActual.setScene(new Scene(root));
             stageActual.show();
         } catch (Exception e) {
-            // En vez de e.printStackTrace() se recomienda un logging adecuado.
             e.printStackTrace();
         }
     }

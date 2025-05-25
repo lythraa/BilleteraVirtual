@@ -80,6 +80,11 @@ public class Usuario extends Perfil implements Observer {
         return nueva;
     }
 
+    /**
+     * Método para obtener una categoría del usuario dado su nombre
+     * @param idNombre nombre de la categoría
+     * @return categoría encontrada
+     */
     public Categoria buscarCategoria(String idNombre) {
         for (Categoria c : listaCategorias) {
             if (c.getId_Nombre().equals(idNombre)) {
@@ -89,28 +94,49 @@ public class Usuario extends Perfil implements Observer {
         return null;
     }
 
+    /**
+     * Crea una nueva categoría para el usuario
+     * @param idNombre nombre de la categoría
+     * @param monto monto máximo a gastar
+     * @return categoría creada
+     */
     private Categoria crearCategoria(String idNombre, double monto) {
         return new Categoria(idNombre, new Presupuesto(monto));
     }
 
-
+    /**
+     * Método para registrar un movimiento del usuario
+     * @param movimiento movimiento a registrar
+     */
     public void registrarMovimiento(Movimiento movimiento){
         calcularSaldoTotal();
         historialMovimientos.add(movimiento);
     }
 
-
+    /**
+     * Método de la interface observer, permite que el usuario reciba notificaciones
+     * @param notificacion notificacion enviada
+     */
     @Override
     public void recibirNotificacion(Notificacion notificacion) {
         System.out.println("Usuario " + this.getNombre() + " recibió: " + notificacion.getMensaje());
         historialNotificaciones.add(notificacion);
     }
 
+    /**
+     * Método para agregar una nueva cuenta a la lista de cuentas bancarias del usuario
+     * @param cuentaNueva cuenta a agregar
+     */
     public void agregarCuenta(CuentaBancaria cuentaNueva){
         listaCuentasBancarias.add(cuentaNueva);
         SistemaBilleteraFacade.getInstancia().getGestorCuentasBancarias().agregar(cuentaNueva);
     }
 
+    /**
+     * Método para enviar mensajes a soporte a modo de notificación
+     * @param evento evento del mensaje
+     * @param mensaje mensaje a enviar
+     */
     public void enviarMensaje(String evento, String mensaje) {
         Notificacion n = new Notificacion("USUARIO " + this.getNombre() + ": " + mensaje);
         GestorNotificaciones.getInstancia().notificar(evento, n);

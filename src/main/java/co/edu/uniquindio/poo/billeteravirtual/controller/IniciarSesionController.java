@@ -9,7 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+/**
+ * Controlador de la vista de inicio de sesión.
+ * Permite a usuarios y administradores iniciar sesión en la aplicación.
+ */
 public class IniciarSesionController {
 
 
@@ -19,6 +22,10 @@ public class IniciarSesionController {
     @FXML
     private PasswordField campoContrasena;
 
+    /**
+     * Maneja el intento de inicio de sesión.
+     * Verifica credenciales y redirige según el tipo de perfil.
+     */
     @FXML
     void onIniciarSesion() {
         if (camposInvalidos()) return;
@@ -46,6 +53,9 @@ public class IniciarSesionController {
         }
     }
 
+    /**
+     * Abre un enlace web al formulario de registro (o sitio externo).
+     */
     @FXML
     void enlaceRegistro() {
         try {
@@ -57,7 +67,10 @@ public class IniciarSesionController {
         }
     }
 
-
+    /**
+     * Valida que los campos de ID y contraseña no estén vacíos.
+     * @return true si hay campos vacíos, false en caso contrario.
+     */
     private boolean camposInvalidos() {
         if (campoId.getText().isBlank() || campoContrasena.getText().isBlank()) {
             UtilAlerta.mostrarAlertaError("Campos vacíos", "Por favor, ingresa tu ID y contraseña.");
@@ -66,6 +79,9 @@ public class IniciarSesionController {
         return false;
     }
 
+    /**
+     * Inicializa la vista asegurando que los campos estén correctamente inyectados.
+     */
     @FXML
     void initialize() {
         assert campoId != null : "fx:id=\"campoId\" no fue inyectado. Verifica el FXML 'IniciarSesionView.fxml'.";

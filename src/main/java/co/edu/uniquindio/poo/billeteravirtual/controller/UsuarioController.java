@@ -1,20 +1,15 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
-import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
-import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
+/**
+ * Controlador principal para la vista del usuario.
+ * Gestiona acciones como ver saldo, movimientos, editar perfil, entre otras.
+ */
 public class UsuarioController {
 
     private Stage stage;
@@ -24,14 +19,16 @@ public class UsuarioController {
     @FXML
     private Label textoHolaUsuario;
 
+    /**
+     * Abre la vista de contacto.
+     */
     public void onContactenos() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "ContactoView.fxml", "Vista Contacto");
     }
 
     /**
-     * Acción para mostrar la vista de transacciones.
-     * Actualmente no implementado.
+     * Abre la vista para gestionar los movimientos del usuario.
      */
     @FXML
     void onMovimientos() {
@@ -42,7 +39,7 @@ public class UsuarioController {
 
     /**
      * Acción para mostrar la vista de presupuestos.
-     * Actualmente no implementado.
+     * (Aún no implementado).
      */
     @FXML
     void onPresupuestos() {

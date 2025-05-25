@@ -10,7 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+/**
+ * Controlador para la vista de envío de notificaciones por parte del administrador.
+ * Permite seleccionar un evento o crear uno nuevo, y enviar un mensaje relacionado.
+ */
 public class MandarNotificacionController {
 
     @FXML
@@ -26,12 +29,20 @@ public class MandarNotificacionController {
     private TextField campoEnCasoCrearEvento;
 
     private final String OPCION_NUEVO_EVENTO = "Crear nuevo evento...";
+
+
+    /**
+     * Regresa a la vista principal del administrador.
+     */
     @FXML
     void onVolver() {
         Stage stage = (Stage) campoMensaje.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Panel Administrador");
     }
 
+    /**
+     * Maneja la lógica de mostrar el campo de texto si se elige la opción de crear un nuevo evento.
+     */
     @FXML
     void onEventoSeleccionado() {
         String seleccionado = comboEventos.getValue();
@@ -42,6 +53,10 @@ public class MandarNotificacionController {
 
     }
 
+    /**
+     * Envía una notificación con un mensaje relacionado a un evento seleccionado o creado.
+     * Verifica los campos y actualiza la lista de eventos si se crea uno nuevo.
+     */
     @FXML
     void onEnviar() {
         String eventoSeleccionado = comboEventos.getValue();
@@ -83,7 +98,9 @@ public class MandarNotificacionController {
         comboEventos.getSelectionModel().clearSelection();
     }
 
-
+    /**
+     * Inicializa los componentes de la vista, incluyendo la carga de eventos al ComboBox.
+     */
     @FXML
     void initialize() {
         comboEventos.getItems().addAll(GestorNotificaciones.getInstancia().obtenerEventos());

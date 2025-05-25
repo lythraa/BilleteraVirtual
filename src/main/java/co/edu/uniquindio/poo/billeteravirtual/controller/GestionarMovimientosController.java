@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador para gestionar movimientos: depósito, retiro y transferencia.
+ */
 public class GestionarMovimientosController {
 
     @FXML
@@ -63,6 +66,9 @@ public class GestionarMovimientosController {
 
     private Usuario usuarioActual;
 
+    /**
+     * Inicializa la vista y configura los componentes.
+     */
     @FXML
     public void initialize() {
         usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
@@ -80,6 +86,9 @@ public class GestionarMovimientosController {
         labelIdCuentaDestino.setManaged(false);
     }
 
+    /**
+     * Configura las columnas de la tabla de movimientos.
+     */
     private void configurarColumnas() {
         columnaTipo.setCellValueFactory(cellData -> {
             MovimientoStrategy estrategia = cellData.getValue().getEstrategia();
@@ -125,17 +134,26 @@ public class GestionarMovimientosController {
         });
     }
 
+    /**
+     * Carga los movimientos del usuario en la tabla.
+     */
     private void cargarMovimientos() {
         movimientosObservable.setAll(usuarioActual.getHistorialMovimientos());
         tablaMovimientos.setItems(movimientosObservable);
     }
 
+    /**
+     * Refresca la tabla de movimientos.
+     */
     @FXML
     private void onRefrescar() {
         cargarMovimientos();
         tablaMovimientos.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Genera un reporte en PDF o Excel con los movimientos.
+     */
     @FXML
     void onGenerarReporte() {
         List<String> opciones = Arrays.asList("PDF", "Excel");
@@ -162,6 +180,10 @@ public class GestionarMovimientosController {
         });
     }
 
+    /**
+     * Muestra una alerta informativa.
+     * @param mensaje Mensaje a mostrar.
+     */
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Resultado del Reporte");
@@ -170,12 +192,20 @@ public class GestionarMovimientosController {
         alerta.showAndWait();
     }
 
+
+    /**
+     * Regresa a la vista principal del usuario.
+     */
     @FXML
     private void onVolver() {
         Stage stage = (Stage) tablaMovimientos.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Panel Usuario");
     }
 
+
+    /**
+     * Ejecuta la transacción seleccionada.
+     */
     @FXML
     private void onEnviar() {
         String tipo = comboTipoTransaccion.getValue();
@@ -234,6 +264,9 @@ public class GestionarMovimientosController {
         }
     }
 
+    /**
+     * Limpia los campos del formulario.
+     */
     @FXML
     private void onLimpiar() {
         comboTipoTransaccion.getSelectionModel().clearSelection();
@@ -249,6 +282,9 @@ public class GestionarMovimientosController {
         labelIdCuentaDestino.setManaged(false);
     }
 
+    /**
+     * Muestra u oculta campos según el tipo de transacción.
+     */
     private void actualizarCampos() {
         String tipoSeleccionado = comboTipoTransaccion.getValue();
         boolean mostrarDestino = "Transferencia".equalsIgnoreCase(tipoSeleccionado);

@@ -19,11 +19,20 @@ public class Administrador extends Perfil implements Observer {
         super(id, contrasenia, nombre, correo, telefono, direccion);
     }
 
+    /**
+     * Implementación del método recibir notificación
+     * @param notificacion notificacion entrante
+     */
     @Override
     public void recibirNotificacion(Notificacion notificacion) {
         System.out.println("ADMIN " + this.getNombre() + " recibió: " + notificacion.getMensaje());
     }
 
+    /**
+     * Método para enviar una notificación
+     * @param evento evento de la notificación
+     * @param mensaje mensaje a presentar en la notificación
+     */
     public void enviarNotificacion(String evento, String mensaje) {
         Notificacion notificacion = new Notificacion("ADMIN " + this.getNombre() + ": " + mensaje);
         GestorNotificaciones.getInstancia().notificar(evento, notificacion);

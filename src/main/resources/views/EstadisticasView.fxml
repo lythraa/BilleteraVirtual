@@ -1,67 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.EstadisticasController">
-    <VBox spacing="20.0" StackPane.alignment="CENTER">
-        <HBox spacing="20.0">
-            <Button onAction="#onVolver" styleClass="button" text="Volver"/>
-            <Label styleClass="label-title" text="Estadísticas de la Billetera Virtual">
-                <HBox.margin>
-                    <Insets left="200.0"/>
-                </HBox.margin>
-            </Label>
-        </HBox>
 
-        <GridPane alignment="CENTER" hgap="20" vgap="20">
-            <columnConstraints>
-                <ColumnConstraints percentWidth="50"/>
-                <ColumnConstraints percentWidth="50"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints percentHeight="50"/>
-                <RowConstraints percentHeight="50"/>
-            </rowConstraints>
-
-            <VBox fx:id="boxGastos" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <Label styleClass="label-subtitle" text="Gastos por Categoría"/>
-                <PieChart fx:id="chartMovimientosPorCategoria" prefHeight="300" prefWidth="500"/>
-            </VBox>
-
-            <VBox fx:id="boxSaldoPromedio" alignment="CENTER" spacing="15" GridPane.columnIndex="1"
-                  GridPane.rowIndex="0">
-                <Label styleClass="label-subtitle" text="Saldo Promedio de Usuarios"/>
-                <Label fx:id="labelSaldoPromedio" style="-fx-font-size: 32px; -fx-font-weight: bold;"
-                       styleClass="label-subtitle"/>
-            </VBox>
-
-            <VBox fx:id="boxTopUsuarios" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                <Label styleClass="label-subtitle" text="Top Usuarios por Transacciones"/>
-                <BarChart fx:id="chartUsuariosConMasMovimientos" prefHeight="300" prefWidth="500">
-                    <xAxis>
-                        <CategoryAxis label="Usuario"/>
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis label="Transacciones"/>
-                    </yAxis>
-                </BarChart>
-            </VBox>
-
-            <VBox fx:id="boxEvolucionSaldo" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <Label styleClass="label-subtitle" text="Evolución del Saldo Promedio"/>
-                <LineChart fx:id="chartEvolucionSaldoPromedio" prefHeight="300" prefWidth="500">
-                    <xAxis>
-                        <NumberAxis label="Día"/>
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis label="Saldo Promedio"/>
-                    </yAxis>
-                </LineChart>
-            </VBox>
-        </GridPane>
-    </VBox>
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.EstadisticasController">
+   <children>
+       <VBox spacing="20.0" StackPane.alignment="CENTER">
+          <children>
+              <HBox spacing="20.0">
+                 <children>
+                     <Button onAction="#onVolver" styleClass="button" text="Volver" />
+                     <Label styleClass="label-title" text="Estadísticas de la Billetera Virtual">
+                         <HBox.margin>
+                             <Insets left="200.0" />
+                         </HBox.margin>
+                     </Label>
+                 </children>
+              </HBox>
+      
+              <GridPane alignment="CENTER" hgap="20" vgap="20">
+                  <columnConstraints>
+                      <ColumnConstraints percentWidth="50" />
+                      <ColumnConstraints percentWidth="50" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints percentHeight="50" />
+                      <RowConstraints percentHeight="50" />
+                  </rowConstraints>
+         <children>
+         
+                     <VBox fx:id="boxGastos" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <children>
+                            <Label styleClass="label-subtitle" text="Gastos por Categoría" />
+                            <PieChart fx:id="chartMovimientosPorCategoria" prefHeight="300" prefWidth="500" />
+            </children>
+                     </VBox>
+         
+                     <VBox fx:id="boxSaldoPromedio" alignment="CENTER" spacing="15" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <children>
+                            <Label styleClass="label-subtitle" text="Saldo Promedio de Usuarios" />
+                            <Label fx:id="labelSaldoPromedio" style="-fx-font-size: 32px; -fx-font-weight: bold;" styleClass="label-subtitle" />
+            </children>
+                     </VBox>
+         
+                     <VBox fx:id="boxTopUsuarios" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <children>
+                            <Label styleClass="label-subtitle" text="Top Usuarios por Transacciones" />
+                            <BarChart fx:id="chartUsuariosConMasMovimientos" prefHeight="300" prefWidth="500">
+                                <xAxis>
+                                    <CategoryAxis label="Usuario" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Transacciones" />
+                                </yAxis>
+                            </BarChart>
+            </children>
+                     </VBox>
+         </children>
+              </GridPane>
+          </children>
+       </VBox>
+   </children>
 </StackPane>

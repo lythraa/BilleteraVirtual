@@ -28,7 +28,6 @@ public abstract class ValidadorMovimiento {
      * @param movimiento El movimiento sobre el cual se realiza la validación.
      * @throws IllegalArgumentException si el movimiento es nulo
      */
-
     public void validar(Movimiento movimiento) {
         if (movimiento==null){
             throw new IllegalArgumentException("El movimiento no puede ser nulo.");

@@ -229,13 +229,10 @@ public class SistemaBilleteraFacade {
         return saldoPromedio;
     }
 
-    //Este es opcional, de momento no lo vamos a usar, si da el tiempo lo acomodo
-    /*
-    public Map<LocalDate, Double> obtenerSaldoPromedioPorFecha() {
-
-    }
-    */
-
+    /**
+     * Método para generar un reporte en pdf de los movimientos del usuario
+     * @param usuario usuario en sesión
+     */
     public void generarReportePDF(Usuario usuario) {
         ReporteExportable reporte = new ReportePDFService();
         try {
@@ -245,6 +242,10 @@ public class SistemaBilleteraFacade {
         }
     }
 
+    /**
+     * Método para generar un reporte en excel de los movimientos del usuario
+     * @param usuario usuario en sesión
+     */
     public void generarReporteExcel(Usuario usuario) {
         ReporteExportable reporte = new ReporteExcelAdapter();
         try {

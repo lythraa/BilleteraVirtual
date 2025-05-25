@@ -99,12 +99,16 @@ public class Movimiento implements Identificable, Cloneable {
         }
     }
 
+    /**
+     * Método para clonar un movimiento
+     * @return
+     */
     @Override
     public Movimiento clone() {
         try {
-            return (Movimiento) super.clone(); // copia superficial (profundiza si es necesario)
+            return (Movimiento) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError(); // no debería pasar si implementas Cloneable
+            throw new AssertionError();
         }
     }
 

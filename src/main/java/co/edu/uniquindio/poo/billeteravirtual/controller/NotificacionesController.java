@@ -20,7 +20,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
+/**
+ * Controlador de la vista de notificaciones para el usuario.
+ * Permite suscribirse a eventos y visualizar mensajes recibidos.
+ */
 public class NotificacionesController implements Observer {
 
     @FXML
@@ -38,6 +41,10 @@ public class NotificacionesController implements Observer {
 
     private ObservableList<Notificacion> listaNotificacionesObservable;
 
+    /**
+     * Inicializa la vista cargando eventos disponibles y notificaciones previas.
+     * También suscribe al usuario a eventos seleccionados.
+     */
     @FXML
     public void initialize() {
         usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
@@ -57,8 +64,6 @@ public class NotificacionesController implements Observer {
         System.out.println("EVENTOS DISPONIBLES: " + eventos);
 
         if (eventos.isEmpty()) {
-            // Si quieres mostrar algún mensaje en tabla, sino quitar esta línea
-            // tablaNotificaciones.setPlaceholder(new Label("No hay eventos disponibles para suscribirse."));
             return;
         }
 
@@ -82,6 +87,10 @@ public class NotificacionesController implements Observer {
         }
     }
 
+    /**
+     * Guarda las suscripciones del usuario a los eventos seleccionados.
+     * Registra o elimina la suscripción según el estado del CheckBox.
+     */
     @FXML
     public void onGuardarSuscripciones() {
         for (String evento : mapaCheckEventos.keySet()) {
@@ -95,18 +104,25 @@ public class NotificacionesController implements Observer {
         }
     }
 
+    /**
+     * Regresa a la vista principal del usuario.
+     */
     @FXML
     public void onVolver() {
         Stage stage = (Stage) contenedorEventos.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Vista Usuario");
     }
 
+    /**
+     * Recibe una notificación nueva como parte del patrón Observer.
+     * La agrega al historial del usuario y a la tabla visual.
+     *
+     * @param notificacion la notificación recibida.
+     */
     @Override
     public void recibirNotificacion(Notificacion notificacion) {
-        // Actualiza el historial del usuario (importante)
         usuario.getHistorialNotificaciones().add(notificacion);
 
-        // Actualiza la tabla con la nueva notificación
         listaNotificacionesObservable.add(notificacion);
     }
 }
