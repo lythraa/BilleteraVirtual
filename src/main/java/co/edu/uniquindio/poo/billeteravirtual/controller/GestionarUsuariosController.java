@@ -1,5 +1,5 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorVistas;
+
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
@@ -7,75 +7,75 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 public class GestionarUsuariosController {
-    //CLASE LISTA------------------------------------------------------------------------Manejar Excepciones, nulll....
-    @FXML
-    private TextField campoId;
 
-    @FXML
-    private TableColumn<Usuario, String> columnaDireccion;
+    @FXML private TextField campoId;
+    @FXML private TextField campoCorreo;
+    @FXML private TextField campoTelefono;
+    @FXML private PasswordField campoContrasena;
+    @FXML private TextField campoDireccion;
+    @FXML private TextField campoNombre;
+    @FXML private TextField campoIdBusqueda;
 
-    @FXML
-    private TextField campoCorreo;
+    @FXML private TableColumn<Usuario, String> columnaId;
+    @FXML private TableColumn<Usuario, String> columnaNombre;
+    @FXML private TableColumn<Usuario, String> columnaCorreo;
+    @FXML private TableColumn<Usuario, String> columnaTelefono;
+    @FXML private TableColumn<Usuario, String> columnaDireccion;
+    @FXML private TableColumn<Usuario, Double> columnaSaldo;
+    @FXML private TableView<Usuario> tablaUsuarios;
 
-    @FXML
-    private TableColumn<Usuario, String> columnaCorreo;
+    private final ObservableList<Usuario> listaObservableUsuarios = FXCollections.observableArrayList();
 
-    @FXML
-    private TableColumn<Usuario, String> columnaTelefono;
-
-    @FXML
-    private TableView<Usuario> tablaUsuarios;
-
-    @FXML
-    private TextField campoTelefono;
-
-    @FXML
-    private PasswordField campoContrasena;
-
-    @FXML
-    private TableColumn<Usuario, Double> columnaSaldo;
-
-    @FXML
-    private TableColumn<Usuario, String> columnaId;
-
-    @FXML
-    private TextField campoBusqueda;
-
-    @FXML
-    private TextField campoDireccion;
-
-    @FXML
-    private TableColumn<Usuario, String> columnaNombre;
-
-    @FXML
-    private TextField campoNombre;
+    private boolean camposInvalidos() {
+        if (campoId.getText().isEmpty() || campoContrasena.getText().isEmpty() ||
+                campoNombre.getText().isEmpty() || campoCorreo.getText().isEmpty()) {
+            UtilAlerta.mostrarAlertaError("Campos incompletos", "Por favor, completa todos los campos requeridos.");
+            return true;
+        }
+        return false;
+    }
 
 
-    private ObservableList<Usuario> listaObservableUsuarios = FXCollections.observableArrayList();
+    private Usuario buildUsuario() {
+        return new Usuario(
+                campoId.getText(),
+                campoContrasena.getText(),
+                campoNombre.getText(),
+                campoCorreo.getText(),
+                campoTelefono.getText(),
+                campoDireccion.getText()
+        );
+    }
 
-
-    public Usuario buildUsuario(){
-        return new Usuario(campoId.getText(),campoContrasena.getText(),campoNombre.getText(),
-                campoCorreo.getText(),campoTelefono.getText(),campoDireccion.getText());
+    private void actualizarUsuarioDesdeCampos(Usuario usuario) {
+        usuario.setId(campoId.getText());
+        usuario.setContrasenia(campoContrasena.getText());
+        usuario.setNombre(campoNombre.getText());
+        usuario.setCorreo(campoCorreo.getText());
+        usuario.setTelefono(campoTelefono.getText());
+        usuario.setDireccion(campoDireccion.getText());
     }
 
     @FXML
     void onAgregar() {
-        Usuario usuario = buildUsuario();
-        GestorUsuarios.getInstancia().agregar(usuario);
+        if (camposInvalidos()) return;
+
+        Usuario nuevoUsuario = buildUsuario();
+
+        if (GestorUsuarios.getInstancia().buscar(nuevoUsuario.getId()) != null) {
+            UtilAlerta.mostrarAlertaError("Usuario existente", "Ya existe un usuario con este ID.");
+            return;
+        }
+
+        GestorUsuarios.getInstancia().agregar(nuevoUsuario);
         cargarUsuarios();
         limpiarCampos();
     }
@@ -84,14 +84,8 @@ public class GestionarUsuariosController {
     void onEditar() {
         Usuario seleccionado = getUsuarioSeleccionado();
         if (seleccionado != null) {
-            seleccionado.setNombre(campoNombre.getText());
-            seleccionado.setCorreo(campoCorreo.getText());
-            seleccionado.setTelefono(campoTelefono.getText());
-            seleccionado.setDireccion(campoDireccion.getText());
-            seleccionado.setContrasenia(campoContrasena.getText());
-            seleccionado.setId(campoId.getText());
-
-
+            if (camposInvalidos()) return;
+            actualizarUsuarioDesdeCampos(seleccionado);
             cargarUsuarios();
             limpiarCampos();
         }
@@ -99,10 +93,10 @@ public class GestionarUsuariosController {
 
     @FXML
     void onBuscar() {
-        String idBuscado = campoBusqueda.getText().trim();
+        String idBuscado = campoIdBusqueda.getText().trim();
 
         if (idBuscado.isEmpty()) {
-            UtilAlerta.mostrarAlertaError("Búsqueda incorrecta.","Por favor, ingresa un ID válido para buscar.");
+            UtilAlerta.mostrarAlertaError("Búsqueda incorrecta", "Por favor, ingresa un ID válido para buscar.");
             return;
         }
 
@@ -114,30 +108,31 @@ public class GestionarUsuariosController {
             UtilAlerta.mostrarAlertaError("Sin coincidencias", "No se encontró ningún usuario con el ID ingresado.");
             listaObservableUsuarios.clear();
         }
-
     }
 
     @FXML
     void onEliminar() {
         Usuario seleccionado = getUsuarioSeleccionado();
         if (seleccionado != null) {
+            boolean confirmado = UtilAlerta.mostrarAlertaConfirmacion("¿Estás seguro?", "Esta acción eliminará al usuario permanentemente.");
+            if (!confirmado) return;
+
             GestorUsuarios.getInstancia().eliminar(seleccionado);
             listaObservableUsuarios.remove(seleccionado);
             limpiarCampos();
             cargarUsuarios();
-        }
-        else{
-            UtilAlerta.mostrarAlertaError("Selección vacía.","No se ha seleccionado ningún usuario para eliminar.");
+        } else {
+            UtilAlerta.mostrarAlertaError("Selección vacía", "No se ha seleccionado ningún usuario para eliminar.");
         }
     }
 
-    public void onVolver(ActionEvent actionEvent) {
+    public void onVolver() {
         Stage stage = (Stage) campoId.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage,"AdministradorView.fxml","Vista Administrador");
+        GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Vista Administrador");
     }
 
     @FXML
-    void onRecargarTabla(ActionEvent event) {
+    void onRefrescarTabla() {
         limpiarCampos();
         tablaUsuarios.getSelectionModel().clearSelection();
         cargarUsuarios();
@@ -147,10 +142,6 @@ public class GestionarUsuariosController {
         listaObservableUsuarios.setAll(GestorUsuarios.getInstancia().getListaObjetos());
     }
 
-    /**
-     * Método para autocompletar los campos con información del usuario seleccionado
-     * @param usuario el usuario seleccionado
-     */
     private void llenarCamposConUsuario(Usuario usuario) {
         campoId.setText(usuario.getId());
         campoContrasena.setText(usuario.getContrasenia());
@@ -175,10 +166,6 @@ public class GestionarUsuariosController {
 
     @FXML
     void initialize() {
-        // Inicializar las columnas de la tabla
-        assert campoId != null : "fx:id=\"campoId\" was not injected: check your FXML file 'GestionarUsuariosView.fxml'.";
-        assert columnaDireccion != null : "fx:id=\"columnaDireccion\" was not injected: check your FXML file 'GestionarUsuariosView.fxml'.";
-
         columnaId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         columnaNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         columnaCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorreo()));
@@ -186,17 +173,13 @@ public class GestionarUsuariosController {
         columnaDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
         columnaSaldo.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSaldoTotal()).asObject());
 
-        //Permite escuchar el evento de selección en la tabla (Listener Selección)
         tablaUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 llenarCamposConUsuario(newSel);
             }
         });
 
-        // Llenar la tabla con la lista de usuarios desde GestorUsuarios
         tablaUsuarios.setItems(listaObservableUsuarios);
-
-        // Cargar los usuarios preexistentes desde el GestorUsuarios
         cargarUsuarios();
     }
 }

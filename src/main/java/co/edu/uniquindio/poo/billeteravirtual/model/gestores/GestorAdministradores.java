@@ -4,6 +4,11 @@ import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 
 import java.util.ArrayList;
 
+
+/**
+ * Gestor Singleton para administrar objetos Administrador.
+ * Extiende GestorBaseCRUD para heredar operaciones CRUD básicas.
+ */
 public class GestorAdministradores extends GestorBaseCRUD<Administrador> {
     private static GestorAdministradores instancia;
 
@@ -11,7 +16,11 @@ public class GestorAdministradores extends GestorBaseCRUD<Administrador> {
         super(new ArrayList<Administrador>());
     }
 
-    public static GestorAdministradores getInstancia() {
+    /**
+     * Obtiene la instancia única de GestorAdministradores (Singleton).
+     * @return instancia de GestorAdministradores
+     */
+    public static synchronized GestorAdministradores getInstancia() {
         if (instancia == null) {
             instancia = new GestorAdministradores();
         }

@@ -7,15 +7,17 @@ import org.jetbrains.annotations.Nullable;
 import java.time.LocalDate;
 
 /**
- * Clase directora para crear transacciones haciendo uso
- * del Builder de la clase Movimiento.
+ * Clase directora que se encarga de construir objetos Movimiento usando
+ * el patrón Builder.
  *
- * Dependiendo del tipo de movimiento a realizar deseado,
- * se construye un objeto Movimiento de manera distinta.
+ * Dependiendo del tipo de movimiento (depósito, retiro, transferencia),
+ * construye un Movimiento con las propiedades y la estrategia apropiada.
  */
 public class DirectorMovimiento {
+
+
     /**
-     * Método para crear un Movimiento de tipo Deposito
+     * Crea un Movimiento de tipo Depósito.
      * @param cuentaDestino Cuenta a la cual se realizará el depósito,
      *                      corresponde al parámetro cuentaOrigen de la clase
      *                      Movimiento, pues se refiera a la cuenta de quien ejecuta
@@ -29,8 +31,8 @@ public class DirectorMovimiento {
     public Movimiento crearDeposito(CuentaBancaria cuentaDestino, String id, double monto, @Nullable Categoria categoria, @Nullable String descripcion) {
 
         Movimiento.Builder builder = new Movimiento.Builder()
-                .setCuentaBancariaOrigen(cuentaDestino) // tratada como origen en depósito
-                .setId(id) //Estaría chevere que el id se genere aleatoriamente o secuencialmente, algo así
+                .setCuentaBancariaOrigen(cuentaDestino) // En depósito la cuenta destino es tratada como origen
+                .setId(id) // Se recomienda que el id sea generado aleatoriamente o secuencialmente
                 .setFecha(LocalDate.now())
                 .setMonto(monto)
                 .setEstrategia(new DepositoStrategy());
@@ -47,25 +49,27 @@ public class DirectorMovimiento {
     }
 
     /**
-     * Método para crear un movimiento de tipo Retiro
-     * @param cuentaOrigen Cuenta de la cual se realizará el retiro
-     * @param id id del movimiento
-     * @param monto monto deseado a retirar de la cuenta
-     * @param categoria categoría opcional del movimiento
-     * @param descripcion
-     * @return
+     * Crea un Movimiento de tipo Retiro.
+     *
+     * @param cuentaOrigen Cuenta desde la cual se realizará el retiro.
+     * @param id Identificador único del movimiento.
+     * @param monto Monto que se retirará de la cuenta.
+     * @param categoria Categoría opcional que clasifica el movimiento.
+     * @param descripcion Descripción opcional del movimiento.
+     * @return Objeto Movimiento configurado para un retiro, con la estrategia RetiroStrategy.
      */
     public Movimiento crearRetiro(CuentaBancaria cuentaOrigen, String id, double monto, @Nullable Categoria categoria, @Nullable String descripcion) {
 
         Movimiento.Builder builder = new Movimiento.Builder()
                 .setCuentaBancariaOrigen(cuentaOrigen)
-                .setId(id) //Estaría chevere que el id se genere aleatoriamente o secuencialmente, algo así
+                .setId(id) // Se recomienda que el id sea generado aleatoriamente o secuencialmente
                 .setFecha(LocalDate.now())
                 .setMonto(monto)
                 .setEstrategia(new RetiroStrategy());
 
         if (categoria != null) {
             builder.setCategoriaOpcional(categoria);
+            // Nota: se podría validar que no se exceda el presupuesto asignado en la categoría
         }
 
         if (descripcion != null) {
@@ -73,14 +77,27 @@ public class DirectorMovimiento {
         }
 
         return builder.build();
+
     }
 
+
+    /**
+     * Crea un Movimiento de tipo Transferencia.
+     *
+     * @param cuentaOrigen Cuenta desde la cual se transferirá el monto.
+     * @param cuentaDestino Cuenta que recibirá la transferencia.
+     * @param id Identificador único del movimiento.
+     * @param monto Monto a transferir.
+     * @param categoria Categoría opcional que clasifica el movimiento.
+     * @param descripcion Descripción opcional del movimiento.
+     * @return Objeto Movimiento configurado para una transferencia, con la estrategia TransferenciaStrategy.
+     */
     public Movimiento crearTransferencia(CuentaBancaria cuentaOrigen, CuentaBancaria cuentaDestino, String id, double monto, @Nullable Categoria categoria, @Nullable String descripcion) {
 
         Movimiento.Builder builder = new Movimiento.Builder()
                 .setCuentaBancariaOrigen(cuentaOrigen)
                 .setCuentaBancariaDestino(cuentaDestino)
-                .setId(id) //Estaría chevere que el id se genere aleatoriamente o secuencialmente, algo así
+                .setId(id) // Se recomienda que el id sea generado aleatoriamente o secuencialmente
                 .setFecha(LocalDate.now())
                 .setMonto(monto)
                 .setEstrategia(new TransferenciaStrategy());
@@ -97,3 +114,4 @@ public class DirectorMovimiento {
 
     }
 }
+

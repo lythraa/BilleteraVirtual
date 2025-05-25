@@ -1,37 +1,47 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class Categoria {
-    private String idCategoria;
-    private String nombre;
-    private String descripcion;
+/**
+ * Representa una categoría con un presupuesto asignado.
+ */
+public class Categoria implements Identificable {
+    private String id_Nombre;
+    private Presupuesto presupuesto;
 
-    public Categoria(String idCategoria, String nombre, String descripcion) {
-        this.idCategoria = idCategoria;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    /**
+     * Crea una nueva categoría con nombre y presupuesto asignado.
+     *
+     * @param id_Nombre Nombre o identificador de la categoría
+     * @param presupuesto Presupuesto asociado a la categoría
+     */
+    public Categoria(String id_Nombre, Presupuesto presupuesto) {
+        this.id_Nombre = id_Nombre;
+        this.presupuesto = presupuesto;
     }
 
-    public String getIdCategoria() {
-        return idCategoria;
+    /**
+     * Retorna el identificador de la categoría.
+     *
+     * @return id de la categoría
+     */
+    @Override
+    public String getId() {
+        return id_Nombre;
     }
 
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
+    //==============================GETTERS AND SETTERS=========================
+    public String getId_Nombre() {
+        return id_Nombre;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setId_Nombre(String id_Nombre) {
+        this.id_Nombre = id_Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Presupuesto getPresupuesto() {
+        return presupuesto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPresupuesto(Presupuesto presupuesto) {
+        this.presupuesto = presupuesto;
     }
 }

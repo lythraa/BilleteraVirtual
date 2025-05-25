@@ -2,6 +2,10 @@ package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
 
+/**
+ * Interfaz que define las operaciones básicas que una cuenta bancaria debe implementar.
+ * Sirve para ser usada por clases proxy o la cuenta bancaria real.
+ */
 public interface ICuentaBancaria {
     String getId();
 

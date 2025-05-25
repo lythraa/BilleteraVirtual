@@ -1,36 +1,40 @@
-/* === Fondo General === */
+/* ==================================== FONDO GENERAL ==================================== */
+/* Define el fondo principal de toda la interfaz con un gradiente vertical oscuro */
 .root {
     -fx-background-color: linear-gradient(to bottom, #1e1e2f, #2a2a40);
     -fx-padding: 20px;
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* === Textos === */
+/* ==================================== ESTILOS DE TEXTO ==================================== */
 .label {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: #eeeeee;     /* Texto claro */
     -fx-font-size: 14px;
 }
 
+/* Título principal sutil en cursiva */
 .label-title {
     -fx-font-size: 18px;
-    -fx-font-style: italic;      /* Cursiva */
+    -fx-font-style: italic;
     -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-    -fx-text-fill: #A0A0A0;       /* Gris tenue */
-    -fx-font-weight: 300;         /* Más delgadita */
+    -fx-text-fill: #A0A0A0;
+    -fx-font-weight: 300;
 }
 
-
+/* Subtítulo con un tono gris claro */
 .label-subtitle {
     -fx-font-size: 16px;
     -fx-text-fill: #cccccc;
 }
 
+/* Mensaje de bienvenida */
 .label-bienvenido {
     -fx-font-size: 18px;
     -fx-text-fill: #bbbbbb;
     -fx-font-weight: normal;
 }
 
+/* Título llamativo con efecto de sombra y gradiente */
 .nebula-title {
     -fx-font-size: 48px;
     -fx-text-fill: linear-gradient(to right, #ba68c8, #9c27b0);
@@ -38,25 +42,34 @@
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.4), 4, 0.5, 0, 2);
 }
 
-/* === Campos de Texto === */
-.text-field, .password-field {
-    -fx-background-color: rgba(255,255,255,0.08);
+/* ==================================== CAMPOS DE TEXTO Y ÁREAS ==================================== */
+/* Estilos unificados para campos de entrada */
+.text-field, .password-field, .text-area {
+    -fx-background-color: rgba(255,255,255,0.06);
     -fx-text-fill: white;
     -fx-prompt-text-fill: #bbbbbb;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
     -fx-border-color: transparent;
     -fx-padding: 12;
     -fx-font-size: 14px;
-    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 2, 0, 0, 1);
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.25), 2, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-.text-field:focused, .password-field:focused {
-    -fx-border-color: #9c27b0;
+/* Estado enfocado para campos de texto */
+.text-field:focused, .password-field:focused, .text-area:focused {
+    -fx-border-color: #ba68c8;
     -fx-background-color: rgba(255,255,255,0.12);
 }
 
-/* === Botones === */
+/* Elimina fondo interno en scrollpane o textarea */
+.viewport, .content {
+    -fx-background-color: transparent;
+}
+
+/* ==================================== BOTONES ===================================== */
+/* Estilo base para todos los botones */
 .button {
     -fx-background-color: linear-gradient(to right, #ab47bc, #8e24aa);
     -fx-text-fill: white;
@@ -68,11 +81,28 @@
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 4, 0, 0, 2);
 }
 
+/* Cambio de color al pasar el cursor */
 .button:hover {
     -fx-background-color: linear-gradient(to right, #ba68c8, #9c27b0);
 }
 
-/* === Links === */
+/* Botón de enviar con estilo personalizado */
+.boton-enviar {
+    -fx-background-color: linear-gradient(to right, #ba68c8, #9c27b0);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12;
+    -fx-padding: 10 25;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.4), 3, 0, 0, 2);
+}
+
+.boton-enviar:hover {
+    -fx-background-color: linear-gradient(to right, #ce93d8, #ab47bc);
+}
+
+/* ==================================== HIPERVÍNCULOS ==================================== */
 .hyperlink {
     -fx-text-fill: #ba68c8;
     -fx-underline: true;
@@ -82,7 +112,7 @@
     -fx-text-fill: #f06292;
 }
 
-/* === Tabla === */
+/* ==================================== TABLAS ==================================== */
 .table-view-custom {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -92,29 +122,35 @@
     -fx-padding: 10;
 }
 
+/* Encabezado de tabla con gradiente */
 .table-view-custom .column-header-background {
     -fx-background-color: linear-gradient(to right, #ba68c8, #9c27b0);
     -fx-background-radius: 15 15 0 0;
 }
 
+/* Ajustes para celdas de encabezado */
 .table-view-custom .column-header, .table-view-custom .filler {
     -fx-size: 35px;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
+/* Filas normales */
 .table-view-custom .table-row-cell {
     -fx-background-color: rgba(255, 255, 255, 0.04);
     -fx-text-fill: white;
 }
 
+/* Filas seleccionadas */
 .table-view-custom .table-row-cell:filled:selected {
     -fx-background-color: #9c27b0;
 }
 
-.table-view .cell { -fx-text-fill: #f0f0f0 }
+.table-view .cell {
+    -fx-text-fill: #f0f0f0;
+}
 
-/* === Buscador === */
+/* ==================================== BARRA DE BÚSQUEDA ==================================== */
 .search-bar {
     -fx-background-color: rgba(255,255,255,0.08);
     -fx-text-fill: white;
@@ -127,7 +163,7 @@
     -fx-pref-width: 400px;
 }
 
-/* === Contenedor del formulario === */
+/* ==================================== CONTENEDOR DE FORMULARIO ==================================== */
 .formulario-box {
     -fx-background-color: rgba(255,255,255,0.05);
     -fx-padding: 20;
@@ -136,6 +172,7 @@
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 4, 0, 0, 2);
 }
 
+/* ==================================== COMBO BOX ==================================== */
 .combo-box {
     -fx-background-color: rgba(255,255,255,0.08);
     -fx-border-color: transparent;
@@ -169,6 +206,7 @@
     -fx-text-fill: white;
 }
 
+/* ==================================== TÍTULO DE SECCIÓN DE EDICIÓN ==================================== */
 .titulo-editar {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
@@ -178,4 +216,3 @@
     -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     -fx-padding: 0 0 20 0;
 }
-

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="10" styleClass="root" stylesheets="@../css/style.css"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.ContactoController">
+    <Label styleClass="label-subtitle" text="Contáctanos:"/>
+    <TextField fx:id="campoCorreo" promptText="Tu correo electrónico" styleClass="text-field"/>
+    <TextField fx:id="campoAsunto" promptText="Asunto" styleClass="text-field"/>
+    <TextArea fx:id="campoMensaje" prefRowCount="5" promptText="Describe tu solicitud" styleClass="text-area"/>
+
+    <HBox spacing="20">
+        <padding>
+            <Insets top="10.0"/>
+        </padding>
+        <Button onAction="#onEnviarSolicitud" text="Enviar solicitud"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button onAction="#onVolver" text="Volver"/>
+    </HBox>
+</VBox>

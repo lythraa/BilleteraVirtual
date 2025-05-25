@@ -1,16 +1,19 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
-import java.util.List;
 
+/**
+ * Clase que representa un administrador del sistema.
+ */
 public class Administrador extends Perfil {
 
     /**
-     * Método constructor de la clase Administrador
+     * Constructor de la clase Administrador.
+     *
      * @param id Cédula del administrador
-     * @param contrasenia Clave de acceso del administrador
-     * @param nombre Nombre y apellido del administrador
-     * @param correo Dirección de correo electrónico del administrador
-     * @param telefono Número de telefono del administrador
-     * @param direccion Dirección de residencia del administrador
+     * @param contrasenia Contraseña de acceso
+     * @param nombre Nombre completo
+     * @param correo Correo electrónico
+     * @param telefono Número de teléfono
+     * @param direccion Dirección de residencia
      */
     public Administrador(String id, String contrasenia, String nombre, String correo, String telefono, String direccion){
         super(id, contrasenia, nombre, correo, telefono, direccion);
