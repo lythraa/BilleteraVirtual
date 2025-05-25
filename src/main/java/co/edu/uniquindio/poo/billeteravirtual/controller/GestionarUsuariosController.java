@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class GestionarUsuariosController {
-
+    //CLASE LISTA------------------------------------------------------------------------Manejar Excepciones, nulll....
     @FXML
     private TextField campoId;
 
@@ -29,9 +29,6 @@ public class GestionarUsuariosController {
 
     @FXML
     private TextField campoCorreo;
-
-    @FXML
-    private TextField campoSaldo;
 
     @FXML
     private TableColumn<Usuario, String> columnaCorreo;
@@ -66,12 +63,6 @@ public class GestionarUsuariosController {
     @FXML
     private TextField campoNombre;
 
-    @FXML
-    private ImageView iconoVolver;
-
-    //Se obtiene la instancia única del gestorUsuarios para obtener sus datos
-    private final GestorUsuarios gestorUsuarios = GestorUsuarios.getInstancia();
-
 
     private ObservableList<Usuario> listaObservableUsuarios = FXCollections.observableArrayList();
 
@@ -84,7 +75,7 @@ public class GestionarUsuariosController {
     @FXML
     void onAgregar() {
         Usuario usuario = buildUsuario();
-        gestorUsuarios.agregar(usuario);
+        GestorUsuarios.getInstancia().agregar(usuario);
         cargarUsuarios();
         limpiarCampos();
     }
@@ -97,7 +88,9 @@ public class GestionarUsuariosController {
             seleccionado.setCorreo(campoCorreo.getText());
             seleccionado.setTelefono(campoTelefono.getText());
             seleccionado.setDireccion(campoDireccion.getText());
-            seleccionado.setSaldoTotal(Double.parseDouble(campoSaldo.getText()));
+            seleccionado.setContrasenia(campoContrasena.getText());
+            seleccionado.setId(campoId.getText());
+
 
             cargarUsuarios();
             limpiarCampos();
@@ -113,21 +106,22 @@ public class GestionarUsuariosController {
             return;
         }
 
-        Usuario encontrado = gestorUsuarios.buscar(idBuscado);
+        Usuario encontrado = GestorUsuarios.getInstancia().buscar(idBuscado);
 
         if (encontrado != null) {
-            listaObservableUsuarios.setAll(encontrado); // solo muestra ese usuario
+            listaObservableUsuarios.setAll(encontrado);
         } else {
             UtilAlerta.mostrarAlertaError("Sin coincidencias", "No se encontró ningún usuario con el ID ingresado.");
-            listaObservableUsuarios.clear(); // limpia la tabla si no encuentra nada
+            listaObservableUsuarios.clear();
         }
+
     }
 
     @FXML
     void onEliminar() {
         Usuario seleccionado = getUsuarioSeleccionado();
         if (seleccionado != null) {
-            gestorUsuarios.eliminar(seleccionado);
+            GestorUsuarios.getInstancia().eliminar(seleccionado);
             listaObservableUsuarios.remove(seleccionado);
             limpiarCampos();
             cargarUsuarios();
@@ -143,16 +137,44 @@ public class GestionarUsuariosController {
     }
 
     @FXML
-    void onLimpiar(ActionEvent event) {
+    void onRecargarTabla(ActionEvent event) {
         limpiarCampos();
         tablaUsuarios.getSelectionModel().clearSelection();
+        cargarUsuarios();
     }
 
+    private void cargarUsuarios() {
+        listaObservableUsuarios.setAll(GestorUsuarios.getInstancia().getListaObjetos());
+    }
+
+    /**
+     * Método para autocompletar los campos con información del usuario seleccionado
+     * @param usuario el usuario seleccionado
+     */
+    private void llenarCamposConUsuario(Usuario usuario) {
+        campoId.setText(usuario.getId());
+        campoContrasena.setText(usuario.getContrasenia());
+        campoNombre.setText(usuario.getNombre());
+        campoCorreo.setText(usuario.getCorreo());
+        campoTelefono.setText(usuario.getTelefono());
+        campoDireccion.setText(usuario.getDireccion());
+    }
+
+    private void limpiarCampos() {
+        campoId.clear();
+        campoContrasena.clear();
+        campoNombre.clear();
+        campoCorreo.clear();
+        campoTelefono.clear();
+        campoDireccion.clear();
+    }
+
+    private Usuario getUsuarioSeleccionado() {
+        return tablaUsuarios.getSelectionModel().getSelectedItem();
+    }
 
     @FXML
     void initialize() {
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icons/left-arrow.png")));
-        iconoVolver.setImage(image);
         // Inicializar las columnas de la tabla
         assert campoId != null : "fx:id=\"campoId\" was not injected: check your FXML file 'GestionarUsuariosView.fxml'.";
         assert columnaDireccion != null : "fx:id=\"columnaDireccion\" was not injected: check your FXML file 'GestionarUsuariosView.fxml'.";
@@ -177,37 +199,4 @@ public class GestionarUsuariosController {
         // Cargar los usuarios preexistentes desde el GestorUsuarios
         cargarUsuarios();
     }
-
-    private void cargarUsuarios() {
-        listaObservableUsuarios.setAll(gestorUsuarios.filtrarUsuarios());
-    }
-
-    /**
-     * Método para autocompletar los campos con información del usuario seleccionado
-     * @param usuario el usuario seleccionado
-     */
-    private void llenarCamposConUsuario(Usuario usuario) {
-        campoId.setText(usuario.getId());
-        campoContrasena.setText(usuario.getContrasenia());
-        campoNombre.setText(usuario.getNombre());
-        campoCorreo.setText(usuario.getCorreo());
-        campoTelefono.setText(usuario.getTelefono());
-        campoDireccion.setText(usuario.getDireccion());
-        campoSaldo.setText(String.valueOf(usuario.getSaldoTotal()));
-    }
-
-    private void limpiarCampos() {
-        campoId.clear();
-        campoContrasena.clear();
-        campoNombre.clear();
-        campoCorreo.clear();
-        campoTelefono.clear();
-        campoDireccion.clear();
-        campoSaldo.clear();
-    }
-
-    private Usuario getUsuarioSeleccionado() {
-        return tablaUsuarios.getSelectionModel().getSelectedItem();
-    }
-
 }

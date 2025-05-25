@@ -3,6 +3,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +12,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class AdministradorController {
+    private Stage stage;
+
 
     @FXML
     private Label textoHolaUsuario;
 
-    private Stage stage;
 
     @FXML
     void onGestionarTransacciones() {
@@ -60,6 +62,8 @@ public class AdministradorController {
 
     @FXML
     void onCerrarSesion() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "IniciarSesionView.fxml","Vista Iniciar Sesion");
 
     }
 
@@ -70,7 +74,12 @@ public class AdministradorController {
 
     @FXML
     void initialize() {
+        Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
+        if (perfilActual != null) {
+            textoHolaUsuario.setText("[Admin] Bienvenido, " + perfilActual.getNombre());
+        } else {
+            textoHolaUsuario.setText("[Admin] Bienvenido");
+        }
         assert textoHolaUsuario != null : "fx:id=\"textoHolaUsuario\" was not injected: check your FXML file 'AdministradorView.fxml'.";
-
     }
 }

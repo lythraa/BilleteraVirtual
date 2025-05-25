@@ -2,6 +2,9 @@ package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.billeteravirtual.app.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class UsuarioController {
+    private Stage stage;
 
     @FXML
     private Label textoSaldo;
@@ -53,6 +57,8 @@ public class UsuarioController {
 
     @FXML
     void onCerrarSesion() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "IniciarSesionView.fxml","Vista Iniciar Sesion");
 
     }
 
@@ -63,6 +69,12 @@ public class UsuarioController {
 
     @FXML
     void initialize() {
+        Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
+        if (perfilActual != null) {
+            textoHolaUsuario.setText("Bienvenido, " + perfilActual.getNombre());
+        } else {
+            textoHolaUsuario.setText("Bienvenido");
+        }
         assert textoSaldo != null : "fx:id=\"textoSaldo\" was not injected: check your FXML file 'UsuarioView.fxml'.";
         assert textoHolaUsuario != null : "fx:id=\"textoHolaUsuario\" was not injected: check your FXML file 'UsuarioView.fxml'.";
 

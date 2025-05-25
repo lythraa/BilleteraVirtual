@@ -1,5 +1,5 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
-//CLASE LISTA
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class EditarPerfilController {
-
+    //CLASE LISTA------------------------------------------------------------------------Manejar Excepciones, nulll....
     private String vistaOrigen;
 
     public void setVistaOrigen(String vistaOrigen) {

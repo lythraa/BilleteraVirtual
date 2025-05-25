@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class IniciarSesionController {
-//nos referimos aqui a Usuario como Perfil
+    //CLASE LISTA------------------------------------------------------------------------falta enlace registro
     @FXML
     private ResourceBundle resources;
 
@@ -36,7 +36,6 @@ public class IniciarSesionController {
         if (sesionIniciada) {
 
             Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
-            //se obtiene el escenario
             Stage stage = (Stage) campoId.getScene().getWindow();
 
             if (perfilActual instanceof Usuario) {
