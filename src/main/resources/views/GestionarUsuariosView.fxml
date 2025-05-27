@@ -9,10 +9,10 @@
            fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarUsuariosController">
     <VBox spacing="20.0" StackPane.alignment="CENTER">
         <HBox spacing="20.0">
-            <Button onAction="#onVolver" text="Volver"/>
-            <Label styleClass="" text="Gestión de Usuarios">
+            <Button onAction="#onVolver" styleClass="button" text="Volver"/>
+            <Label styleClass="label-title" text="Gestión de Usuarios">
                 <HBox.margin>
-                    <Insets left="300.0"/>
+                    <Insets left="250.0" />
                 </HBox.margin>
             </Label>
         </HBox>
@@ -22,7 +22,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" top="20.0"/>
                 </padding>
-                <Label styleClass="" text="Formulario Usuario">
+                <Label styleClass="label-subtitle" text="Formulario Usuario">
                     <padding>
                         <Insets bottom="10.0"/>
                     </padding>
@@ -42,24 +42,24 @@
                     </rowConstraints>
                     <Label text="Nombre:" GridPane.rowIndex="1"/>
 
-                    <Label text="Teléfono:" GridPane.rowIndex="3"/>
+                    <Label styleClass="label-small" text="Teléfono:" GridPane.rowIndex="3"/>
 
-                    <Label text="Dirección:" GridPane.rowIndex="4"/>
+                    <Label styleClass="label-small" text="Dirección:" GridPane.rowIndex="4"/>
                     <TextField fx:id="campoDireccion" promptText="Calle 123 #45-67"
                                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                     <TextField fx:id="campoId" promptText="10000000" GridPane.columnIndex="1"/>
 
-                    <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                    <Label styleClass="label-small" text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                     <PasswordField fx:id="campoContrasena" promptText="••••••••"
                                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-                    <Label text="Id:"/>
+                    <Label  styleClass="label-small" text="Id:"/>
                     <TextField fx:id="campoNombre" promptText="Nombre completo" GridPane.columnIndex="1"
                                GridPane.rowIndex="1"/>
                     <TextField fx:id="campoCorreo" promptText="correo@ejemplo.com"
                                GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-                    <Label text="Correo:" GridPane.rowIndex="2"/>
+                    <Label styleClass="label-small" text="Correo:" GridPane.rowIndex="2"/>
                     <TextField fx:id="campoTelefono" promptText="3001234567" GridPane.columnIndex="1"
                                GridPane.rowIndex="3"/>
                 </GridPane>
