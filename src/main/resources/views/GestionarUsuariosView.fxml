@@ -40,7 +40,7 @@
                         <RowConstraints/>
                         <RowConstraints/>
                     </rowConstraints>
-                    <Label text="Nombre:" GridPane.rowIndex="1"/>
+                    <Label styleClass="label-small" text="Nombre:" GridPane.rowIndex="1"/>
 
                     <Label styleClass="label-small" text="Teléfono:" GridPane.rowIndex="3"/>
 

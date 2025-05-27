@@ -23,9 +23,5 @@ public class ValidadorCuentaDestino extends ValidadorMovimiento {
         if (GestorCuentasBancarias.getInstancia().buscar(movimiento.getCuentaBancariaDestino().getId()) == null){
             throw new IllegalArgumentException("No existe una cuenta bancaria con el numero de cuenta ingresado.");
         }
-        UtilAlerta.mostrarAlertaInformacion(
-                "Cuenta válida",
-                "✅ La cuenta bancaria destino fue encontrada correctamente en el sistema."
-        );
     }
 }

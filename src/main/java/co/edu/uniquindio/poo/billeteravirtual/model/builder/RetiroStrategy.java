@@ -14,16 +14,13 @@ import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
  */
 public class RetiroStrategy implements MovimientoStrategy{
 
-    private final ValidadorMovimiento validador;
-
     /**
      * Constructor que inicializa el validador de transacciones.
      * En este caso, se utiliza un validador que verifica si la cuenta
      * tiene saldo suficiente para realizar el retiro.
      */
     public RetiroStrategy() {
-        // Construcción de la cadena de validación: actualmente sólo valida saldo suficiente.
-        this.validador = new ValidadorSaldoSuficiente();
+
     }
 
     /**
@@ -36,15 +33,12 @@ public class RetiroStrategy implements MovimientoStrategy{
     @Override
     public void procesarTransaccion(Movimiento movimiento) {
         // Validar la transacción según las reglas definidas en la cadena
-        validador.validar(movimiento);
 
         CuentaBancaria origen = movimiento.getCuentaBancariaOrigen();
-        CuentaBancaria destino = movimiento.getCuentaBancariaDestino();
 
         double monto = movimiento.getMonto();
 
         origen.retirarSaldo(monto);
-        destino.agregarSaldo(monto);
         UtilAlerta.mostrarAlertaInformacion(
                 "Retiro exitoso",
                 "El retiro de $" + monto + " con la ID " + movimiento.getId() + " se ha realizado correctamente.\n" +

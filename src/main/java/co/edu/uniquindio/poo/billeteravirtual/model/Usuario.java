@@ -43,12 +43,12 @@ public class Usuario extends Perfil implements Observer {
      *
      * @return suma del saldo de todas las cuentas bancarias
      */
-    public double calcularSaldoTotal(){
+    public void calcularSaldoTotal(){
         double total = 0;
         for (CuentaBancaria c : listaCuentasBancarias){
             total+=c.getSaldo();
         }
-        return total;
+        this.saldoTotal = total;
     }
 
     /**
@@ -119,6 +119,7 @@ public class Usuario extends Perfil implements Observer {
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {
+        calcularSaldoTotal();
         return saldoTotal;
     }
 

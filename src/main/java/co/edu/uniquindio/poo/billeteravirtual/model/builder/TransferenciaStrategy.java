@@ -15,24 +15,8 @@ import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
  * - Saldo suficiente en la cuenta origen.
  */
 public class TransferenciaStrategy implements MovimientoStrategy{
-    private final ValidadorMovimiento validador;
 
-    /**
-     * Constructor que construye la cadena de validadores para la transferencia.
-     * El orden de validación es:
-     * 1. Validar que la cuenta origen no sea nula.
-     * 2. Validar que la cuenta destino sea diferente y válida.
-     * 3. Validar que la cuenta origen tenga saldo suficiente.
-     */
     public TransferenciaStrategy() {
-        ValidadorMovimiento validador1 = new ValidadorCuentaNula();
-        ValidadorMovimiento validador2 = new ValidadorCuentaDestino();
-        ValidadorMovimiento validador3 = new ValidadorSaldoSuficiente();
-
-        validador1.setSiguiente(validador2);
-        validador2.setSiguiente(validador3);
-
-        this.validador = validador1;
     }
 
     /**
@@ -43,7 +27,6 @@ public class TransferenciaStrategy implements MovimientoStrategy{
      */
     @Override
     public void procesarTransaccion(Movimiento movimiento) {
-        validador.validar(movimiento);
 
         CuentaBancaria origen = movimiento.getCuentaBancariaOrigen();
         CuentaBancaria destino = movimiento.getCuentaBancariaDestino();

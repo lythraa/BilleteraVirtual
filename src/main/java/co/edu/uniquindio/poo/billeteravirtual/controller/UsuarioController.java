@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
+import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -85,11 +86,14 @@ public class UsuarioController {
      */
     @FXML
     void initialize() {
-        Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
-        if (perfilActual != null) {
-            textoHolaUsuario.setText("Bienvenido, " + perfilActual.getNombre());
+        Usuario usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        if (usuario != null) {
+            textoHolaUsuario.setText("Bienvenido, " + usuario.getNombre());
+
+            textoSaldo.setText("Saldo: " + usuario.getSaldoTotal());
         } else {
             textoHolaUsuario.setText("Bienvenido");
+            textoSaldo.setText("Usuario no disponible");
         }
         assert textoSaldo != null : "fx:id=\"textoSaldo\" was not injected: check your FXML file 'UsuarioView.fxml'.";
         assert textoHolaUsuario != null : "fx:id=\"textoHolaUsuario\" was not injected: check your FXML file 'UsuarioView.fxml'.";

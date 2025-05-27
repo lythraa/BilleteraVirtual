@@ -22,9 +22,5 @@ public class ValidadorCuentaNula extends ValidadorMovimiento {
         if (movimiento.getCuentaBancariaDestino() == null) {
             throw new IllegalArgumentException("La cuenta destino no puede ser nula.");
         }
-        UtilAlerta.mostrarAlertaInformacion(
-                "Validación de cuenta",
-                "✅ La cuenta bancaria destino no es nula."
-        );
     }
 }

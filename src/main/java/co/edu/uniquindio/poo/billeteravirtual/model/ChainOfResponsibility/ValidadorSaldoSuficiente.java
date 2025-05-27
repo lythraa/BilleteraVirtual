@@ -29,9 +29,5 @@ public class ValidadorSaldoSuficiente extends ValidadorMovimiento {
         if (saldo < monto) {
             throw new IllegalStateException("Saldo insuficiente en la cuenta de origen.");
         }
-        UtilAlerta.mostrarAlertaInformacion(
-                "Validación de saldo",
-                "✅ La cuenta tiene saldo suficiente para realizar la transacción."
-        );
     }
 }

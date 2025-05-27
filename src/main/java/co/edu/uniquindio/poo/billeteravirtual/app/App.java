@@ -44,16 +44,39 @@ public class App extends Application {
         CuentaBancaria cuenta2 = new CuentaBancaria("456", "Davivienda", TipoCuenta.AHORRO);
         CuentaBancaria cuenta3 = new CuentaBancaria("789", "Colpatria", TipoCuenta.AHORRO);
 
+        cuenta1.agregarSaldo(6000000);
+        cuenta2.agregarSaldo(7000000);
+        cuenta3.agregarSaldo(8000000);
+
         user1.agregarCuenta(cuenta1);
         user2.agregarCuenta(cuenta2);
         user3.agregarCuenta(cuenta3);
 
+        //CATEGORIAS
+        user1.obtenerOCrearCategoria("VIAJE", 1000000);
+        user1.obtenerOCrearCategoria("COMIDA", 900000);
+        user2.obtenerOCrearCategoria("VIAJE", 1000000);
+        user2.obtenerOCrearCategoria("COMIDA", 900000);
+        user3.obtenerOCrearCategoria("VIAJE", 1000000);
+        user3.obtenerOCrearCategoria("ESTUDIOS", 5000000);
+
         //MOVIMIENTOS
-        //fachada.realizarRetiro(user1, CuentaBancaria cuentaOrigen, double monto, @Nullable Categoria categoria, @Nullable String descripcion);
+        fachada.realizarRetiro(user1, cuenta1, 30000, user1.buscarCategoria("VIAJE"), "");
+        fachada.realizarRetiro(user1, cuenta1, 20000, user1.buscarCategoria("VIAJE"), "");
+        fachada.realizarRetiro(user1, cuenta1, 10000, user1.buscarCategoria("COMIDA"), "");
+        fachada.realizarRetiro(user2, cuenta2, 30000, user2.buscarCategoria("VIAJE"), "");
+        fachada.realizarRetiro(user2, cuenta2, 20000, user2.buscarCategoria("COMIDA"), "");
+        fachada.realizarRetiro(user3, cuenta3, 100000, user3.buscarCategoria("ESTUDIOS"), "");
 
         //AGREGAR A LA FACHADA
         fachada.getGestorAdministradores().agregar(admin1);
+        fachada.getGestorAdministradores().agregar(admin2);
+        fachada.getGestorAdministradores().agregar(admin3);
+
         fachada.getGestorUsuarios().agregar(user1);
+        fachada.getGestorUsuarios().agregar(user2);
+        fachada.getGestorUsuarios().agregar(user3);
+
 
     }
 

@@ -32,6 +32,7 @@ public class SistemaBilleteraFacade {
      * Constructor que inicializa los gestores utilizando el patrón Singleton.
      */
     public SistemaBilleteraFacade() {
+        this.directorMovimiento = new DirectorMovimiento();
         this.gestorAdministradores = GestorAdministradores.getInstancia();
         this.gestorMovimientos = GestorMovimientos.getInstancia();
         this.gestorCuentasBancarias = GestorCuentasBancarias.getInstancia();

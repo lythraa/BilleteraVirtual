@@ -54,6 +54,12 @@ public class EstadisticasController {
         mostrarSaldoPromedioGeneral();
     }
 
+    @FXML
+    public void onVolver(){
+        Stage stage = (Stage) labelSaldoPromedio.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Vista Administrador");
+    }
+
     private void cargarChartMovimientosPorCategoria() {
         chartMovimientosPorCategoria.getData().clear();
         Map<String, Double> datos = fachada.obtenerMovimientosPorCategoria();
@@ -82,5 +88,7 @@ public class EstadisticasController {
         double saldo = fachada.calcularSaldoPromedioUsuarios();
         labelSaldoPromedio.setText("$ " + String.format("%,.2f", saldo));
     }
+
+
 
 }
