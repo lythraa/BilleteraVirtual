@@ -14,13 +14,15 @@
 }
 
 .label-title {
-    -fx-font-size: 24px;
-    -fx-text-fill: #d1c4e9;
-    -fx-font-weight: semi-bold;
-    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-    -fx-padding: 0 0 10 0;
-    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 3, 0, 0, 1);
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d772d5; /* Lavanda claro elegante */
+    -fx-font-family: "Helvetica";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.3, 0, 2);
+    -fx-padding: 10 0 15 0;
+    -fx-letter-spacing: 1px;
 }
+
 
 .label-subtitle {
     -fx-font-size: 18px;
@@ -33,6 +35,13 @@
     -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     -fx-text-fill: #A0A0A0;
     -fx-font-weight: 300;
+}
+
+.label-small {
+    -fx-font-size: 14px;
+    -fx-text-fill: #bbbbbb;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    -fx-font-weight: normal;
 }
 
 /* ===================== BOTONES ===================== */

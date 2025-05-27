@@ -19,6 +19,6 @@
         </padding>
         <Button onAction="#onEnviarSolicitud" text="Enviar solicitud"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <Button onAction="#onVolver" text="Volver"/>
+        <Button onAction="#onVolver" styleClass="button" text="Volver"/>
     </HBox>
 </VBox>

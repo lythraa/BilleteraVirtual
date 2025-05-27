@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -12,15 +13,14 @@
             <children>
                 <HBox spacing="20.0">
                     <children>
-                        <Button onAction="#onVolver">
-                            <graphic>
-                                <ImageView fx:id="iconoVolver" fitHeight="20.0" fitWidth="20.0" preserveRatio="true" />
-                            </graphic>
-                        </Button>
-                        <Label styleClass="" text="Gestión de Cuentas Bancarias">
+                        <Button onAction="#onVolver" styleClass="button" text="Volver" />
+                        <Label styleClass="label-title" text="Gestión de Cuentas Bancarias">
                             <HBox.margin>
-                                <Insets left="200.0" />
+                                <Insets left="250.0" />
                             </HBox.margin>
+                     <font>
+                        <Font name="MS UI Gothic" size="32.0" />
+                     </font>
                         </Label>
                     </children>
                 </HBox>
@@ -32,7 +32,7 @@
                                 <Insets bottom="20.0" left="20.0" top="20.0" />
                             </padding>
                             <children>
-                                <Label styleClass="" text="Formulario Cuenta Bancaria">
+                                <Label styleClass="label-subtitle" text="Formulario Cuenta Bancaria">
                                     <padding>
                                         <Insets bottom="10.0" />
                                     </padding>
@@ -50,19 +50,19 @@
                                         <RowConstraints />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="ID Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <TextField fx:id="campoIdUsuario" promptText="ID del usuario" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                        <Label styleClass="label-small" text="ID Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <TextField fx:id="campoIdUsuario" promptText="ID del usuario" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                                        <Label text="Banco:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField fx:id="campoNombreBanco" promptText="Ej. Bancolombia" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label styleClass="label-small" text="Banco:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="campoNombreBanco" promptText="Ej. Bancolombia" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                        <Label text="No. Cuenta:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField fx:id="campoNumeroCuenta" promptText="0000123456" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <Label styleClass="label-small" text="No. Cuenta:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <TextField fx:id="campoNumeroCuenta" promptText="0000123456" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                                        <Label text="Saldo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                        <TextField fx:id="campoSaldo" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                        <Label styleClass="label-small" text="Saldo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                        <TextField fx:id="campoSaldo" promptText="0.00" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                                        <Label text="Tipo Cuenta" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                        <Label styleClass="label-small" text="Tipo Cuenta" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                         <ComboBox fx:id="comboTipoCuenta" prefHeight="46.0" prefWidth="185.0" promptText="Seleccionar..." styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     </children>
                                 </GridPane>
