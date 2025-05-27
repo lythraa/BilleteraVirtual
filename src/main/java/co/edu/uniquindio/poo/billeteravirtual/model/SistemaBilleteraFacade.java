@@ -26,6 +26,7 @@ public class SistemaBilleteraFacade {
     private final GestorAdministradores gestorAdministradores;
     private final GestorMovimientos gestorMovimientos;
     private final GestorCuentasBancarias gestorCuentasBancarias;
+    private static SistemaBilleteraFacade instancia;
 
     /**
      * Constructor que inicializa los gestores utilizando el patrón Singleton.
@@ -225,6 +226,12 @@ public class SistemaBilleteraFacade {
 
     //========================GETTERS=========================//
 
+    public static synchronized SistemaBilleteraFacade getInstancia() {
+        if (instancia == null) {
+            instancia = new SistemaBilleteraFacade();
+        }
+        return instancia;
+    }
 
     public DirectorMovimiento getDirectorMovimiento() {
         return directorMovimiento;

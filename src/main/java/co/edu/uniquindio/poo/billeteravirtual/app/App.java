@@ -25,7 +25,7 @@ public class App extends Application {
 
         //=====================OBJETOS DE PRUEBA========================//
 
-        SistemaBilleteraFacade fachada = new SistemaBilleteraFacade();
+        SistemaBilleteraFacade fachada = SistemaBilleteraFacade.getInstancia();
 
         Administrador admin1 = new Administrador("111", "111","111","111","111","111");
         Usuario user1 = new Usuario("222", "222","222","222","222","222");
