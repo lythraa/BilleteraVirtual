@@ -7,6 +7,14 @@ import co.edu.uniquindio.poo.billeteravirtual.model.gestores.*;
 import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collector;
+
 /**
  * Fachada que simplifica la interacción con los diferentes gestores
  * del sistema de la billetera virtual, centralizando operaciones comunes.
@@ -29,6 +37,7 @@ public class SistemaBilleteraFacade {
         this.gestorUsuarios = GestorUsuarios.getInstancia();
     }
 
+    //=========================MÉTODOS DE REALIZACIÓN DE MOVIMIENTOS===========================//
 
     /**
      * Método para ejecutar depósitos, pasa por una cadena de validaciones antes de crearlo
@@ -133,8 +142,112 @@ public class SistemaBilleteraFacade {
         }
     }
 
-    // TODO: añadir lógica para gestión de categorías (en proceso)
+    //TODO: Métodos para alimentar los gráficos de las estadísticas de admins (En proceso)
+
+    //=========================MÉTODOS DE CÁLCULO DE ESTADÍSTICAS===========================//
+
+    //TENER PRESENTE POR SI ES NECESARIO CORREGIR
+    /**
+     * Método para obtener el porcentaje de movimientos globales realizados por categoría
+     * @return Hashmap porcentaje por categoría
+     */
+    public Map<String, Double> obtenerMovimientosPorCategoria() {
+        List<Movimiento> movimientos = gestorMovimientos.getListaObjetos();
+        Map<String, Integer> conteoPorCategoria = new HashMap<>();
+
+        // Contar movimientos por categoría
+        for (Movimiento movimiento : movimientos) {
+            String categoria = movimiento.getCategoriaOpcional().getId_Nombre(); // Asegúrate de que exista
+            conteoPorCategoria.merge(categoria, 1, Integer::sum);
+        }
+
+        // Total de movimientos
+        int totalMovimientos = movimientos.size();
+
+        // Calcular porcentaje por categoría
+        Map<String, Double> porcentajePorCategoria = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : conteoPorCategoria.entrySet()) {
+            double porcentaje = (entry.getValue() * 100.0) / totalMovimientos;
+            porcentajePorCategoria.put(entry.getKey(), porcentaje);
+        }
+
+        return porcentajePorCategoria;
+    }
+
+    /**
+     * Método para obtener los usuarios con mayor cantidad de movimientos
+     * @param limite máximo de usuarios mostrados en el chart
+     * @return Hashmap de usuarios con su respectivo número de movimientos
+     */
+    public Map<String, Integer> obtenerUsuariosConMasMovimientos(int limite) {
+        Map<String, Integer> movimientosPorUsuario = new HashMap<>();
+
+        for (Usuario usuario : gestorUsuarios.getListaObjetos()) {
+            int cantidad = usuario.getHistorialMovimientos().size(); // o desde gestorMovimientos si lo manejas ahí
+            movimientosPorUsuario.put(usuario.getNombre(), cantidad); // o ID si prefieres
+        }
+
+        // Ordenar por cantidad de movimientos (desc) y limitar resultados
+        return movimientosPorUsuario.entrySet()
+                .stream()
+                .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
+                .limit(limite)
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue(),
+                        (e1, e2) -> e1,
+                        () -> new LinkedHashMap<>()
+                ));
+    }
+
+    /**
+     * Método para calcular el saldo promedio de los usuarios del
+     * histórico de movimientos
+     * @return saldo promedio general
+     */
+    public double calcularSaldoPromedioUsuarios() {
+        List<Usuario> usuarios = gestorUsuarios.getListaObjetos();
+        double saldoPromedio = 0;
+        for (Usuario usuario : usuarios) {
+            double saldo = usuario.getSaldoTotal();
+            saldoPromedio += saldo;
+        }
+        saldoPromedio /= usuarios.size();
+        return saldoPromedio;
+    }
+
+    //Este es opcional, de momento no lo vamos a usar, si da el tiempo lo acomodo
+    /*
+    public Map<LocalDate, Double> obtenerSaldoPromedioPorFecha() {
+
+    }
+    */
+
+    //========================GETTERS=========================//
 
 
+    public DirectorMovimiento getDirectorMovimiento() {
+        return directorMovimiento;
+    }
+
+    public void setDirectorMovimiento(DirectorMovimiento directorMovimiento) {
+        this.directorMovimiento = directorMovimiento;
+    }
+
+    public GestorUsuarios getGestorUsuarios() {
+        return gestorUsuarios;
+    }
+
+    public GestorAdministradores getGestorAdministradores() {
+        return gestorAdministradores;
+    }
+
+    public GestorMovimientos getGestorMovimientos() {
+        return gestorMovimientos;
+    }
+
+    public GestorCuentasBancarias getGestorCuentasBancarias() {
+        return gestorCuentasBancarias;
+    }
 
 }

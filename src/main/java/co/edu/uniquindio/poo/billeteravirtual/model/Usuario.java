@@ -54,7 +54,7 @@ public class Usuario extends Perfil {
      * Si la categoría con el nombre dado ya existe, la retorna.
      * Si no existe, la crea con el monto asignado y la agrega a la lista.
      *
-     * @param iDNombreCategoria nombre o ID de la categoría (no puede ser nulo o vacío).
+     * @param idNombreCategoria nombre o ID de la categoría (no puede ser nulo o vacío).
      * @param montoAsignado monto de dinero asignado (no puede ser negativo).
      * @return la categoría existente o la nueva categoría creada.
      * @throws IllegalArgumentException si el nombre es nulo/vacío o el monto es negativo.
@@ -97,6 +97,12 @@ public class Usuario extends Perfil {
         calcularSaldoTotal();
         historialMovimientos.add(movimiento);
     }
+
+    private void agregarCuenta(String id, String nombreBanco, TipoCuenta tipoCuenta){
+        CuentaBancaria nuevaCuenta = new CuentaBancaria(id, 0, nombreBanco, tipoCuenta);
+        listaCuentasBancarias.add(nuevaCuenta);
+    }
+
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {

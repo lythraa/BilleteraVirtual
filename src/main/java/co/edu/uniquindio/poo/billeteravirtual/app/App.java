@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
+import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
@@ -21,8 +22,18 @@ public class App extends Application {
         primaryStage.setTitle("Billetera Virtual");
         primaryStage.setScene(scene);
         primaryStage.show();
-        GestorAdministradores.getInstancia().agregar(new Administrador("111", "111","111","111","111","111"));
-        GestorUsuarios.getInstancia().agregar(new Usuario("222", "222","222","222","222","222"));
+
+        //=====================OBJETOS DE PRUEBA========================//
+
+        SistemaBilleteraFacade fachada = new SistemaBilleteraFacade();
+
+        Administrador admin1 = new Administrador("111", "111","111","111","111","111");
+        Usuario user1 = new Usuario("222", "222","222","222","222","222");
+
+
+
+        fachada.getGestorAdministradores().agregar(admin1);
+        fachada.getGestorUsuarios().agregar(user1);
 
     }
 

@@ -16,7 +16,7 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
      * @param nombreBanco Nombre del banco asociado
      * @param tipoCuenta Tipo de cuenta: AHORRO o CORRIENTE
      */
-    public CuentaBancaria(String id, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
+    public CuentaBancaria(String id, double saldo, String nombreBanco, TipoCuenta tipoCuenta) {
         this.id = id;
         this.saldo = saldo;
         this.nombreBanco = nombreBanco;

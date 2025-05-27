@@ -1,9 +1,81 @@
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.Button?>
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.ContactoController"
-      styleClass="root" stylesheets="@../css/style.css">
-</VBox>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.EstadisticasController">
+    <children>
+        <VBox spacing="20.0" StackPane.alignment="CENTER">
+            <children>
+                <HBox spacing="20.0">
+                    <children>
+                        <Button onAction="#onVolver">
+                            <graphic>
+                                <ImageView fx:id="iconoVolver" fitHeight="20.0" fitWidth="20.0" preserveRatio="true" />
+                            </graphic>
+                        </Button>
+                        <Label styleClass="nebula-title" text="Estadísticas de la Billetera Virtual">
+                            <HBox.margin>
+                                <Insets left="200.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <GridPane hgap="20" vgap="20" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50" />
+                        <ColumnConstraints percentWidth="50" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="50" />
+                        <RowConstraints percentHeight="50" />
+                    </rowConstraints>
+
+                    <children>
+                        <!-- Gastos más comunes -->
+                        <VBox fx:id="boxGastos" GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER">
+                            <Label text="Gastos por Categoría" styleClass="label-title" />
+                            <PieChart fx:id="chartGastos" prefHeight="300" prefWidth="500" />
+                        </VBox>
+
+                        <!-- Saldo promedio global -->
+                        <VBox fx:id="boxSaldoPromedio" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" spacing="15">
+                            <Label text="Saldo Promedio de Usuarios" styleClass="label-title" />
+                            <Label fx:id="labelSaldoPromedio" styleClass="label-value" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
+                        </VBox>
+
+                        <!-- Usuarios con más transacciones -->
+                        <VBox fx:id="boxTopUsuarios" GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER">
+                            <Label text="Top Usuarios por Transacciones" styleClass="label-title" />
+                            <BarChart fx:id="chartUsuarios" prefHeight="300" prefWidth="500">
+                                <xAxis>
+                                    <CategoryAxis label="Usuario" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Transacciones" />
+                                </yAxis>
+                            </BarChart>
+                        </VBox>
+
+                        <!-- Evolución del saldo promedio -->
+                        <VBox fx:id="boxEvolucionSaldo" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER">
+                            <Label text="Evolución del Saldo Promedio" styleClass="label-title" />
+                            <LineChart fx:id="chartSaldoEvolucion" prefHeight="300" prefWidth="500">
+                                <xAxis>
+                                    <NumberAxis label="Día" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Saldo Promedio" />
+                                </yAxis>
+                            </LineChart>
+                        </VBox>
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </children>
+</StackPane>
