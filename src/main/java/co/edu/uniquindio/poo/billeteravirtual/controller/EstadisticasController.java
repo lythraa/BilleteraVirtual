@@ -1,8 +1,10 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -11,6 +13,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class EstadisticasController {
 
@@ -33,7 +36,7 @@ public class EstadisticasController {
     private Label labelSaldoPromedio;
 
     @FXML
-    private BarChart<?, ?> chartUsuarios;
+    private BarChart<?, ?> barChartUsuarios;
 
     @FXML
     private VBox boxTopUsuarios;
@@ -45,24 +48,6 @@ public class EstadisticasController {
     private PieChart chartGastos;
 
     @FXML
-    private LineChart<?, ?> chartSaldoEvolucion;
-
-    @FXML
-    void onVolver(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-        assert boxEvolucionSaldo != null : "fx:id=\"boxEvolucionSaldo\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert iconoVolver != null : "fx:id=\"iconoVolver\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert boxSaldoPromedio != null : "fx:id=\"boxSaldoPromedio\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert labelSaldoPromedio != null : "fx:id=\"labelSaldoPromedio\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert chartUsuarios != null : "fx:id=\"chartUsuarios\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert boxTopUsuarios != null : "fx:id=\"boxTopUsuarios\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert boxGastos != null : "fx:id=\"boxGastos\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert chartGastos != null : "fx:id=\"chartGastos\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-        assert chartSaldoEvolucion != null : "fx:id=\"chartSaldoEvolucion\" was not injected: check your FXML file 'EstadisticasView.fxml'.";
-
-    }
+    private LineChart<String, Number> chartSaldoEvolucion;
+    
 }

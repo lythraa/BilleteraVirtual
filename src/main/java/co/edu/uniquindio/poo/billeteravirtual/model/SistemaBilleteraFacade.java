@@ -142,7 +142,7 @@ public class SistemaBilleteraFacade {
         }
     }
 
-    //TODO: Métodos para alimentar los gráficos de las estadísticas de admins (En proceso)
+    //TODO: Métodos para alimentar los gráficos de las estadísticas de admins (Almost Done!!!)
 
     //=========================MÉTODOS DE CÁLCULO DE ESTADÍSTICAS===========================//
 

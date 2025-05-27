@@ -71,6 +71,15 @@ public class UsuarioController {
     }
 
     /**
+     * Abre la vista para recibir las notificaciones del usuario actual.
+     */
+    @FXML
+    void onNotificacion(){
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "Notificaciones.fxml", "Vista Notificaciones");
+    }
+
+    /**
      * Inicializa el controlador cargando datos iniciales en la vista.
      * Muestra un saludo personalizado con el nombre del usuario actual si está logueado.
      */

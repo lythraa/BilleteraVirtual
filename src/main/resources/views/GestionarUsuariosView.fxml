@@ -10,7 +10,7 @@
     <VBox spacing="20.0" StackPane.alignment="CENTER">
         <HBox spacing="20.0">
             <Button onAction="#onVolver" text="Volver"/>
-            <Label styleClass="nebula-title" text="Gestión de Usuarios">
+            <Label styleClass="" text="Gestión de Usuarios">
                 <HBox.margin>
                     <Insets left="300.0"/>
                 </HBox.margin>
@@ -22,7 +22,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" top="20.0"/>
                 </padding>
-                <Label styleClass="label-title" text="Formulario Usuario">
+                <Label styleClass="" text="Formulario Usuario">
                     <padding>
                         <Insets bottom="10.0"/>
                     </padding>

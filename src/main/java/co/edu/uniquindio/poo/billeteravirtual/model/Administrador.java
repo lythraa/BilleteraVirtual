@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
+
 /**
  * Clase que representa un administrador del sistema.
  */
@@ -19,4 +22,8 @@ public class Administrador extends Perfil {
         super(id, contrasenia, nombre, correo, telefono, direccion);
     }
 
+    public void enviarNotificacion(String evento, String mensaje) {
+        Notificacion notificacion = new Notificacion("ADMIN " + this.getNombre() + ": " + mensaje);
+        GestorNotificaciones.getInstancia().notificar(evento, notificacion);
+    }
 }

@@ -1,11 +1,13 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.UsuarioObserver;
 import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
 import java.util.ArrayList;
 
-public class Usuario extends Perfil {
+public class Usuario extends Perfil implements UsuarioObserver {
 
     private double saldoTotal;
     private ArrayList<Movimiento> historialMovimientos;
@@ -98,11 +100,11 @@ public class Usuario extends Perfil {
         historialMovimientos.add(movimiento);
     }
 
-    private void agregarCuenta(String id, String nombreBanco, TipoCuenta tipoCuenta){
-        CuentaBancaria nuevaCuenta = new CuentaBancaria(id, 0, nombreBanco, tipoCuenta);
-        listaCuentasBancarias.add(nuevaCuenta);
-    }
 
+    @Override
+    public void recibirNotificacion(Notificacion notificacion) {
+        System.out.println("Usuario " + this.getNombre() + " recibió: " + notificacion.getMensaje());
+    }
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {

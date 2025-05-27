@@ -11,7 +11,7 @@
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="40.0"/>
         </padding>
-        <Label styleClass="titulo-editar" text="Editar Perfil">
+        <Label styleClass="" text="Editar Perfil">
             <padding>
                 <Insets bottom="30.0"/>
             </padding>
@@ -20,19 +20,19 @@
             </VBox.margin>
         </Label>
 
-        <Label styleClass="label-title" text="Nombre completo"/>
+        <Label styleClass="" text="Nombre completo"/>
         <TextField fx:id="campoNombre"/>
 
-        <Label styleClass="label-title" text="Correo electrónico"/>
+        <Label styleClass="" text="Correo electrónico"/>
         <TextField fx:id="campoCorreo"/>
 
-        <Label styleClass="label-title" text="Número de teléfono"/>
+        <Label styleClass="" text="Número de teléfono"/>
         <TextField fx:id="campoTelefono"/>
 
-        <Label styleClass="label-title" text="Dirección"/>
+        <Label styleClass="" text="Dirección"/>
         <TextField fx:id="campoDireccion"/>
 
-        <Label styleClass="label-title" text="Nueva contraseña"/>
+        <Label styleClass="" text="Nueva contraseña"/>
         <PasswordField fx:id="campoContrasena"/>
 
         <HBox alignment="CENTER" spacing="10">

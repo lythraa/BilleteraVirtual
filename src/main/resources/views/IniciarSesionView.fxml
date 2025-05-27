@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="600.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.IniciarSesionController">
-    <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0">
-        <Label styleClass="label-bienvenido" text="Bienvenido a" textAlignment="CENTER"/>
-
-        <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER"/>
-
-        <Label styleClass="label-subtitle" text="Tu dinero, tu control." textAlignment="CENTER">
-            <padding>
-                <Insets bottom="20.0"/>
-            </padding>
-        </Label>
-
-        <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0"
-              style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15; -fx-padding: 20;">
-            <padding>
-                <Insets top="15.0"/>
-            </padding>
-            <TextField fx:id="campoId" promptText="Id de Usuario" styleClass="text-field"/>
-            <PasswordField fx:id="campoContrasena" promptText="Contraseña" styleClass="password-field"/>
-            <Button maxWidth="Infinity" onAction="#onIniciarSesion" styleClass="button" text="Iniciar sesión"/>
-        </VBox>
-
-        <HBox alignment="CENTER" spacing="8.0">
-            <Label styleClass="label-subtitle" text="¿No tienes cuenta?"/>
-            <Hyperlink onAction="#enlaceRegistro" styleClass="hyperlink" text="Regístrate"/>
-        </HBox>
-    </VBox>
+<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.IniciarSesionController">
+   <children>
+       <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0">
+          <children>
+              <Label styleClass="label-cursive" text="Bienvenido a" textAlignment="CENTER" />
+      
+              <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER" />
+      
+              <Label styleClass="label-subtitle" text="Tu dinero, tu control." textAlignment="CENTER">
+                  <padding>
+                      <Insets bottom="40.0" />
+                  </padding>
+              </Label>
+      
+              <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15; -fx-padding: 20;">
+                  <padding>
+                      <Insets top="15.0" />
+                  </padding>
+         <children>
+                     <TextField fx:id="campoId" promptText="Id de Usuario" styleClass="text-field" />
+                     <PasswordField fx:id="campoContrasena" promptText="Contraseña" styleClass="password-field" />
+                     <Button maxWidth="Infinity" onAction="#onIniciarSesion" styleClass="button" text="Iniciar sesión" />
+         </children>
+              </VBox>
+      
+              <HBox alignment="CENTER" spacing="8.0">
+         <children>
+                     <Label styleClass="label-subtitle" text="¿No tienes cuenta?" />
+                     <Hyperlink onAction="#enlaceRegistro" styleClass="hyperlink" text="Regístrate" />
+         </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+              </HBox>
+          </children>
+       </VBox>
+   </children>
 </StackPane>

@@ -96,4 +96,14 @@ public class AdministradorController {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
         GestorVistas.abrirVistaContactoController(stage, "admin");
     }
+
+    /**
+     * Navega a la vista de mandar notificaciones
+     */
+    @FXML
+    void onMandarNotificacion(){
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "MandarNotificacion.fxml", "Vista Mandar Notificaciones");
+
+    }
 }

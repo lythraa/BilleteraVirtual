@@ -17,7 +17,7 @@
                                 <ImageView fx:id="iconoVolver" fitHeight="20.0" fitWidth="20.0" preserveRatio="true" />
                             </graphic>
                         </Button>
-                        <Label styleClass="nebula-title" text="Estadísticas de la Billetera Virtual">
+                        <Label styleClass="label-title" text="Estadísticas de la Billetera Virtual">
                             <HBox.margin>
                                 <Insets left="200.0" />
                             </HBox.margin>
@@ -38,20 +38,20 @@
                     <children>
                         <!-- Gastos más comunes -->
                         <VBox fx:id="boxGastos" GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER">
-                            <Label text="Gastos por Categoría" styleClass="label-title" />
+                            <Label text="Gastos por Categoría" styleClass="label-subtitle" />
                             <PieChart fx:id="chartGastos" prefHeight="300" prefWidth="500" />
                         </VBox>
 
                         <!-- Saldo promedio global -->
                         <VBox fx:id="boxSaldoPromedio" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" spacing="15">
-                            <Label text="Saldo Promedio de Usuarios" styleClass="label-title" />
-                            <Label fx:id="labelSaldoPromedio" styleClass="label-value" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
+                            <Label text="Saldo Promedio de Usuarios" styleClass="label-subtitle" />
+                            <Label fx:id="labelSaldoPromedio" styleClass="label-subtitle" style="-fx-font-size: 32px; -fx-font-weight: bold;" />
                         </VBox>
 
                         <!-- Usuarios con más transacciones -->
                         <VBox fx:id="boxTopUsuarios" GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER">
-                            <Label text="Top Usuarios por Transacciones" styleClass="label-title" />
-                            <BarChart fx:id="chartUsuarios" prefHeight="300" prefWidth="500">
+                            <Label text="Top Usuarios por Transacciones" styleClass="label-subtitle" />
+                            <BarChart fx:id="barChartUsuarios" prefHeight="300" prefWidth="500">
                                 <xAxis>
                                     <CategoryAxis label="Usuario" />
                                 </xAxis>
@@ -63,7 +63,7 @@
 
                         <!-- Evolución del saldo promedio -->
                         <VBox fx:id="boxEvolucionSaldo" GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER">
-                            <Label text="Evolución del Saldo Promedio" styleClass="label-title" />
+                            <Label text="Evolución del Saldo Promedio" styleClass="label-subtitle" />
                             <LineChart fx:id="chartSaldoEvolucion" prefHeight="300" prefWidth="500">
                                 <xAxis>
                                     <NumberAxis label="Día" />
