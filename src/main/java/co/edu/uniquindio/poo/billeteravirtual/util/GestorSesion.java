@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.app;
+package co.edu.uniquindio.poo.billeteravirtual.util;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
@@ -39,7 +39,7 @@ public class GestorSesion {
     }
 
     /**
-     * Intenta iniciar sesión con el id y contraseña dados.
+     * Intenta iniciar sesión con el ID y contraseña dados.
      * Busca en las listas de usuarios y administradores para validar las credenciales.
      * Si se encuentra un perfil válido, se asigna como perfilActual.
      *

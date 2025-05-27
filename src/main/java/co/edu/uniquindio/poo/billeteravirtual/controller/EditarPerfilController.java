@@ -1,8 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,18 +44,26 @@ public class EditarPerfilController {
     private void onGuardarCambios() {
         Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
 
-        if (perfilActual != null) {
-            perfilActual.setNombre(campoNombre.getText());
-            perfilActual.setContrasenia(campoContrasena.getText());
-            perfilActual.setCorreo(campoCorreo.getText());
-            perfilActual.setTelefono(campoTelefono.getText());
-            perfilActual.setDireccion(campoDireccion.getText());
-
-            UtilAlerta.mostrarAlertaInformacion("Perfil actualizado", "Los cambios se guardaron correctamente.");
-        } else {
-            UtilAlerta.mostrarAlertaError("Error", "No se encontró el perfil actual.");
+        if (perfilActual == null) {
+            UtilAlerta.mostrarAlertaNoEncontrado("Perfil actual");
+            return;
         }
+
+        if (UtilAlerta.esInvalido(campoNombre.getText(), "Nombre")) return;
+        if (UtilAlerta.esInvalido(campoContrasena.getText(), "Contraseña")) return;
+        if (UtilAlerta.esInvalido(campoCorreo.getText(), "Correo")) return;
+        if (UtilAlerta.esInvalido(campoTelefono.getText(), "Teléfono")) return;
+        if (UtilAlerta.esInvalido(campoDireccion.getText(), "Dirección")) return;
+
+        perfilActual.setNombre(campoNombre.getText());
+        perfilActual.setContrasenia(campoContrasena.getText());
+        perfilActual.setCorreo(campoCorreo.getText());
+        perfilActual.setTelefono(campoTelefono.getText());
+        perfilActual.setDireccion(campoDireccion.getText());
+
+        UtilAlerta.mostrarAlertaInformacion("Perfil actualizado", "Los cambios se guardaron correctamente.");
     }
+
 
     /**
      * Regresa a la vista de origen desde la edición del perfil.
@@ -84,11 +93,5 @@ public class EditarPerfilController {
             campoDireccion.setText(perfilActual.getDireccion());
             campoContrasena.setText(perfilActual.getContrasenia());
         }
-
-        assert campoNombre != null : "fx:id=\"campoNombre\" no fue inyectado. Revisa 'EditarPerfilView.fxml'.";
-        assert campoCorreo != null : "fx:id=\"campoCorreo\" no fue inyectado. Revisa 'EditarPerfilView.fxml'.";
-        assert campoTelefono != null : "fx:id=\"campoTelefono\" no fue inyectado. Revisa 'EditarPerfilView.fxml'.";
-        assert campoDireccion != null : "fx:id=\"campoDireccion\" no fue inyectado. Revisa 'EditarPerfilView.fxml'.";
-        assert campoContrasena != null : "fx:id=\"campoContrasena\" no fue inyectado. Revisa 'EditarPerfilView.fxml'.";
     }
 }

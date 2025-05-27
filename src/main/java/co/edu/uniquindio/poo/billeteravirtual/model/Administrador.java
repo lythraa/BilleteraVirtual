@@ -17,6 +17,7 @@ public class Administrador extends Perfil implements Observer {
      */
     public Administrador(String id, String contrasenia, String nombre, String correo, String telefono, String direccion){
         super(id, contrasenia, nombre, correo, telefono, direccion);
+        GestorNotificaciones.getInstancia().registrar("soporte", this);
     }
 
     /**
@@ -28,13 +29,9 @@ public class Administrador extends Perfil implements Observer {
         System.out.println("ADMIN " + this.getNombre() + " recibió: " + notificacion.getMensaje());
     }
 
-    /**
-     * Método para enviar una notificación
-     * @param evento evento de la notificación
-     * @param mensaje mensaje a presentar en la notificación
-     */
+
     public void enviarNotificacion(String evento, String mensaje) {
-        Notificacion notificacion = new Notificacion("ADMIN " + this.getNombre() + ": " + mensaje);
+        Notificacion notificacion = new Notificacion(evento, this.getNombre(), mensaje);
         GestorNotificaciones.getInstancia().notificar(evento, notificacion);
     }
 }

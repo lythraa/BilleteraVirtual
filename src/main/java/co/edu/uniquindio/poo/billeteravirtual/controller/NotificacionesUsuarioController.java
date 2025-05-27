@@ -1,45 +1,50 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.GestorNotificaciones;
 import co.edu.uniquindio.poo.billeteravirtual.model.Notificacion;
-import co.edu.uniquindio.poo.billeteravirtual.model.Observer;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Controlador de la vista de notificaciones para el usuario.
  * Permite suscribirse a eventos y visualizar mensajes recibidos.
  */
-public class NotificacionesController implements Observer {
+public class NotificacionesUsuarioController {
 
     @FXML
     private VBox contenedorEventos;
-
     @FXML
     private TableView<Notificacion> tablaNotificaciones;
-
     @FXML
     private TableColumn<Notificacion, String> colMensaje;
+    @FXML
+    private TableColumn<Notificacion, String> colAdministrador;
+    @FXML
+    private TableColumn<Notificacion, LocalDateTime> colfecha;
+    @FXML
+    private TableColumn<Notificacion, String> colEvento;
+    @FXML
+    private Button btnGuardar;
 
     private final Map<String, CheckBox> mapaCheckEventos = new HashMap<>();
 
     private Usuario usuario;
-
-    private ObservableList<Notificacion> listaNotificacionesObservable;
 
     /**
      * Inicializa la vista cargando eventos disponibles y notificaciones previas.
@@ -48,30 +53,37 @@ public class NotificacionesController implements Observer {
     @FXML
     public void initialize() {
         usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        ObservableList<Notificacion> listaNotificacionesObservable = FXCollections.observableArrayList();
 
-        listaNotificacionesObservable = FXCollections.observableArrayList();
-
-        // Configura la columna para que muestre el mensaje
+        colEvento.setCellValueFactory(new PropertyValueFactory<>("evento"));
+        colAdministrador.setCellValueFactory(new PropertyValueFactory<>("adminNombre"));
         colMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
+        colfecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
 
-        // Enlaza la tabla con la lista observable
+        colfecha.setCellFactory(column -> new TableCell<>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.format(formatter));
+            }
+        });
+
         tablaNotificaciones.setItems(listaNotificacionesObservable);
-
-        // Carga notificaciones previas si quieres mostrar historial guardado
         listaNotificacionesObservable.addAll(usuario.getHistorialNotificaciones());
 
         Set<String> eventos = GestorNotificaciones.getInstancia().obtenerEventos();
-        System.out.println("EVENTOS DISPONIBLES: " + eventos);
-
-        if (eventos.isEmpty()) {
-            return;
-        }
+        if (eventos.isEmpty()) return;
 
         Set<String> eventosUsuario = GestorNotificaciones.getInstancia().obtenerEventosPorUsuario(usuario);
 
         for (String evento : eventos) {
+            if (evento.equalsIgnoreCase("soporte")) continue;
+
             CheckBox checkBox = new CheckBox("Evento " + evento);
             checkBox.setStyle("-fx-font-size: 14px;");
+            checkBox.getStyleClass().add("label-subtitle");
 
             if (eventosUsuario.contains(evento)) {
                 checkBox.setSelected(true);
@@ -80,12 +92,11 @@ public class NotificacionesController implements Observer {
             contenedorEventos.getChildren().add(checkBox);
             mapaCheckEventos.put(evento, checkBox);
         }
-
-        // Registrar este controlador como observer para recibir notificaciones nuevas
-        for (String evento : eventos) {
-            GestorNotificaciones.getInstancia().registrar(evento, this);
+        if (mapaCheckEventos.isEmpty()) {
+            btnGuardar.setDisable(true);
         }
     }
+
 
     /**
      * Guarda las suscripciones del usuario a los eventos seleccionados.
@@ -102,6 +113,7 @@ public class NotificacionesController implements Observer {
                 GestorNotificaciones.getInstancia().eliminar(evento, usuario);
             }
         }
+        UtilAlerta.mostrarAlertaInformacion("Suscripciones guardadas", "Tus preferencias han sido actualizadas correctamente.");
     }
 
     /**
@@ -113,16 +125,4 @@ public class NotificacionesController implements Observer {
         GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Vista Usuario");
     }
 
-    /**
-     * Recibe una notificación nueva como parte del patrón Observer.
-     * La agrega al historial del usuario y a la tabla visual.
-     *
-     * @param notificacion la notificación recibida.
-     */
-    @Override
-    public void recibirNotificacion(Notificacion notificacion) {
-        usuario.getHistorialNotificaciones().add(notificacion);
-
-        listaNotificacionesObservable.add(notificacion);
-    }
 }

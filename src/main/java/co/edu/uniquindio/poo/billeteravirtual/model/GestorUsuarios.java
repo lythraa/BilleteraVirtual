@@ -15,7 +15,7 @@ public class GestorUsuarios extends GestorBaseCRUD<Usuario> {
      * Inicializa la lista interna de usuarios vacía.
      */
     private GestorUsuarios() {
-        super(new ArrayList<Usuario>());
+        super(new ArrayList<>());
     }
 
     /**

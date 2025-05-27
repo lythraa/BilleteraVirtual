@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarCuentasController">
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionCuentasBancariasController">
     <VBox spacing="20.0" StackPane.alignment="CENTER">
         <HBox spacing="20.0">
             <Button onAction="#onVolver" styleClass="button" text="Volver"/>
@@ -90,7 +90,7 @@
                     <padding>
                         <Insets top="10"/>
                     </padding>
-                    <TableView fx:id="tablaCuentas" prefHeight="356.0" prefWidth="751.0"
+                    <TableView fx:id="tablaCuentas" prefHeight="445.0" prefWidth="795.0"
                                styleClass="table-view-custom">
                         <columns>
                             <TableColumn fx:id="columnaIdUsuario" prefWidth="120.0" text="ID Usuario"/>

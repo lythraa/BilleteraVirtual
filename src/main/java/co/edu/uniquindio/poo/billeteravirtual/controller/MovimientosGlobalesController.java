@@ -5,6 +5,7 @@ import co.edu.uniquindio.poo.billeteravirtual.model.Movimiento;
 import co.edu.uniquindio.poo.billeteravirtual.model.DepositoStrategy;
 import co.edu.uniquindio.poo.billeteravirtual.model.RetiroStrategy;
 import co.edu.uniquindio.poo.billeteravirtual.model.TransferenciaStrategy;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,7 +18,7 @@ import java.time.format.DateTimeFormatter;
  * Controlador para la vista de gestión global de transacciones.
  * Permite visualizar y eliminar movimientos desde la vista del administrador.
  */
-public class GestionarTransaccionesGlobalesController {
+public class MovimientosGlobalesController {
 
     @FXML
     private TableView<Movimiento> tablaMovimientos;
@@ -65,7 +66,7 @@ public class GestionarTransaccionesGlobalesController {
         columnaCategoria.setCellValueFactory(cellData ->
                 new SimpleStringProperty(
                         cellData.getValue().getCategoriaOpcional() != null
-                                ? cellData.getValue().getCategoriaOpcional().getId_Nombre()
+                                ? cellData.getValue().getCategoriaOpcional().getId()
                                 : "Sin categoría"
                 ));
 
@@ -93,35 +94,6 @@ public class GestionarTransaccionesGlobalesController {
         tablaMovimientos.setItems(FXCollections.observableArrayList(
                 GestorMovimientos.getInstancia().getListaObjetos()
         ));
-    }
-
-    /**
-     * Elimina el movimiento seleccionado en la tabla, previa confirmación.
-     */
-    @FXML
-    private void onEliminar() {
-        Movimiento movimientoSeleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
-
-        if (movimientoSeleccionado == null) {
-            // No hay selección, avisar al usuario
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Eliminar Movimiento");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Debe seleccionar un movimiento para eliminar.");
-            alerta.showAndWait();
-            return;
-        }
-
-        // Confirmar eliminación
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar Eliminación");
-        confirmacion.setHeaderText(null);
-        confirmacion.setContentText("¿Está seguro de eliminar el movimiento seleccionado?");
-
-        if (confirmacion.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
-            GestorMovimientos.getInstancia().eliminar(movimientoSeleccionado);
-            onRefrescarTabla();  // Actualizar tabla luego de eliminar
-        }
     }
 
     /**

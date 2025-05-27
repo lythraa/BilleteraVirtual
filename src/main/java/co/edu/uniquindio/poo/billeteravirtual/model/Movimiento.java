@@ -101,7 +101,6 @@ public class Movimiento implements Identificable, Cloneable {
 
     /**
      * Método para clonar un movimiento
-     * @return
      */
     @Override
     public Movimiento clone() {
@@ -154,7 +153,7 @@ public class Movimiento implements Identificable, Cloneable {
 
     /**
      * Obtiene el identificador único del movimiento.
-     * @return ID del movimiento.
+     * @return iD del movimiento.
      */
     @Override
     public String getId() {

@@ -1,6 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -11,7 +14,7 @@ import javafx.stage.Stage;
  * Permite al usuario o administrador enviar solicitudes de contacto
  * y volver a la vista correspondiente según su origen.
  */
-public class ContactoController {
+public class SoporteController {
 
     @FXML
     private TextField campoCorreo;
@@ -30,11 +33,15 @@ public class ContactoController {
         String asunto = campoAsunto.getText();
         String mensaje = campoMensaje.getText();
 
-        if (correo.isBlank() || asunto.isBlank() || mensaje.isBlank()) {
-            UtilAlerta.mostrarAlertaAdvertencia("Campos incompletos", "Por favor completa todos los campos.");
-            return;
-        }
+        if (UtilAlerta.esInvalido(correo, "Correo")) return;
+        if (UtilAlerta.esInvalido(asunto, "Asunto")) return;
+        if (UtilAlerta.esInvalido(mensaje, "Mensaje")) return;
 
+
+        Usuario usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        String cuerpo = correo + "\n" + asunto + "\n" + mensaje;
+        Notificacion notificacion = new Notificacion("soporte", cuerpo, usuario.getNombre());
+        GestorNotificaciones.getInstancia().notificar("soporte", notificacion);
         UtilAlerta.mostrarAlertaInformacion("Solicitud enviada", "¡Gracias! Tu solicitud ha sido enviada.");
 
         campoCorreo.clear();
@@ -49,5 +56,12 @@ public class ContactoController {
     private void onVolver() {
         Stage stage = (Stage) campoCorreo.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Panel Usuario");
+    }
+
+
+    @FXML
+    public void initialize() {
+        Usuario usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        campoCorreo.setText(usuario.getCorreo());
     }
 }

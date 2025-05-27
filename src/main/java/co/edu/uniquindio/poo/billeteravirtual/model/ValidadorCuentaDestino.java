@@ -12,7 +12,7 @@ public class ValidadorCuentaDestino extends ValidadorMovimiento {
      * Si la cuenta no existe, lanza una excepción. Si existe, muestra una alerta informativa indicando que la validación fue exitosa.
      *
      * @param movimiento Movimiento a validar que contiene la cuenta bancaria destino
-     * @throws IllegalArgumentException si la cuenta bancaria no existe con el numero de cuenta asignado
+     * @throws IllegalArgumentException si la cuenta bancaria no existe con el número de cuenta asignado
      */
     @Override
     protected void realizarValidacion(Movimiento movimiento) {

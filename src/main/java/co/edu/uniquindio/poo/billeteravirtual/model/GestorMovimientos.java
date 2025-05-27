@@ -15,7 +15,7 @@ public class GestorMovimientos extends GestorBaseCRUD<Movimiento> {
      * Inicializa la lista interna de movimientos vacía.
      */
     private GestorMovimientos() {
-        super(new ArrayList<Movimiento>());
+        super(new ArrayList<>());
     }
 
     /**

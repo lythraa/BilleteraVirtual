@@ -7,7 +7,7 @@
 
 <StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.MandarNotificacionController">
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionNotificacionesController">
     <VBox spacing="20.0" StackPane.alignment="CENTER">
         <HBox spacing="20.0">
             <Button onAction="#onVolver" styleClass="button" text="Volver"/>
@@ -57,8 +57,8 @@
                     </padding>
                 </Label>
 
-                <ListView fx:id="listaSolicitudes" prefHeight="505.0" prefWidth="795.0"
-                          styleClass="table-view-custom"/>
+                <ListView fx:id="listaMensajesSoporte" prefHeight="505.0" prefWidth="795.0"
+                          styleClass="lista-soporte"/>
 
                 <HBox alignment="BOTTOM_RIGHT" prefWidth="750.0"/>
             </VBox>

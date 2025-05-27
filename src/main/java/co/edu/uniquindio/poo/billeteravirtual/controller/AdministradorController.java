@@ -1,7 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -25,13 +26,11 @@ public class AdministradorController {
     void initialize() {
         Perfil perfilActual = GestorSesion.getInstance().getPerfilActual();
         if (perfilActual != null) {
-            textoHolaUsuario.setText("[Admin] Bienvenido, " + perfilActual.getNombre());
+            textoHolaUsuario.setText("[Admin] Hola de nuevo, " + perfilActual.getNombre());
         } else {
             textoHolaUsuario.setText("[Admin] Bienvenido");
         }
-
-        assert textoHolaUsuario != null : "fx:id=\"textoHolaUsuario\" no fue inyectado: revisa el archivo FXML 'AdministradorView.fxml'.";
-    }
+}
 
     /**
      * Navega a la vista de gestión de usuarios.
@@ -39,7 +38,7 @@ public class AdministradorController {
     @FXML
     void onGestionarUsuarios() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionarUsuariosView.fxml", "Vista Usuario");
+        GestorVistas.CambiarEscena(stage, "GestionUsuariosView.fxml", "Vista Usuario");
     }
 
     /**
@@ -48,7 +47,7 @@ public class AdministradorController {
     @FXML
     void onGestionarTransacciones() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionarTransaccionesGlobales.fxml", "Vista Gestionar Transacciones");
+        GestorVistas.CambiarEscena(stage, "MovimientosGlobalesView.fxml", "Vista Gestionar Transacciones");
     }
 
     /**
@@ -57,7 +56,7 @@ public class AdministradorController {
     @FXML
     void onGestionarCuentasBancarias() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionarCuentasBancariasView.fxml", "Vista Gestionar Cuentas Bancarias");
+        GestorVistas.CambiarEscena(stage, "GestionCuentasBancariasView.fxml", "Vista Gestionar Cuentas Bancarias");
     }
 
     /**
@@ -94,7 +93,7 @@ public class AdministradorController {
     @FXML
     void onMandarNotificacion(){
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "MandarNotificacion.fxml", "Vista Mandar Notificaciones");
+        GestorVistas.CambiarEscena(stage, "GestionNotificaciones.fxml", "Vista Mandar Notificaciones");
 
     }
 }

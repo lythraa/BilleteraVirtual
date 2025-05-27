@@ -6,11 +6,11 @@ import java.util.List;
 public class Usuario extends Perfil implements Observer {
 
     private double saldoTotal;
-    private ArrayList<Movimiento> historialMovimientos;
-    private ArrayList<Presupuesto> listaPresupuestos;
-    private ArrayList<CuentaBancaria> listaCuentasBancarias;
-    private ArrayList<Categoria> listaCategorias;
-    private List<Notificacion> historialNotificaciones;
+    private final ArrayList<Movimiento> historialMovimientos;
+    private final ArrayList<Presupuesto> listaPresupuestos;
+    private final ArrayList<CuentaBancaria> listaCuentasBancarias;
+    private final ArrayList<Categoria> listaCategorias;
+    private final List<Notificacion> historialNotificaciones;
 
     /**
      * Constructor público de la clase Usuario que hereda de Perfil.
@@ -39,7 +39,6 @@ public class Usuario extends Perfil implements Observer {
      * Calcula la suma del saldo de todas las cuentas bancarias asociadas
      * al usuario.
      *
-     * @return suma del saldo de todas las cuentas bancarias
      */
     public void calcularSaldoTotal(){
         double total = 0;
@@ -51,7 +50,6 @@ public class Usuario extends Perfil implements Observer {
 
     /**
      * Crea una nueva categoría con un monto asignado o devuelve una ya existente.
-     *
      * Si la categoría con el nombre dado ya existe, la retorna.
      * Si no existe, la crea con el monto asignado y la agrega a la lista.
      *
@@ -81,13 +79,13 @@ public class Usuario extends Perfil implements Observer {
     }
 
     /**
-     * Método para obtener una categoría del usuario dado su nombre
+     * Obtiene una categoría del usuario dado su nombre
      * @param idNombre nombre de la categoría
      * @return categoría encontrada
      */
     public Categoria buscarCategoria(String idNombre) {
         for (Categoria c : listaCategorias) {
-            if (c.getId_Nombre().equals(idNombre)) {
+            if (c.getId().equals(idNombre)) {
                 return c;
             }
         }
@@ -105,7 +103,7 @@ public class Usuario extends Perfil implements Observer {
     }
 
     /**
-     * Método para registrar un movimiento del usuario
+     * Registra un movimiento del usuario
      * @param movimiento movimiento a registrar
      */
     public void registrarMovimiento(Movimiento movimiento){
@@ -114,7 +112,7 @@ public class Usuario extends Perfil implements Observer {
     }
 
     /**
-     * Método de la interface observer, permite que el usuario reciba notificaciones
+     * Implementación de la interface observer, permite que el usuario reciba notificaciones
      * @param notificacion notificacion enviada
      */
     @Override
@@ -124,7 +122,7 @@ public class Usuario extends Perfil implements Observer {
     }
 
     /**
-     * Método para agregar una nueva cuenta a la lista de cuentas bancarias del usuario
+     * Agrega una nueva cuenta a la lista de cuentas bancarias del usuario
      * @param cuentaNueva cuenta a agregar
      */
     public void agregarCuenta(CuentaBancaria cuentaNueva){
@@ -133,14 +131,33 @@ public class Usuario extends Perfil implements Observer {
     }
 
     /**
-     * Método para enviar mensajes a soporte a modo de notificación
-     * @param evento evento del mensaje
-     * @param mensaje mensaje a enviar
+     * Calcula el total de gastos del usuario
+     * @return total de gastos realizados
      */
-    public void enviarMensaje(String evento, String mensaje) {
-        Notificacion n = new Notificacion("USUARIO " + this.getNombre() + ": " + mensaje);
-        GestorNotificaciones.getInstancia().notificar(evento, n);
+    public double calcularGastosTotales(){
+        double total = 0;
+        for(Movimiento movimiento : historialMovimientos){
+            if(movimiento.getEstrategia() instanceof RetiroStrategy){
+                total += movimiento.getMonto();
+            }
+        }
+        return total;
     }
+
+    /**
+     * Calcula el total de ingresos del usuario
+     * @return total de ingresos recibidos
+     */
+    public double calcularIngresosTotales(){
+        double total = 0;
+        for(Movimiento movimiento : historialMovimientos){
+            if(movimiento.getEstrategia() instanceof DepositoStrategy){
+                total += movimiento.getMonto();
+            }
+        }
+        return total;
+    }
+
 
     //====================GETTERS Y SETTERS=======================//
 
@@ -149,41 +166,23 @@ public class Usuario extends Perfil implements Observer {
         return saldoTotal;
     }
 
-    public void setSaldoTotal(double saldoTotal) {
-        this.saldoTotal = saldoTotal;
-    }
-
-    public ArrayList<Movimiento> getHistorialMovimientos() {
-        return historialMovimientos;
-    }
-
-    public void setHistorialMovimientos(ArrayList<Movimiento> historialMovimientos) {
-        this.historialMovimientos = historialMovimientos;
-    }
 
     public ArrayList<Presupuesto> getListaPresupuestos() {
         return listaPresupuestos;
-    }
-
-    public void setListaPresupuestos(ArrayList<Presupuesto> listaPresupuestos) {
-        this.listaPresupuestos = listaPresupuestos;
-    }
-
-    public ArrayList<CuentaBancaria> getListaCuentasBancarias() {
-        return listaCuentasBancarias;
-    }
-
-    public void setListaCuentasBancarias(ArrayList<CuentaBancaria> listaCuentasBancarias) {
-        this.listaCuentasBancarias = listaCuentasBancarias;
     }
 
     public ArrayList<Categoria> getListaCategorias() {
         return listaCategorias;
     }
 
-    public void setListaCategorias(ArrayList<Categoria> listaCategorias) {
-        this.listaCategorias = listaCategorias;
+    public ArrayList<Movimiento> getHistorialMovimientos() {
+        return historialMovimientos;
     }
+
+    public ArrayList<CuentaBancaria> getListaCuentasBancarias() {
+        return listaCuentasBancarias;
+    }
+
     public List<Notificacion> getHistorialNotificaciones() {
         return historialNotificaciones;
     }

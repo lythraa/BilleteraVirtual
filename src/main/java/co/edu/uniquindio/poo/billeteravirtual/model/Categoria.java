@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 /**
  * Representa una categoría con un presupuesto asignado.
  */
-public class Categoria implements Identificable {
+public class Categoria implements Identificable, Cloneable {
     private String id_Nombre;
     private Presupuesto presupuesto;
 
@@ -19,6 +19,25 @@ public class Categoria implements Identificable {
     }
 
     /**
+     * Hace una copia profunda (Deep Copy) de la categoría
+     * @return Categoria clonada
+     */
+    @Override
+    public Categoria clone() {
+        try {
+            Categoria copia = (Categoria) super.clone();
+            copia.presupuesto = presupuesto.clone();
+            return copia;
+        } catch (CloneNotSupportedException e){
+            throw new AssertionError();
+        }
+
+    }
+
+
+//==============================GETTERS AND SETTERS=========================
+
+    /**
      * Retorna el identificador de la categoría.
      *
      * @return id de la categoría
@@ -28,17 +47,12 @@ public class Categoria implements Identificable {
         return id_Nombre;
     }
 
-    //==============================GETTERS AND SETTERS=========================
-    public String getId_Nombre() {
-        return id_Nombre;
+    public Presupuesto getPresupuesto() {
+        return presupuesto;
     }
 
     public void setId_Nombre(String id_Nombre) {
         this.id_Nombre = id_Nombre;
-    }
-
-    public Presupuesto getPresupuesto() {
-        return presupuesto;
     }
 
     public void setPresupuesto(Presupuesto presupuesto) {

@@ -6,7 +6,7 @@
 
 <VBox alignment="CENTER" spacing="10" styleClass="root" stylesheets="@../css/style.css"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.ContactoController">
+      fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.SoporteController">
 
     <Label styleClass="label-subtitle" text="Contáctanos:"/>
     <TextField fx:id="campoCorreo" promptText="Tu correo electrónico" styleClass="text-field"/>

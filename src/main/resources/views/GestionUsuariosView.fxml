@@ -6,7 +6,7 @@
 
 <StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarUsuariosController">
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionUsuariosController">
     <VBox spacing="20.0" StackPane.alignment="CENTER">
         <HBox spacing="20.0">
             <Button onAction="#onVolver" styleClass="button" text="Volver"/>

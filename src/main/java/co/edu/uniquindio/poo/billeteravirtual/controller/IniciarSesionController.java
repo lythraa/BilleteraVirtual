@@ -1,7 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
@@ -9,6 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Controlador de la vista de inicio de sesión.
  * Permite a usuarios y administradores iniciar sesión en la aplicación.
@@ -63,12 +68,12 @@ public class IniciarSesionController {
             java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
         } catch (Exception e) {
             UtilAlerta.mostrarAlertaError("Error al abrir enlace", "No se pudo abrir el navegador.");
-            e.printStackTrace();
+            Logger.getLogger(GestorVistas.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * Valida que los campos de ID y contraseña no estén vacíos.
+     * Válida que los campos de ID y contraseña no estén vacíos.
      * @return true si hay campos vacíos, false en caso contrario.
      */
     private boolean camposInvalidos() {

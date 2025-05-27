@@ -1,7 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class UsuarioController {
      */
     public void onContactenos() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "ContactoView.fxml", "Vista Contacto");
+        GestorVistas.CambiarEscena(stage, "SoporteView.fxml", "Vista Contacto");
     }
 
     /**
@@ -33,26 +34,26 @@ public class UsuarioController {
     @FXML
     void onMovimientos() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionMovimientos.fxml", "Vista Movimientos");
+        GestorVistas.CambiarEscena(stage, "GestionMovimientosView.fxml", "Vista Movimientos");
 
     }
 
     /**
-     * Acción para mostrar la vista de presupuestos.
-     * (Aún no implementado).
+     * Acción para mostrar la vista de presupuestos y categorias.
      */
     @FXML
-    void onPresupuestos() {
-
+    void onPresupuestosYCategorias() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "GestionCategoriasPresupuestosView.fxml", "Vista Presupuestos y Categorias");
     }
 
     /**
      * Acción para mostrar la vista de cuentas.
-     * Actualmente no implementado.
      */
     @FXML
     void onCuentas() {
-
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "CuentasBancariasUsuarioView.fxml", "Vista Cuentas");
     }
 
     /**
@@ -80,7 +81,7 @@ public class UsuarioController {
     @FXML
     void onNotificaciones(){
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "Notificaciones.fxml", "Vista Notificaciones");
+        GestorVistas.CambiarEscena(stage, "NotificacionesUsuarioView.fxml", "Vista Notificaciones");
     }
 
     /**
@@ -91,7 +92,7 @@ public class UsuarioController {
     void initialize() {
         Usuario usuario = (Usuario) GestorSesion.getInstance().getPerfilActual();
         if (usuario != null) {
-            textoHolaUsuario.setText("Bienvenido, " + usuario.getNombre());
+            textoHolaUsuario.setText("Hola de nuevo, " + usuario.getNombre());
 
             textoSaldo.setText("Saldo: " + usuario.getSaldoTotal());
         } else {

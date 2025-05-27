@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
+           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionMovimientosController">
+    <VBox alignment="CENTER" spacing="20">
+
+        <HBox spacing="20">
+            <Button onAction="#onVolver" styleClass="button" text="Volver"/>
+            <Label styleClass="label-title" text="Gestión de Movimientos">
+                <font>
+                    <Font name="MS UI Gothic" size="32.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="250"/>
+                </HBox.margin>
+            </Label>
+        </HBox>
+
+        <HBox alignment="TOP_CENTER" spacing="30">
+
+            <VBox alignment="TOP_CENTER" prefHeight="556.0" prefWidth="321.0" spacing="15.0"
+                  styleClass="formulario-box">
+                <padding>
+                    <Insets bottom="20.0" left="30.0" right="20.0" top="20.0"/>
+                </padding>
+                <Label styleClass="label-subtitle" text="Datos de la Transacción">
+                    <padding>
+                        <Insets bottom="20.0" top="20.0"/>
+                    </padding>
+                </Label>
+                <GridPane hgap="15" prefHeight="283.0" prefWidth="281.0" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="120" prefWidth="140"/>
+                        <ColumnConstraints minWidth="160" prefWidth="160"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                        <RowConstraints minHeight="40" prefHeight="40"/>
+                    </rowConstraints>
+                    <padding>
+                        <Insets bottom="30.0"/>
+                    </padding>
+                    <Label styleClass="label-small" text="ID Cuenta Origen" textAlignment="RIGHT"
+                           wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+
+                    <Label styleClass="label-small" text="Tipo:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="1"/>
+                    <ComboBox fx:id="comboTipoTransaccion" promptText="Seleccionar..."
+                              styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Transferencia"/>
+                                <String fx:value="Depósito"/>
+                                <String fx:value="Retiro"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <Label fx:id="labelIdCuentaDestino" managed="false" styleClass="label-small"
+                           text="ID Cuenta Destino:" visible="false" GridPane.columnIndex="0"
+                           GridPane.rowIndex="2"/>
+                    <TextField fx:id="campoIdCuentaDestino" managed="false"
+                               promptText="ID Cuenta Destino" styleClass="text-field" visible="false"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Label styleClass="label-small" text="Monto:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="3"/>
+                    <TextField fx:id="campoMonto" promptText="0.00" styleClass="text-field"
+                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label styleClass="label-small" text="Descripción:" GridPane.rowIndex="5"/>
+                    <TextField fx:id="campoDescripcion" promptText="Descripción opcional"
+                               styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label styleClass="label-small" text="Categoria:" GridPane.rowIndex="4"/>
+                    <TextField fx:id="campoCategoria" promptText="Categoria Opcional"
+                               styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="comboIdCuentaOrigen" promptText="Seleccionar..."
+                              styleClass="combo-box" GridPane.columnIndex="1">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Transferencia"/>
+                                <String fx:value="Depósito"/>
+                                <String fx:value="Retiro"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </GridPane>
+
+
+                <HBox alignment="CENTER" spacing="10">
+                    <Button onAction="#onEnviar" styleClass="button" text="Enviar"/>
+                    <Button onAction="#onLimpiar" styleClass="button" text="Limpiar"/>
+                </HBox>
+            </VBox>
+
+            <VBox alignment="TOP_CENTER" prefHeight="556.0" prefWidth="793.0" spacing="15.0">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Button onAction="#onRefrescar" styleClass="button" text="Refrescar tabla"/>
+                </HBox>
+                <TableView fx:id="tablaMovimientos" prefHeight="474.0" prefWidth="793.0"
+                           styleClass="table-view-custom">
+                    <columns>
+                        <TableColumn fx:id="columnaFecha" prefWidth="144.0" text="Fecha"/>
+                        <TableColumn fx:id="columnaTipo" prefWidth="111.0" text="Tipo"/>
+                        <TableColumn fx:id="columnaMonto" prefWidth="166.0" text="Monto"/>
+                        <TableColumn fx:id="columnaDestino" prefWidth="171.0" text="Cuenta Destino"/>
+                        <TableColumn fx:id="columnaCategoria" prefWidth="178.0" text="Categoría"/>
+                        <TableColumn fx:id="columnaDescripcion" prefWidth="210.0" text="Descripción"/>
+                    </columns>
+                </TableView>
+                <HBox alignment="BOTTOM_RIGHT" spacing="10.0">
+                    <Button onAction="#onGenerarReporte" styleClass="button" text="Generar Reporte"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</StackPane>

@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class GestorBaseCRUD<T extends Identificable> {
 
-    protected List<T> listaObjetos;
+    protected final List<T> listaObjetos;
 
     /**
      * Constructor del gestor CRUD.
@@ -20,20 +20,18 @@ public class GestorBaseCRUD<T extends Identificable> {
 
     /**
      * Agrega un nuevo objeto si no está ya en la lista (según equals).
+     *
      * @param objeto objeto a agregar
-     * @return true si se agregó, false si ya existía
      * @throws IllegalArgumentException si el objeto es null
      */
-    public boolean agregar(T objeto) {
+    public void agregar(T objeto) {
         if (objeto == null) {
             throw new IllegalArgumentException("El objeto a agregar no puede ser null.");
         }
 
         if (!listaObjetos.contains(objeto)) {
             listaObjetos.add(objeto);
-            return true;
         }
-        return false;
     }
 
     /**

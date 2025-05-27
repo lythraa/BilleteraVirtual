@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
+           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.CuentasbancariasUsuarioController">
+    <VBox alignment="CENTER" spacing="20">
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <Button onAction="#onVolver" styleClass="button" text="Volver"/>
+            <Label styleClass="label-title" text="Mis Cuentas Bancarias">
+                <HBox.margin>
+                    <Insets left="250"/>
+                </HBox.margin>
+            </Label>
+        </HBox>
+
+        <VBox prefHeight="539.0" prefWidth="1160.0" spacing="15.0">
+            <TableView fx:id="tablaCuentas" prefHeight="500" prefWidth="1150" styleClass="table-view-custom">
+                <columns>
+                    <TableColumn fx:id="columnaId" prefWidth="200.0" text="ID de Cuenta"/>
+                    <TableColumn fx:id="columnaBanco" prefWidth="300.0" text="Banco"/>
+                    <TableColumn fx:id="columnaTipo" prefWidth="200.0" text="Tipo de Cuenta"/>
+                    <TableColumn fx:id="columnaSaldo" prefWidth="200.0" text="Saldo"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</StackPane>

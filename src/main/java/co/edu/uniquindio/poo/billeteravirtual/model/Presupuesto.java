@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
  * Clase que representa un presupuesto asignado,
  * permitiendo registrar gastos y controlar el monto gastado.
  */
-public class Presupuesto {
+public class Presupuesto implements Cloneable {
 
     private double montoAsignado;
     private double montoGastado;
@@ -27,6 +27,16 @@ public class Presupuesto {
             throw new IllegalArgumentException("El gasto excede el monto asignado del presupuesto.");
         }
         this.montoGastado += monto;
+    }
+
+    /**
+     * Clona el presupuesto
+     * @return Copia del presupuesto
+     * @throws CloneNotSupportedException si por algún motivo falla
+     */
+    @Override
+    public Presupuesto clone() throws CloneNotSupportedException {
+        return (Presupuesto) super.clone();
     }
 
     //===============GETTERS Y SETTERS==================//

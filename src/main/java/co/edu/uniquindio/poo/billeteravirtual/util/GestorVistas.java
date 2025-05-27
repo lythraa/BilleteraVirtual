@@ -1,11 +1,14 @@
-package co.edu.uniquindio.poo.billeteravirtual.controller;
+package co.edu.uniquindio.poo.billeteravirtual.util;
 
+import co.edu.uniquindio.poo.billeteravirtual.controller.EditarPerfilController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestorVistas {
 
@@ -26,8 +29,7 @@ public class GestorVistas {
             escenario.setScene(escena);
             escenario.show();
         } catch (Exception e) {
-            // Mejor usar un sistema de logging en producción
-            e.printStackTrace();
+            Logger.getLogger(GestorVistas.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -41,6 +43,7 @@ public class GestorVistas {
      * @param vistaOrigen    Cadena que representa la vista origen que invoca esta apertura.
      * @param configController Función que recibe el controlador cargado para hacer configuraciones adicionales (puede ser null).
      */
+    @SuppressWarnings("unused")
     public static void abrirVistaConOrigen(String rutaFXML, String tituloVentana, Stage stageActual, String vistaOrigen, Consumer<Object> configController) {
         try {
             FXMLLoader loader = new FXMLLoader(GestorVistas.class.getResource(rutaFXML));
@@ -55,7 +58,7 @@ public class GestorVistas {
             stageActual.setScene(new Scene(root));
             stageActual.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(GestorVistas.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -66,9 +69,7 @@ public class GestorVistas {
      * @param vistaOrigen Nombre o clave de la vista origen.
      */
     public static void abrirVistaEditarPerfilDesde(Stage stageActual, String vistaOrigen) {
-        abrirVistaConOrigen("/views/EditarPerfilView.fxml", "Editar Perfil", stageActual, vistaOrigen, controller -> {
-            ((EditarPerfilController) controller).setVistaOrigen(vistaOrigen);
-        });
+        abrirVistaConOrigen("/views/EditarPerfilView.fxml", "Editar Perfil", stageActual, vistaOrigen, controller -> ((EditarPerfilController) controller).setVistaOrigen(vistaOrigen));
     }
 
 }

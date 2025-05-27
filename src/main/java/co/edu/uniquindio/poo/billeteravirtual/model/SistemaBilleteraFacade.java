@@ -1,12 +1,12 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Fachada que simplifica la interacción con los diferentes gestores
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class SistemaBilleteraFacade {
 
-    private DirectorMovimiento directorMovimiento;
+    private final DirectorMovimiento directorMovimiento;
     private final GestorUsuarios gestorUsuarios;
     private final GestorAdministradores gestorAdministradores;
     private final GestorMovimientos gestorMovimientos;
@@ -40,20 +40,19 @@ public class SistemaBilleteraFacade {
      * @param usuario Usuario actual en sesión
      * @param cuentaDestino Cuenta a la cual se dirige el depósito (Siempre corresponderá a la cuenta del usuario actual en sesión)
      * @param monto monto del deposito
-     * @param categoria categoría opcional relacionada con los presupuestos del usuario
      * @param descripcion descripción opcional del depósito
      */
-    public void realizarDeposito(Usuario usuario, CuentaBancaria cuentaDestino, double monto, @Nullable Categoria categoria, @Nullable String descripcion){
+    public void realizarDeposito(Usuario usuario, CuentaBancaria cuentaDestino, double monto, @Nullable String descripcion){
         try {
-            // Antes de crear el objeto, debe pasar por las validaciones
+            // Antes de crear el objeto pasa por las validaciones
             ValidadorMovimiento validador = new ValidadorCuentaDestino()
                     .setSiguiente(new ValidadorCuentaNula());
 
-            Movimiento temporal = directorMovimiento.crearDeposito(cuentaDestino, monto, categoria, descripcion);
+            Movimiento temporal = directorMovimiento.crearDeposito(cuentaDestino, monto, descripcion);
             validador.validar(temporal);  // lanza excepción si algo falla
 
             // Construye el objeto real
-            Movimiento deposito = directorMovimiento.crearDeposito(cuentaDestino, monto, categoria, descripcion);
+            Movimiento deposito = directorMovimiento.crearDeposito(cuentaDestino, monto, descripcion);
 
             // Ejecuta, registra
             deposito.procesarTransaccion();
@@ -115,7 +114,7 @@ public class SistemaBilleteraFacade {
                     .setSiguiente(new ValidadorSaldoSuficiente());
 
             if(categoria != null){
-                usuario.buscarCategoria(categoria.getId_Nombre())
+                usuario.buscarCategoria(categoria.getId())
                         .getPresupuesto().registrarGasto(monto);///checkkk
             }
 
@@ -130,7 +129,21 @@ public class SistemaBilleteraFacade {
             transferencia.procesarTransaccion();
             gestorMovimientos.agregar(transferencia);
             usuario.registrarMovimiento(transferencia);
-            usuario.calcularSaldoTotal();
+
+            Usuario usuarioDestino = null;
+
+            for(Usuario u : gestorUsuarios.getListaObjetos()){
+                for(CuentaBancaria cuentaBancaria : u.getListaCuentasBancarias()){
+                    if (Objects.equals(cuentaBancaria.getId(), cuentaDestino.getId())) {
+                        usuarioDestino = u;
+                        break;
+                    }
+                }
+            }
+
+            if(usuarioDestino != null){
+                usuarioDestino.registrarMovimiento(transferencia);
+            }
 
         } catch (Exception e) {
             System.out.println("No se pudo realizar la transferencia: " + e.getMessage());
@@ -170,7 +183,7 @@ public class SistemaBilleteraFacade {
 
         // Contar movimientos por categoría
         for (Movimiento movimiento : movimientos) {
-            String categoria = movimiento.getCategoriaOpcional().getId_Nombre(); // Asegúrate de que exista
+            String categoria = movimiento.getCategoriaOpcional().getId(); // Asegúrate de que exista
             conteoPorCategoria.merge(categoria, 1, Integer::sum);
         }
 
@@ -188,7 +201,7 @@ public class SistemaBilleteraFacade {
     }
 
     /**
-     * Método para obtener los usuarios con mayor cantidad de movimientos
+     *Obtiene los usuarios con mayor cantidad de movimientos
      * @param limite máximo de usuarios mostrados en el chart
      * @return Hashmap de usuarios con su respectivo número de movimientos
      */
@@ -206,15 +219,15 @@ public class SistemaBilleteraFacade {
                 .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
                 .limit(limite)
                 .collect(Collectors.toMap(
-                        entry -> entry.getKey(),
-                        entry -> entry.getValue(),
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
                         (e1, e2) -> e1,
-                        () -> new LinkedHashMap<>()
+                        LinkedHashMap::new
                 ));
     }
 
     /**
-     * Método para calcular el saldo promedio de los usuarios del
+     * Calcula el saldo promedio de los usuarios del
      * histórico de movimientos
      * @return saldo promedio general
      */
@@ -230,15 +243,15 @@ public class SistemaBilleteraFacade {
     }
 
     /**
-     * Método para generar un reporte en pdf de los movimientos del usuario
+     * Genera un reporte en pdf de los movimientos del usuario
      * @param usuario usuario en sesión
      */
     public void generarReportePDF(Usuario usuario) {
         ReporteExportable reporte = new ReportePDFService();
         try {
-            reporte.exportarReporte(usuario, "reporte_usuario.pdf");
+            reporte.exportarReporte(usuario, "Documentos-Creados/reporte_usuario.pdf");
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(GestorVistas.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -249,10 +262,26 @@ public class SistemaBilleteraFacade {
     public void generarReporteExcel(Usuario usuario) {
         ReporteExportable reporte = new ReporteExcelAdapter();
         try {
-            reporte.exportarReporte(usuario, "reporte_usuario.xlsx");
+            reporte.exportarReporte(usuario, "Documentos-Creados/reporte_usuario.xlsx");
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(GestorVistas.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    /**
+     * Genera un código alfanumérico corto de 6 caracteres para identificar las trnsacciones.
+     * Usa letras mayúsculas y dígitos numéricos.
+     *
+     * @return Código aleatorio de 6 caracteres
+     */
+    public String generarCodigoId() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder codigo = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            int pos = (int) (Math.random() * chars.length());
+            codigo.append(chars.charAt(pos));
+        }
+        return codigo.toString();
     }
 
     //========================GETTERS=========================//
@@ -264,24 +293,12 @@ public class SistemaBilleteraFacade {
         return instancia;
     }
 
-    public DirectorMovimiento getDirectorMovimiento() {
-        return directorMovimiento;
-    }
-
-    public void setDirectorMovimiento(DirectorMovimiento directorMovimiento) {
-        this.directorMovimiento = directorMovimiento;
-    }
-
     public GestorUsuarios getGestorUsuarios() {
         return gestorUsuarios;
     }
 
     public GestorAdministradores getGestorAdministradores() {
         return gestorAdministradores;
-    }
-
-    public GestorMovimientos getGestorMovimientos() {
-        return gestorMovimientos;
     }
 
     public GestorCuentasBancarias getGestorCuentasBancarias() {

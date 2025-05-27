@@ -7,6 +7,7 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires org.apache.poi.ooxml;
     requires org.apache.poi.poi;
     requires org.apache.pdfbox;
+    requires java.logging;
     requires java.desktop;
 
     opens co.edu.uniquindio.poo.billeteravirtual.model to javafx.fxml;
@@ -17,4 +18,6 @@ module co.edu.uniquindio.poo.billeteravirtual {
     exports co.edu.uniquindio.poo.billeteravirtual.app;
     exports co.edu.uniquindio.poo.billeteravirtual.controller;
     exports co.edu.uniquindio.poo.billeteravirtual.model;
+    exports co.edu.uniquindio.poo.billeteravirtual.util;
+    opens co.edu.uniquindio.poo.billeteravirtual.util to javafx.fxml;
 }

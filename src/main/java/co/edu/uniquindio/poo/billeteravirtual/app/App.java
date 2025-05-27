@@ -1,7 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.CuentaBancaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,14 +26,14 @@ public class App extends Application {
         SistemaBilleteraFacade fachada = SistemaBilleteraFacade.getInstancia();
 
         //ADMINS
-        Administrador admin1 = new Administrador("111", "111","111","111","111","111");
-        Administrador admin2 = new Administrador("333", "333","Eduardo","eduardo@admin.com","12345678","Armenia");
-        Administrador admin3 = new Administrador("444", "444","Juliana","juliana@admin.com","34567890","Pereira");
+        Administrador admin1 = new Administrador("admin1", "admin1", "Laura Gómez", "laura.gomez@admin.com", "34567890", "Calle 10 #45-67");
+        Administrador admin2 = new Administrador("admin2", "admin2", "Juliana Martínez", "juliana.martinez@admin.com", "34567890", "Carrera 12 #34-56");
+        Administrador admin3 = new Administrador("admin2", "admin3", "Samanta López", "samanta.lopez@admin.com", "34567890", "Avenida 3 #21-09");
 
-        //USUARIOS
-        Usuario user1 = new Usuario("222", "222","222","222","222","222");
-        Usuario user2 = new Usuario("555", "555","Andres","andres@email.com","87654321","Bogota");
-        Usuario user3 = new Usuario("666", "666","Tatiana","tatiana@email.com","09876543","Cartagena");
+        // USUARIOS
+        Usuario user1 = new Usuario("user1", "user1", "Carlos Pérez", "carlos.perez@email.com", "32165487", "Carrera 8 #12-34");
+        Usuario user2 = new Usuario("user2", "user2", "Andrés Torres", "andres.torres@email.com", "87654321", "Calle 15 #67-89");
+        Usuario user3 = new Usuario("user3", "user3", "Raul Ramírez", "raul.ramirez@email.com", "09876543", "Avenida 9 #45-12");
 
         //CUENTAS
         CuentaBancaria cuenta1 = new CuentaBancaria("123", "Bancolombia", TipoCuenta.AHORRO);

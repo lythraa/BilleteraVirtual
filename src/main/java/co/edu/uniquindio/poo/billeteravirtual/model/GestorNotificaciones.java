@@ -1,13 +1,11 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.util.*;
 
 public class GestorNotificaciones {
     private static GestorNotificaciones instancia;
-    private Map<String, List<Observer>> suscriptoresPorEvento = new HashMap<>();
+    private final Map<String, List<Observer>> suscriptoresPorEvento = new HashMap<>();
+    private final List<Notificacion> notificacionesSoporte = new ArrayList<>();
 
     /**
      * Constructor sin argumentos de la clase
@@ -18,7 +16,7 @@ public class GestorNotificaciones {
      * Método para obtener la instancia única del gestor
      * @return instancias del gestor
      */
-    public static GestorNotificaciones getInstancia() {
+    public static synchronized GestorNotificaciones getInstancia() {
         if (instancia == null) {
             instancia = new GestorNotificaciones();
         }
@@ -32,9 +30,15 @@ public class GestorNotificaciones {
      */
     public void registrar(String evento, Observer obs) {
         suscriptoresPorEvento
-                .computeIfAbsent(evento, k -> new ArrayList<>())
-                .add(obs);
+                .computeIfAbsent(evento, k -> new ArrayList<>());
+
+        List<Observer> lista = suscriptoresPorEvento.get(evento);
+
+        if (!lista.contains(obs)) {
+            lista.add(obs);
+        }
     }
+
 
     /**
      * Método para registrar un nuevo evento
@@ -60,6 +64,10 @@ public class GestorNotificaciones {
      * @param notificacion notificación a enviar
      */
     public void notificar(String evento, Notificacion notificacion) {
+        if (evento.equalsIgnoreCase("soporte")) {
+            notificacionesSoporte.add(notificacion);
+        }
+
         List<Observer> lista = suscriptoresPorEvento.get(evento);
         if (lista != null) {
             for (Observer obs : lista) {
@@ -67,6 +75,7 @@ public class GestorNotificaciones {
             }
         }
     }
+
 
     /**
      * Método para obtener todos los eventos creados
@@ -91,4 +100,18 @@ public class GestorNotificaciones {
         return eventosSuscritos;
     }
 
+    /**
+     * Obtiene la lista de observadores registrados para un evento específico.
+     *
+     * @param evento El evento cuyo listado de observadores se desea obtener.
+     * @return Una lista de observadores asociados al evento. Si no existen observadores
+     *         para el evento, se retorna una lista vacía.
+     */
+    public List<Observer> obtenerObservadoresPorEvento(String evento) {
+        return suscriptoresPorEvento.getOrDefault(evento, Collections.emptyList());
+    }
+
+    public List<Notificacion> getNotificacionesSoporte() {
+        return notificacionesSoporte;
+    }
 }

@@ -4,7 +4,6 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
  * Estrategia concreta que representa un movimiento de tipo transferencia.
  * Implementa el patrón Strategy para aplicar la lógica específica de transferencia
  * entre dos cuentas bancarias.
- *
  * Utiliza el patrón Chain of Responsibility para validar diferentes aspectos
  * antes de realizar la transferencia:
  * - Cuenta no nula,

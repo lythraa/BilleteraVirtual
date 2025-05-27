@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css"
+           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.AdministradorController">
+    <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0">
+        <Label fx:id="textoHolaUsuario" styleClass="label-cursive" text="Hola," textAlignment="CENTER"
+               wrapText="true">
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+         <padding>
+             <Insets top="20.0"/>
+         </padding>
+        </Label>
 
-<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.AdministradorController">
-   <children>
-       <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0">
-          <children>
-              <Label fx:id="textoHolaUsuario" styleClass="label-cursive" text="Hola," textAlignment="CENTER" wrapText="true">
-                  <VBox.margin>
-                      <Insets top="10.0" />
-                  </VBox.margin>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-              </Label>
-      
-              <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
-                  <VBox.margin>
-                      <Insets top="10.0" />
-                  </VBox.margin>
-                  <padding>
-                      <Insets bottom="30.0" top="10.0" />
-                  </padding>
-              </Label>
-      
-              <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15;">
-                  <padding>
-                      <Insets bottom="25.0" left="20.0" right="20.0" top="20.0" />
-                  </padding>
-         <children>
-                     <Button maxWidth="Infinity" onAction="#onGestionarTransacciones" styleClass="button" text="Ver Transacciones Globales" />
-                     <Button maxWidth="Infinity" onAction="#onGestionarUsuarios" styleClass="button" text="Gestionar Usuarios" />
-                     <Button maxWidth="Infinity" onAction="#onGestionarCuentasBancarias" styleClass="button" text="Gestionar Cuentas Bancarias" />
-                     <Button maxWidth="Infinity" onAction="#onVerEstadisticas" styleClass="button" text="Ver Estadísticas" />
-                     <Button maxWidth="Infinity" onAction="#onMandarNotificacion" styleClass="button" text="Mandar Notificaciones" />
-                     <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil" />
-                     <Button maxWidth="Infinity" onAction="#onCerrarSesion" styleClass="button" text="Cerrar sesión" />
-         </children>
-              </VBox>
-          </children>
-       </VBox>
-   </children>
+        <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="30.0" top="10.0"/>
+            </padding>
+        </Label>
+
+        <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0"
+              style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15;">
+            <padding>
+                <Insets bottom="25.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Button maxWidth="Infinity" onAction="#onGestionarTransacciones" styleClass="button"
+                    text="Ver Transacciones Globales"/>
+            <Button maxWidth="Infinity" onAction="#onGestionarUsuarios" styleClass="button"
+                    text="Gestionar Usuarios"/>
+            <Button maxWidth="Infinity" onAction="#onGestionarCuentasBancarias" styleClass="button"
+                    text="Gestionar Cuentas Bancarias"/>
+            <Button maxWidth="Infinity" onAction="#onVerEstadisticas" styleClass="button"
+                    text="Ver Estadísticas"/>
+            <Button maxWidth="Infinity" onAction="#onMandarNotificacion" styleClass="button"
+                    text="Mandar Notificaciones"/>
+            <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil"/>
+            <Button maxWidth="Infinity" onAction="#onCerrarSesion" styleClass="button" text="Cerrar sesión"/>
+        </VBox>
+    </VBox>
 </StackPane>

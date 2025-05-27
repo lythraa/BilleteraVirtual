@@ -11,7 +11,7 @@ public class GestorAdministradores extends GestorBaseCRUD<Administrador> {
     private static GestorAdministradores instancia;
 
     private GestorAdministradores() {
-        super(new ArrayList<Administrador>());
+        super(new ArrayList<>());
     }
 
     /**

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.GestorUsuarios;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
  * Controlador para gestionar usuarios desde el panel de administrador.
  * Permite agregar, editar, buscar, eliminar y listar usuarios del sistema.
  */
-public class GestionarUsuariosController {
+public class GestionUsuariosController {
 
     @FXML
     private TextField campoId;
@@ -54,15 +55,13 @@ public class GestionarUsuariosController {
     /**
      * Verifica si hay campos obligatorios vacíos.
      *
-     * @return true si hay campos inválidos, false si todo está completo.
+     * @return true si hay campos inválidos, false están está completo.
      */
     private boolean camposInvalidos() {
-        if (campoId.getText().isEmpty() || campoContrasena.getText().isEmpty() ||
-                campoNombre.getText().isEmpty() || campoCorreo.getText().isEmpty()) {
-            UtilAlerta.mostrarAlertaError("Campos incompletos", "Por favor, completa todos los campos requeridos.");
-            return true;
-        }
-        return false;
+        return UtilAlerta.esInvalido(campoId.getText(), "ID") ||
+                UtilAlerta.esInvalido(campoContrasena.getText(), "Contraseña") ||
+                UtilAlerta.esInvalido(campoNombre.getText(), "Nombre") ||
+                UtilAlerta.esInvalido(campoCorreo.getText(), "Correo");
     }
 
 
@@ -113,6 +112,7 @@ public class GestionarUsuariosController {
         GestorUsuarios.getInstancia().agregar(nuevoUsuario);
         cargarUsuarios();
         limpiarCampos();
+        UtilAlerta.mostrarAlertaInformacion("Usuario agregado", "El usuario se agregó correctamente.");
     }
 
     /**
@@ -121,23 +121,25 @@ public class GestionarUsuariosController {
     @FXML
     void onEditar() {
         Usuario seleccionado = getUsuarioSeleccionado();
-        if (seleccionado != null) {
-            if (camposInvalidos()) return;
-            actualizarUsuarioDesdeCampos(seleccionado);
-            cargarUsuarios();
-            limpiarCampos();
+        if (seleccionado == null) {
+            UtilAlerta.mostrarAlertaError("Selección vacía", "No has seleccionado ningún usuario para editar.");
+            return;
         }
+        if (camposInvalidos()) return;
+        actualizarUsuarioDesdeCampos(seleccionado);
+        cargarUsuarios();
+        limpiarCampos();
     }
 
     /**
-     * Busca un usuario por su ID e actualiza la tabla con el resultado.
+     * Busca un usuario por su ID y actualiza la tabla con el resultado.
      */
     @FXML
     void onBuscar() {
         String idBuscado = campoIdBusqueda.getText().trim();
 
         if (idBuscado.isEmpty()) {
-            UtilAlerta.mostrarAlertaError("Búsqueda incorrecta", "Por favor, ingresa un ID válido para buscar.");
+            cargarUsuarios();
             return;
         }
 
@@ -157,17 +159,30 @@ public class GestionarUsuariosController {
     @FXML
     void onEliminar() {
         Usuario seleccionado = getUsuarioSeleccionado();
-        if (seleccionado != null) {
-            boolean confirmado = UtilAlerta.mostrarAlertaConfirmacion("¿Estás seguro?", "Esta acción eliminará al usuario permanentemente.");
-            if (!confirmado) return;
 
-            GestorUsuarios.getInstancia().eliminar(seleccionado);
-            listaObservableUsuarios.remove(seleccionado);
-            limpiarCampos();
-            cargarUsuarios();
-        } else {
-            UtilAlerta.mostrarAlertaError("Selección vacía", "No se ha seleccionado ningún usuario para eliminar.");
+        if (seleccionado == null) {
+            UtilAlerta.mostrarAlertaError("Selección vacía", "No has seleccionado ningún usuario para eliminar.");
+            return;
         }
+
+        boolean confirmado = UtilAlerta.mostrarAlertaConfirmacion(
+                "¿Estás seguro?",
+                "Esta acción eliminará al usuario permanentemente."
+        );
+
+        if (!confirmado) {
+            return;
+        }
+
+        GestorUsuarios.getInstancia().eliminar(seleccionado);
+        listaObservableUsuarios.remove(seleccionado);
+        limpiarCampos();
+        cargarUsuarios();
+
+        UtilAlerta.mostrarAlertaInformacion(
+                "Usuario eliminado",
+                "El usuario ha sido eliminado correctamente."
+        );
     }
 
     /**

@@ -1,9 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.util.GestorVistas;
+import co.edu.uniquindio.poo.billeteravirtual.util.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.CuentaBancaria;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,55 +14,43 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para gestionar movimientos: depósito, retiro y transferencia.
  */
-public class GestionarMovimientosController {
+public class GestionMovimientosController {
 
     @FXML
     private ComboBox<String> comboTipoTransaccion;
-
+    @FXML
+    private ComboBox<String> comboIdCuentaOrigen;
     @FXML
     private TextField campoDescripcion;
-
     @FXML
     private TextField campoIdCuentaDestino;
-
     @FXML
     private Label labelIdCuentaDestino;
-
     @FXML
     private TextField campoMonto;
-
-    @FXML
-    private TextField campoIdCuentaOrigen;
-
     @FXML
     private TableView<Movimiento> tablaMovimientos;
-
     @FXML
     private TableColumn<Movimiento, String> columnaTipo;
-
     @FXML
     private TableColumn<Movimiento, String> columnaFecha;
-
     @FXML
     private TableColumn<Movimiento, String> columnaMonto;
-
     @FXML
     private TableColumn<Movimiento, String> columnaDescripcion;
-
     @FXML
     private TableColumn<Movimiento, String> columnaCategoria;
-
     @FXML
     private TableColumn<Movimiento, String> columnaDestino;
-
     @FXML
     private TextField campoCategoria;
 
-    private ObservableList<Movimiento> movimientosObservable = FXCollections.observableArrayList();
+    private final ObservableList<Movimiento> movimientosObservable = FXCollections.observableArrayList();
 
     private Usuario usuarioActual;
 
@@ -76,10 +64,15 @@ public class GestionarMovimientosController {
         comboTipoTransaccion.setItems(FXCollections.observableArrayList("Transferencia", "Depósito", "Retiro"));
         comboTipoTransaccion.setOnAction(event -> actualizarCampos());
 
+        List<CuentaBancaria> cuentas = usuarioActual.getListaCuentasBancarias();
+        List<String> idsCuentas = cuentas.stream()
+                .map(CuentaBancaria::getId)
+                .collect(Collectors.toList());
+        comboIdCuentaOrigen.setItems(FXCollections.observableArrayList(idsCuentas));
+
         configurarColumnas();
         cargarMovimientos();
 
-        // Inicialmente oculta campo destino
         campoIdCuentaDestino.setVisible(false);
         campoIdCuentaDestino.setManaged(false);
         labelIdCuentaDestino.setVisible(false);
@@ -140,6 +133,8 @@ public class GestionarMovimientosController {
     private void cargarMovimientos() {
         movimientosObservable.setAll(usuarioActual.getHistorialMovimientos());
         tablaMovimientos.setItems(movimientosObservable);
+        System.out.println("Movimientos actuales: " + usuarioActual.getHistorialMovimientos());
+//TODO
     }
 
     /**
@@ -152,7 +147,8 @@ public class GestionarMovimientosController {
     }
 
     /**
-     * Genera un reporte en PDF o Excel con los movimientos.
+     * Genera un reporte con los movimientos del usuario.
+     * Si el reporte se desea en pdf,
      */
     @FXML
     void onGenerarReporte() {
@@ -169,27 +165,15 @@ public class GestionarMovimientosController {
             try {
                 if (formato.equals("PDF")) {
                     SistemaBilleteraFacade.getInstancia().generarReportePDF(usuarioActual);
-                    mostrarAlerta("Reporte generado exitosamente en PDF.");
+                    UtilAlerta.mostrarAlertaInformacion("Reporte generado", "Reporte generado exitosamente en PDF.");
                 } else {
                     SistemaBilleteraFacade.getInstancia().generarReporteExcel(usuarioActual);
-                    mostrarAlerta("Reporte generado exitosamente en Excel.");
+                    UtilAlerta.mostrarAlertaInformacion("Reporte generado", "Reporte generado exitosamente en Excel.");
                 }
             } catch (Exception e) {
-                mostrarAlerta("Error al generar el reporte: " + e.getMessage());
+                UtilAlerta.mostrarAlertaError("Error al generar el reporte", e.getMessage());
             }
         });
-    }
-
-    /**
-     * Muestra una alerta informativa.
-     * @param mensaje Mensaje a mostrar.
-     */
-    private void mostrarAlerta(String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Resultado del Reporte");
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
     }
 
 
@@ -209,41 +193,44 @@ public class GestionarMovimientosController {
     @FXML
     private void onEnviar() {
         String tipo = comboTipoTransaccion.getValue();
-        String idCuentaOrigen = campoIdCuentaOrigen.getText();
         String montoTexto = campoMonto.getText();
         String descripcion = campoDescripcion.getText();
         String idCuentaDestino = campoIdCuentaDestino.getText();
         String categoriaTexto = campoCategoria.getText();
+        String idCuentaOrigen = comboIdCuentaOrigen.getValue();
         Usuario usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
         CuentaBancaria cuentaBancariaOrigen = SistemaBilleteraFacade.getInstancia().buscarCuenta(idCuentaOrigen);
+        if (cuentaBancariaOrigen == null) {
+            UtilAlerta.mostrarAlertaNoEncontrado("Cuenta origen");
+            return;
+        }
+
         CuentaBancaria cuentaBancariaDestino = SistemaBilleteraFacade.getInstancia().buscarCuenta(idCuentaDestino);
         Categoria categoria = usuarioActual.buscarCategoria(categoriaTexto);
 
-        if (tipo == null || idCuentaOrigen.isEmpty() || montoTexto.isEmpty()) {
-            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacíos", "Por favor complete todos los campos obligatorios.");
-            return;
-        }
-
-        double monto;
-        try {
-            monto = Double.parseDouble(montoTexto);
-        } catch (NumberFormatException e) {
-            UtilAlerta.mostrarAlertaInformacion("Número inválido", "El monto debe ser un número válido.");
-            return;
-        }
+        if (UtilAlerta.esInvalido(tipo, "Tipo de transacción")) return;
+        if (UtilAlerta.esInvalido(idCuentaOrigen, "ID Cuenta Origen")) return;
+        if (UtilAlerta.esInvalido(montoTexto, "Monto")) return;
+        Double monto = UtilAlerta.validarYConvertirMonto(montoTexto, "Monto");
+        if (monto == null) return;
 
         try {
             switch (tipo) {
                 case "Transferencia":
-                    if (idCuentaDestino == null || idCuentaDestino.isEmpty()) {
-                        UtilAlerta.mostrarAlertaInformacion("Campo vacío", "Por favor ingrese el ID de la cuenta destino para la transferencia.");
+                    if (idCuentaDestino.isBlank()) {
+                        UtilAlerta.mostrarAlertaAdvertencia("Campo vacío", "Por favor ingrese el ID de la cuenta destino.");
                         return;
                     }
-                    SistemaBilleteraFacade.getInstancia().realizarTransferencia(usuarioActual, cuentaBancariaOrigen, cuentaBancariaDestino, monto, categoria, descripcion);
+                    if (cuentaBancariaDestino == null) {
+                        UtilAlerta.mostrarAlertaNoEncontrado("Cuenta destino");
+                        return;
+                    }
+                    SistemaBilleteraFacade.getInstancia().realizarTransferencia(usuarioActual, cuentaBancariaOrigen,cuentaBancariaDestino, monto, categoria, descripcion);
+
                     break;
 
                 case "Depósito":
-                    SistemaBilleteraFacade.getInstancia().realizarDeposito(usuarioActual, cuentaBancariaOrigen, monto, categoria, descripcion);
+                    SistemaBilleteraFacade.getInstancia().realizarDeposito(usuarioActual, cuentaBancariaOrigen, monto, descripcion);
                     break;
 
                 case "Retiro":
@@ -251,16 +238,16 @@ public class GestionarMovimientosController {
                     break;
 
                 default:
-                    mostrarAlerta("Tipo de transacción desconocido.");
+                    UtilAlerta.mostrarAlertaAdvertencia("Tipo desconocido", "Tipo de transacción desconocido.");
                     return;
             }
 
-            mostrarAlerta("¡Transacción realizada con éxito!");
+            UtilAlerta.mostrarAlertaInformacion("Éxito", "¡Transacción realizada con éxito!");
             onLimpiar();
             onRefrescar();
 
         } catch (Exception e) {
-            mostrarAlerta("Error al realizar la transacción: " + e.getMessage());
+            UtilAlerta.mostrarAlertaError("Error de transacción", e.getMessage());
         }
     }
 
@@ -270,7 +257,6 @@ public class GestionarMovimientosController {
     @FXML
     private void onLimpiar() {
         comboTipoTransaccion.getSelectionModel().clearSelection();
-        campoIdCuentaOrigen.clear();
         campoIdCuentaDestino.clear();
         campoMonto.clear();
         campoDescripcion.clear();
@@ -283,7 +269,7 @@ public class GestionarMovimientosController {
     }
 
     /**
-     * Muestra u oculta campos según el tipo de transacción.
+     * Muestra y oculta los campos según el tipo de transacción.
      */
     private void actualizarCampos() {
         String tipoSeleccionado = comboTipoTransaccion.getValue();

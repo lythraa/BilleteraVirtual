@@ -182,3 +182,94 @@
 .table-view .cell {
     -fx-text-fill: #f0f0f0;
 }
+
+/* ===================== LISTAS PERSONALIZADAS ===================== */
+.lista-soporte {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.25), 4, 0, 0, 2);
+}
+
+.lista-soporte .list-cell {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-border-color: rgba(255,255,255,0.1);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    -fx-text-fill: #f0f0f0;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+.lista-soporte .list-cell:selected {
+    -fx-background-color: linear-gradient(to right, #ba68c8, #9c27b0);
+    -fx-text-fill: white;
+}
+
+/* ===================== ALERTAS PERSONALIZADAS ===================== */
+.my-alert {
+    -fx-background-color: linear-gradient(to bottom, #2a2a40, #1e1e2f);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 20;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.my-alert .label {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 14px;
+}
+
+.my-alert .header-panel {
+    -fx-background-color: transparent;
+}
+
+.my-alert .content {
+    -fx-background-color: transparent;
+}
+
+.my-alert .button-bar .button {
+    -fx-background-color: linear-gradient(to right, #ba68c8, #9c27b0);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+}
+
+.my-alert .button-bar .button:hover {
+    -fx-background-color: linear-gradient(to right, #ce93d8, #ab47bc);
+}
+
+.tile-pane-categorias {
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-padding: 10;
+    -fx-hgap: 15;
+    -fx-vgap: 15;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.25), 4, 0, 0, 2);
+}
+
+.categoria-card {
+    -fx-background-color: #ba68c8;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #ab47bc;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+.categoria-card .label-nombre,
+.categoria-card .label-presupuesto,
+.categoria-card .label-gastado {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: bold;
+}
+
+
