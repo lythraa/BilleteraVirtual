@@ -2,11 +2,12 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
 import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.Observer;
 
 /**
  * Clase que representa un administrador del sistema.
  */
-public class Administrador extends Perfil {
+public class Administrador extends Perfil implements Observer {
 
     /**
      * Constructor de la clase Administrador.
@@ -20,6 +21,11 @@ public class Administrador extends Perfil {
      */
     public Administrador(String id, String contrasenia, String nombre, String correo, String telefono, String direccion){
         super(id, contrasenia, nombre, correo, telefono, direccion);
+    }
+
+    @Override
+    public void recibirNotificacion(Notificacion notificacion) {
+        System.out.println("ADMIN " + this.getNombre() + " recibió: " + notificacion.getMensaje());
     }
 
     public void enviarNotificacion(String evento, String mensaje) {

@@ -1,13 +1,14 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
 import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.UsuarioObserver;
+import co.edu.uniquindio.poo.billeteravirtual.model.observer.Observer;
 import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
 import java.util.ArrayList;
 
-public class Usuario extends Perfil implements UsuarioObserver {
+public class Usuario extends Perfil implements Observer {
 
     private double saldoTotal;
     private ArrayList<Movimiento> historialMovimientos;
@@ -109,6 +110,11 @@ public class Usuario extends Perfil implements UsuarioObserver {
     public void agregarCuenta(CuentaBancaria cuentaNueva){
         listaCuentasBancarias.add(cuentaNueva);
         SistemaBilleteraFacade.getInstancia().getGestorCuentasBancarias().agregar(cuentaNueva);
+    }
+
+    public void enviarMensaje(String evento, String mensaje) {
+        Notificacion n = new Notificacion("USUARIO " + this.getNombre() + ": " + mensaje);
+        GestorNotificaciones.getInstancia().notificar(evento, n);
     }
     //====================GETTERS Y SETTERS=======================//
 

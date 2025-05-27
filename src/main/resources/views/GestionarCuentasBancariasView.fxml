@@ -1,121 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css"
+           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarCuentasController">
+    <VBox spacing="20.0" StackPane.alignment="CENTER">
+        <HBox spacing="20.0">
+            <Button onAction="#onVolver" styleClass="button" text="Volver"/>
+            <Label styleClass="label-title" text="Gestión de Cuentas Bancarias">
+                <HBox.margin>
+                    <Insets left="250.0"/>
+                </HBox.margin>
+                <font>
+                    <Font name="MS UI Gothic" size="32.0"/>
+                </font>
+            </Label>
+        </HBox>
 
-<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarCuentasController">
-    <children>
-        <VBox spacing="20.0" StackPane.alignment="CENTER">
-            <children>
-                <HBox spacing="20.0">
-                    <children>
-                        <Button onAction="#onVolver" styleClass="button" text="Volver" />
-                        <Label styleClass="label-title" text="Gestión de Cuentas Bancarias">
-                            <HBox.margin>
-                                <Insets left="250.0" />
-                            </HBox.margin>
-                     <font>
-                        <Font name="MS UI Gothic" size="32.0" />
-                     </font>
-                        </Label>
-                    </children>
+        <HBox alignment="CENTER" spacing="30.0">
+            <VBox prefHeight="569.0" prefWidth="317.0" spacing="15.0" styleClass="formulario-box">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" top="20.0"/>
+                </padding>
+                <Label styleClass="label-subtitle" text="Formulario Cuenta Bancaria">
+                    <padding>
+                        <Insets bottom="10.0"/>
+                    </padding>
+                </Label>
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT"/>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                    <Label styleClass="label-small" text="ID Usuario:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="0"/>
+                    <TextField fx:id="campoIdUsuario" promptText="ID del usuario"
+                               styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label styleClass="label-small" text="Banco:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="1"/>
+                    <TextField fx:id="campoNombreBanco" promptText="Ej. Bancolombia"
+                               styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label styleClass="label-small" text="No. Cuenta:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="2"/>
+                    <TextField fx:id="campoNumeroCuenta" promptText="0000123456" styleClass="text-field"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Label styleClass="label-small" text="Saldo:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="3"/>
+                    <TextField fx:id="campoSaldo" promptText="0.00" styleClass="text-field"
+                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label styleClass="label-small" text="Tipo Cuenta" GridPane.columnIndex="0"
+                           GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="comboTipoCuenta" prefHeight="46.0" prefWidth="185.0"
+                              promptText="Seleccionar..." styleClass="combo-box"
+                              GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                </GridPane>
+                <HBox alignment="CENTER" spacing="10.0">
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                    <Button onAction="#onAgregar" styleClass="button" text="Agregar"/>
+                    <Button onAction="#onEditar" styleClass="button" text="Editar"/>
                 </HBox>
+            </VBox>
 
-                <HBox alignment="CENTER" spacing="30.0">
-                    <children>
-                        <VBox prefHeight="569.0" prefWidth="317.0" spacing="15.0" styleClass="formulario-box">
-                            <padding>
-                                <Insets bottom="20.0" left="20.0" top="20.0" />
-                            </padding>
-                            <children>
-                                <Label styleClass="label-subtitle" text="Formulario Cuenta Bancaria">
-                                    <padding>
-                                        <Insets bottom="10.0" />
-                                    </padding>
-                                </Label>
-                                <GridPane hgap="15" vgap="15">
-                                    <columnConstraints>
-                                        <ColumnConstraints halignment="RIGHT" />
-                                        <ColumnConstraints />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                        <RowConstraints />
-                                    </rowConstraints>
-                                    <children>
-                                        <Label styleClass="label-small" text="ID Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <TextField fx:id="campoIdUsuario" promptText="ID del usuario" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                                        <Label styleClass="label-small" text="Banco:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField fx:id="campoNombreBanco" promptText="Ej. Bancolombia" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                                        <Label styleClass="label-small" text="No. Cuenta:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField fx:id="campoNumeroCuenta" promptText="0000123456" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                                        <Label styleClass="label-small" text="Saldo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                        <TextField fx:id="campoSaldo" promptText="0.00" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                                        <Label styleClass="label-small" text="Tipo Cuenta" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <ComboBox fx:id="comboTipoCuenta" prefHeight="46.0" prefWidth="185.0" promptText="Seleccionar..." styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    </children>
-                                </GridPane>
-                                <HBox alignment="CENTER" spacing="10.0">
-                                    <VBox.margin>
-                                        <Insets top="30.0" />
-                                    </VBox.margin>
-                                    <children>
-                                        <Button onAction="#onAgregar" styleClass="button" text="Agregar" />
-                                        <Button onAction="#onEditar" styleClass="button" text="Editar" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-
-                        <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="795.0" spacing="15.0">
-                            <children>
-                                <HBox alignment="CENTER" spacing="10.0">
-                                    <padding>
-                                        <Insets top="10.0" />
-                                    </padding>
-                                    <children>
-                                        <TextField fx:id="campoBusqueda" promptText="Buscar cuenta por ID usuario..." styleClass="search-bar" />
-                                        <Button onAction="#onBuscar" styleClass="button" text="Buscar" />
-                                    </children>
-                                </HBox>
-                                <VBox prefHeight="451.0" prefWidth="751.0">
-                                    <padding>
-                                        <Insets top="10" />
-                                    </padding>
-                                    <children>
-                                        <TableView fx:id="tablaCuentas" prefHeight="356.0" prefWidth="751.0" styleClass="table-view-custom">
-                                            <columns>
-                                                <TableColumn fx:id="columnaIdUsuario" prefWidth="120.0" text="ID Usuario" />
-                                                <TableColumn fx:id="columnaNombreUsuario" prefWidth="160.0" text="Nombre Usuario" />
-                                                <TableColumn fx:id="columnaBanco" prefWidth="140.0" text="Banco" />
-                                                <TableColumn fx:id="columnaNumeroCuenta" prefWidth="140.0" text="N° Cuenta" />
-                                                <TableColumn fx:id="columnaSaldo" prefWidth="80.0" text="Saldo" />
-                                                <TableColumn fx:id="columnaTipoCuenta" prefWidth="110.0" text="Tipo" />
-                                            </columns>
-                                        </TableView>
-                                    </children>
-                                </VBox>
-                                <HBox alignment="BOTTOM_RIGHT" prefHeight="15.0" prefWidth="556.0">
-                                    <children>
-                                        <Button onAction="#onEliminar" prefHeight="29.0" prefWidth="94.0" styleClass="button" text="Eliminar" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-                    </children>
+            <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="795.0" spacing="15.0">
+                <HBox alignment="CENTER" spacing="10.0">
+                    <padding>
+                        <Insets top="10.0"/>
+                    </padding>
+                    <TextField fx:id="campoBusqueda" promptText="Buscar cuenta por ID usuario..."
+                               styleClass="search-bar"/>
+                    <Button onAction="#onBuscar" styleClass="button" text="Buscar"/>
                 </HBox>
-            </children>
-        </VBox>
-    </children>
+                <VBox prefHeight="451.0" prefWidth="751.0">
+                    <padding>
+                        <Insets top="10"/>
+                    </padding>
+                    <TableView fx:id="tablaCuentas" prefHeight="356.0" prefWidth="751.0"
+                               styleClass="table-view-custom">
+                        <columns>
+                            <TableColumn fx:id="columnaIdUsuario" prefWidth="120.0" text="ID Usuario"/>
+                            <TableColumn fx:id="columnaNombreUsuario" prefWidth="160.0"
+                                         text="Nombre Usuario"/>
+                            <TableColumn fx:id="columnaBanco" prefWidth="140.0" text="Banco"/>
+                            <TableColumn fx:id="columnaNumeroCuenta" prefWidth="140.0"
+                                         text="N° Cuenta"/>
+                            <TableColumn fx:id="columnaSaldo" text="Saldo"/>
+                            <TableColumn fx:id="columnaTipoCuenta" prefWidth="110.0" text="Tipo"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="15.0" prefWidth="556.0">
+                    <Button onAction="#onEliminar" prefHeight="29.0" prefWidth="94.0"
+                            styleClass="button" text="Eliminar"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </VBox>
 </StackPane>
