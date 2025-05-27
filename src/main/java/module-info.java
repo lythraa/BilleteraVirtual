@@ -16,5 +16,6 @@ module co.edu.uniquindio.poo.billeteravirtual {
     opens co.edu.uniquindio.poo.billeteravirtual.model.builder to javafx.fxml;
     opens co.edu.uniquindio.poo.billeteravirtual.model.proxy to javafx.fxml;
     opens co.edu.uniquindio.poo.billeteravirtual.model.gestores to javafx.fxml;
+    opens co.edu.uniquindio.poo.billeteravirtual.model.exception to javafx.fxml;
 
 }

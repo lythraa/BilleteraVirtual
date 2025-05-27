@@ -14,7 +14,6 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
      * @param id Identificador único de la cuenta
      * @param saldo Saldo inicial de la cuenta
      * @param nombreBanco Nombre del banco asociado
-     * @param numeroCuenta (No usado en la clase, puede eliminarse o usarse)
      * @param tipoCuenta Tipo de cuenta: AHORRO o CORRIENTE
      */
     public CuentaBancaria(String id, double saldo, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
@@ -27,16 +26,24 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
     /**
      * Agrega un monto al saldo actual
      * @param monto Cantidad a sumar
+     * @throws IllegalArgumentException si el monto es negativo
      */
     public void agregarSaldo(double monto){
+        if (monto < 0){
+            throw new IllegalArgumentException("Monto negativo");
+        }
         setSaldo(getSaldo() + monto);
     }
 
     /**
      * Resta un monto al saldo actual
      * @param monto Cantidad a retirar
+     * @throws IllegalArgumentException si el monto es negativo o si sobrepasa el saldo actual de la cuenta
      */
     public void retirarSaldo(double monto){
+        if (monto < 0 || monto > saldo){
+            throw new IllegalArgumentException("Monto negativo o Monto sobrepasa el saldo actual de la cuenta");
+        }
         setSaldo(getSaldo() - monto);
     }
 

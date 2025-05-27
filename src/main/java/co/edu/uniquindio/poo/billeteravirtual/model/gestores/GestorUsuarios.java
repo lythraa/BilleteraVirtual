@@ -27,7 +27,7 @@ public class GestorUsuarios extends GestorBaseCRUD<Usuario> {
      */
     public static synchronized GestorUsuarios getInstancia() {
         if (instancia == null) {
-            instancia = new GestorUsuarios(); // Si la instancia es null, crea una nueva.
+            instancia = new GestorUsuarios();
         }
         return instancia;
     }

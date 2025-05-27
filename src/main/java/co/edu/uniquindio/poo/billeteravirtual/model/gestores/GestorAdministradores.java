@@ -26,5 +26,4 @@ public class GestorAdministradores extends GestorBaseCRUD<Administrador> {
         }
         return instancia;
     }
-
 }

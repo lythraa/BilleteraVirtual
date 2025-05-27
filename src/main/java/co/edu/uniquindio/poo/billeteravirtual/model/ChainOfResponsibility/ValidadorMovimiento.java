@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility;
+package co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
 
@@ -7,9 +7,9 @@ import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
  * en la validación de transacciones. Define la estructura general para encadenar
  * múltiples validadores y ejecutar sus validaciones secuencialmente.
  */
-public abstract class ValidadorTransaccion {
+public abstract class ValidadorMovimiento {
 
-    protected ValidadorTransaccion siguiente;
+    protected ValidadorMovimiento siguiente;
 
     /**
      * Establece el siguiente validador en la cadena.
@@ -18,7 +18,7 @@ public abstract class ValidadorTransaccion {
      * @param siguiente El siguiente validador en la cadena.
      * @return El validador recién asignado para permitir el encadenamiento.
      */
-    public ValidadorTransaccion setSiguiente(ValidadorTransaccion siguiente) {
+    public ValidadorMovimiento setSiguiente(ValidadorMovimiento siguiente) {
         this.siguiente = siguiente;
         return siguiente;
     }
@@ -28,9 +28,13 @@ public abstract class ValidadorTransaccion {
      * Si hay un siguiente validador en la cadena, delega la validación.
      *
      * @param movimiento El movimiento sobre el cual se realiza la validación.
+     * @throws IllegalArgumentException si el movimiento es nulo
      */
 
     public void validar(Movimiento movimiento) {
+        if (movimiento==null){
+            throw new IllegalArgumentException("El movimiento no puede ser nulo.");
+        }
         realizarValidacion(movimiento);
         if (siguiente != null) {
             siguiente.validar(movimiento);

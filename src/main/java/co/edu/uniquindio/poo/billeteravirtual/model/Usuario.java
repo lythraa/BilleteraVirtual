@@ -8,14 +8,15 @@ import java.util.ArrayList;
 public class Usuario extends Perfil {
 
     private double saldoTotal;
-    private ArrayList<Movimiento> historialTransacciones;
+    private ArrayList<Movimiento> historialMovimientos;
     private ArrayList<Presupuesto> listaPresupuestos;
     private ArrayList<CuentaBancaria> listaCuentasBancarias;
+    private ArrayList<Categoria> listaCategorias;
 
     /**
      * Constructor público de la clase Usuario que hereda de Perfil.
      * Inicializa el saldo total en 0 y las listas vacías para transacciones,
-     * presupuestos y cuentas bancarias.
+     * presupuestos, categorias y cuentas bancarias.
      *
      * @param id        Cédula del usuario
      * @param contrasenia Clave de acceso del usuario
@@ -27,9 +28,10 @@ public class Usuario extends Perfil {
     public Usuario(String id, String contrasenia, String nombre, String correo, String telefono, String direccion){
         super(id, contrasenia, nombre, correo, telefono, direccion);
         this.saldoTotal = 0.0;
-        historialTransacciones = new ArrayList<>();
+        historialMovimientos = new ArrayList<>();
         listaPresupuestos = new ArrayList<>();
         listaCuentasBancarias = new ArrayList<>();
+        listaCategorias = new ArrayList<>();
     }
 
     /**
@@ -47,13 +49,54 @@ public class Usuario extends Perfil {
     }
 
     /**
-     * Actualiza el atributo saldoTotal con la suma de los saldos actuales
-     * de las cuentas bancarias del usuario.
+     * Crea una nueva categoría con un monto asignado o devuelve una ya existente.
+     *
+     * Si la categoría con el nombre dado ya existe, la retorna.
+     * Si no existe, la crea con el monto asignado y la agrega a la lista.
+     *
+     * @param iDNombreCategoria nombre o ID de la categoría (no puede ser nulo o vacío).
+     * @param montoAsignado monto de dinero asignado (no puede ser negativo).
+     * @return la categoría existente o la nueva categoría creada.
+     * @throws IllegalArgumentException si el nombre es nulo/vacío o el monto es negativo.
      */
-    public void actualizarSaldoTotal(){
-        this.saldoTotal = calcularSaldoTotal();
+
+    public Categoria obtenerOCrearCategoria(String idNombreCategoria, double montoAsignado) {
+        if (idNombreCategoria == null || idNombreCategoria.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la categoría no puede ser nulo ni vacío.");
+        }
+        if (montoAsignado < 0) {
+            throw new IllegalArgumentException("El monto asignado no puede ser negativo.");
+        }
+
+
+        Categoria existente = buscarCategoria(idNombreCategoria);
+        if (existente != null) {
+            return existente;
+        }
+
+        Categoria nueva = crearCategoria(idNombreCategoria, montoAsignado);
+        listaCategorias.add(nueva);
+        return nueva;
     }
 
+    public Categoria buscarCategoria(String idNombre) {
+        for (Categoria c : listaCategorias) {
+            if (c.getId_Nombre().equals(idNombre)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private Categoria crearCategoria(String idNombre, double monto) {
+        return new Categoria(idNombre, new Presupuesto(monto));
+    }
+
+
+    public void registrarMovimiento(Movimiento movimiento){
+        calcularSaldoTotal();
+        historialMovimientos.add(movimiento);
+    }
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {
@@ -64,12 +107,12 @@ public class Usuario extends Perfil {
         this.saldoTotal = saldoTotal;
     }
 
-    public ArrayList<Movimiento> getHistorialTransacciones() {
-        return historialTransacciones;
+    public ArrayList<Movimiento> getHistorialMovimientos() {
+        return historialMovimientos;
     }
 
-    public void setHistorialTransacciones(ArrayList<Movimiento> historialTransacciones) {
-        this.historialTransacciones = historialTransacciones;
+    public void setHistorialMovimientos(ArrayList<Movimiento> historialMovimientos) {
+        this.historialMovimientos = historialMovimientos;
     }
 
     public ArrayList<Presupuesto> getListaPresupuestos() {
@@ -86,6 +129,14 @@ public class Usuario extends Perfil {
 
     public void setListaCuentasBancarias(ArrayList<CuentaBancaria> listaCuentasBancarias) {
         this.listaCuentasBancarias = listaCuentasBancarias;
+    }
+
+    public ArrayList<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public void setListaCategorias(ArrayList<Categoria> listaCategorias) {
+        this.listaCategorias = listaCategorias;
     }
 
 }

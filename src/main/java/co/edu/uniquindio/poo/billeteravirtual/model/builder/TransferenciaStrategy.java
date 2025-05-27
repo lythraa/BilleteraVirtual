@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.builder;
 
-import co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.*;
 import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
 /**
@@ -15,7 +15,7 @@ import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
  * - Saldo suficiente en la cuenta origen.
  */
 public class TransferenciaStrategy implements MovimientoStrategy{
-    private final ValidadorTransaccion validador;
+    private final ValidadorMovimiento validador;
 
     /**
      * Constructor que construye la cadena de validadores para la transferencia.
@@ -25,9 +25,9 @@ public class TransferenciaStrategy implements MovimientoStrategy{
      * 3. Validar que la cuenta origen tenga saldo suficiente.
      */
     public TransferenciaStrategy() {
-        ValidadorTransaccion validador1 = new ValidadorCuentaNula();
-        ValidadorTransaccion validador2 = new ValidadorCuentaDestino();
-        ValidadorTransaccion validador3 = new ValidadorSaldoSuficiente();
+        ValidadorMovimiento validador1 = new ValidadorCuentaNula();
+        ValidadorMovimiento validador2 = new ValidadorCuentaDestino();
+        ValidadorMovimiento validador3 = new ValidadorSaldoSuficiente();
 
         validador1.setSiguiente(validador2);
         validador2.setSiguiente(validador3);

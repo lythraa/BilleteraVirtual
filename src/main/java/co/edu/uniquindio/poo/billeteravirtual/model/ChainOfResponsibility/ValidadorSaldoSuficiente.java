@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility;
+package co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
@@ -8,7 +8,7 @@ import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
  * si la cuenta bancaria de origen tiene saldo suficiente
  * para realizar la transacción.
  */
-public class ValidadorSaldoSuficiente extends ValidadorTransaccion {
+public class ValidadorSaldoSuficiente extends ValidadorMovimiento {
 
     /**
      * Verifica que el saldo disponible en la cuenta de origen
@@ -17,9 +17,13 @@ public class ValidadorSaldoSuficiente extends ValidadorTransaccion {
      * muestra una alerta de validación exitosa.
      *
      * @param movimiento Movimiento que contiene la cuenta origen y el monto
+     * @throws IllegalArgumentException si el movimiento es nulo
      */
     @Override
     protected void realizarValidacion(Movimiento movimiento) {
+        if (movimiento==null){
+            throw new IllegalArgumentException("El movimiento no puede ser nulo.");
+        }
         double saldo = movimiento.getCuentaBancariaOrigen().getSaldo();
         double monto = movimiento.getMonto();
         if (saldo < monto) {

@@ -1,31 +1,31 @@
-//=========================CRUD USUARIO============================//
+============================================================
+              PROYECTO DE PROGRAMACIÓN II
+                     BILLETERA VIRTUAL
+============================================================
 
-    /**
-     * Método para agregar un nuevo usuario
-     * @param usuario
-     */
-    public void agregarUsuario(Usuario usuario) {
-        baseDatos.getPerfiles().add(usuario);
-    }
+Fecha de entrega: XX de mayo de 2025
 
-    /**
-     * Método para buscar un usuario mediante su número de identificación único
-     * @param id Número de identificación del usuario
-     * @return
-     */
-    public Usuario buscarUsuario(String id) {
-        for (Perfil perfil : baseDatos.getPerfiles()) {
-            if (perfil instanceof Usuario usuario && usuario.getId().equals(id)) {
-                return usuario;
-            }
-        }
-        return null;
-    }
+Integrantes del equipo:
+- Nicolas Orozco Osorio
+- Leidy Suarez Alvarez
 
-    /**
-     * Método para eliminar un usuario mediante el id
-     * @param usuario usuario a eliminar
-     */
-    public void eliminarUsuario(Usuario usuario) {
-        baseDatos.getPerfiles().remove(usuario);
-    }
+Descripción:
+Este proyecto consiste en el desarrollo de una aplicación de tipo
+"billetera virtual" programada en Java. La aplicación permite ...
+
+La estructura del proyecto incluye:
+- Interfaces gráficas
+........
+
+Licencia MMM:
+Este proyecto se encuentra bajo una licencia tipo MMM:
+- M: No Modificable
+- M: No Monetizable (no se puede vender)
+- M: No Movible (no se debe compartir sin permiso de los autores)
+
+!!!! Esto es un proyecto académico. Está hecho con fines educativos
+y no se recomienda usar en producción o con dinero real
+
+Gracias por revisar este archivo. :)
+
+============================================================

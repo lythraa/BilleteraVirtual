@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.builder;
 
-import co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility.ValidadorSaldoSuficiente;
-import co.edu.uniquindio.poo.billeteravirtual.ChainOfResponsibility.ValidadorTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.ValidadorSaldoSuficiente;
+import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.ValidadorMovimiento;
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
@@ -14,7 +14,7 @@ import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
  */
 public class RetiroStrategy implements MovimientoStrategy{
 
-    private final ValidadorTransaccion validador;
+    private final ValidadorMovimiento validador;
 
     /**
      * Constructor que inicializa el validador de transacciones.
