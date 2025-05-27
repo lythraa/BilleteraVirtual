@@ -1,15 +1,16 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
-import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
+import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Nullable;
+
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,13 +26,32 @@ public class App extends Application {
 
         //=====================OBJETOS DE PRUEBA========================//
 
+        //FACHADA
         SistemaBilleteraFacade fachada = SistemaBilleteraFacade.getInstancia();
 
+        //ADMINS
         Administrador admin1 = new Administrador("111", "111","111","111","111","111");
+        Administrador admin2 = new Administrador("333", "333","Eduardo","eduardo@admin.com","12345678","Armenia");
+        Administrador admin3 = new Administrador("444", "444","Juliana","juliana@admin.com","34567890","Pereira");
+
+        //USUARIOS
         Usuario user1 = new Usuario("222", "222","222","222","222","222");
+        Usuario user2 = new Usuario("555", "555","Andres","andres@email.com","87654321","Bogota");
+        Usuario user3 = new Usuario("666", "666","Tatiana","tatiana@email.com","09876543","Cartagena");
 
+        //CUENTAS
+        CuentaBancaria cuenta1 = new CuentaBancaria("123", "Bancolombia", TipoCuenta.AHORRO);
+        CuentaBancaria cuenta2 = new CuentaBancaria("456", "Davivienda", TipoCuenta.AHORRO);
+        CuentaBancaria cuenta3 = new CuentaBancaria("789", "Colpatria", TipoCuenta.AHORRO);
 
+        user1.agregarCuenta(cuenta1);
+        user2.agregarCuenta(cuenta2);
+        user3.agregarCuenta(cuenta3);
 
+        //MOVIMIENTOS
+        //fachada.realizarRetiro(user1, CuentaBancaria cuentaOrigen, double monto, @Nullable Categoria categoria, @Nullable String descripcion);
+
+        //AGREGAR A LA FACHADA
         fachada.getGestorAdministradores().agregar(admin1);
         fachada.getGestorUsuarios().agregar(user1);
 

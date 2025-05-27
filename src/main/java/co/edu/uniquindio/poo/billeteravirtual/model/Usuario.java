@@ -105,6 +105,11 @@ public class Usuario extends Perfil implements UsuarioObserver {
     public void recibirNotificacion(Notificacion notificacion) {
         System.out.println("Usuario " + this.getNombre() + " recibió: " + notificacion.getMensaje());
     }
+
+    public void agregarCuenta(CuentaBancaria cuentaNueva){
+        listaCuentasBancarias.add(cuentaNueva);
+        SistemaBilleteraFacade.getInstancia().getGestorCuentasBancarias().agregar(cuentaNueva);
+    }
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {

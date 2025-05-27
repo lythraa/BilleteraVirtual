@@ -12,13 +12,12 @@ public class CuentaBancaria implements Identificable, ICuentaBancaria {
     /**
      * Constructor de CuentaBancaria
      * @param id Identificador único de la cuenta
-     * @param saldo Saldo inicial de la cuenta
      * @param nombreBanco Nombre del banco asociado
      * @param tipoCuenta Tipo de cuenta: AHORRO o CORRIENTE
      */
-    public CuentaBancaria(String id, double saldo, String nombreBanco, TipoCuenta tipoCuenta) {
+    public CuentaBancaria(String id, String nombreBanco, TipoCuenta tipoCuenta) {
         this.id = id;
-        this.saldo = saldo;
+        this.saldo = 0;
         this.nombreBanco = nombreBanco;
         this.tipoCuenta = tipoCuenta;
     }
