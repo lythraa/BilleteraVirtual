@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController">
-    <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0">
-        <Label fx:id="textoHolaUsuario" prefHeight="35.0" prefWidth="360.0" styleClass="label-cursive"
-               text="Hola de nuevo," textAlignment="CENTER" wrapText="true"/>
 
-        <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
-            <VBox.margin>
-                <Insets top="10.0"/>
-            </VBox.margin>
-        </Label>
-
-        <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0"
-              style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15;">
-            <VBox.margin>
-                <Insets bottom="15.0" top="25.0"/>
-            </VBox.margin>
-            <padding>
-                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
-            </padding>
-            <Label fx:id="textoSaldo" prefHeight="35.0" prefWidth="360.0" styleClass="label-subtitle"
-                   text="Saldo: " textAlignment="CENTER" wrapText="true"/>
-            <Button maxWidth="Infinity" onAction="#onTransacciones" styleClass="button" text="Transacciones"/>
-            <Button maxWidth="Infinity" onAction="#onPresupuestos" styleClass="button" text="Presupuestos"/>
-            <Button maxWidth="Infinity" onAction="#onCuentas" styleClass="button" text="Cuentas"/>
-            <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil"/>
-            <Button maxWidth="Infinity" onAction="#onNotificaciones" styleClass="button" text="Notificaciones"/>
-            <Button maxWidth="Infinity" onAction="#onCerrarSesion" styleClass="button" text="Cerrar Sesión"/>
-        </VBox>
-
-        <HBox alignment="CENTER" spacing="8.0">
-            <Label styleClass="label-subtitle" text="¿Problemas?"/>
-            <Hyperlink onAction="#onContactenos" styleClass="hyperlink" text="Contáctanos"/>
-        </HBox>
-    </VBox>
+<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController">
+   <children>
+       <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0">
+          <children>
+              <Label fx:id="textoHolaUsuario" prefHeight="35.0" prefWidth="360.0" styleClass="label-cursive" text="Hola de nuevo," textAlignment="CENTER" wrapText="true" />
+      
+              <Label styleClass="nebula-title" text="NEBULA" textAlignment="CENTER">
+                  <VBox.margin>
+                      <Insets top="10.0" />
+                  </VBox.margin>
+              </Label>
+      
+              <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 15;">
+                  <VBox.margin>
+                      <Insets bottom="15.0" top="25.0" />
+                  </VBox.margin>
+                  <padding>
+                      <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                  </padding>
+         <children>
+                     <Label fx:id="textoSaldo" prefHeight="35.0" prefWidth="360.0" styleClass="label-subtitle" text="Saldo: " textAlignment="CENTER" wrapText="true" />
+                     <Button maxWidth="Infinity" onAction="#onTransacciones" styleClass="button" text="Transacciones" />
+                     <Button maxWidth="Infinity" onAction="#onPresupuestos" styleClass="button" text="Presupuestos" />
+                     <Button maxWidth="Infinity" onAction="#onCuentas" styleClass="button" text="Cuentas" />
+                     <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil" />
+                     <Button maxWidth="Infinity" onAction="#onNotificaciones" styleClass="button" text="Notificaciones" />
+                  <Button maxWidth="Infinity" onAction="#onGenerarReporte" styleClass="button" text="Generar Reporte (PDF)" />
+                     <Button maxWidth="Infinity" onAction="#onCerrarSesion" styleClass="button" text="Cerrar Sesión" />
+         </children>
+              </VBox>
+      
+              <HBox alignment="CENTER" spacing="8.0">
+         <children>
+                     <Label styleClass="label-subtitle" text="¿Problemas?" />
+                     <Hyperlink onAction="#onContactenos" styleClass="hyperlink" text="Contáctanos" />
+         </children>
+              </HBox>
+          </children>
+       </VBox>
+   </children>
 </StackPane>

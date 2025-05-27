@@ -1,6 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExcelAdapter;
+import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExportable;
+import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReportePDFService;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.DirectorMovimiento;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
 import co.edu.uniquindio.poo.billeteravirtual.model.gestores.*;
@@ -224,6 +227,24 @@ public class SistemaBilleteraFacade {
 
     }
     */
+
+    public void generarReportePDF(Usuario usuario) {
+        ReporteExportable reporte = new ReportePDFService();
+        try {
+            reporte.exportarReporte(usuario, "reporte_usuario.pdf");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generarReporteExcel(Usuario usuario) {
+        ReporteExportable reporte = new ReporteExcelAdapter();
+        try {
+            reporte.exportarReporte(usuario, "reporte_usuario.xlsx");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //========================GETTERS=========================//
 

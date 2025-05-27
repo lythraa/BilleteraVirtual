@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExportable;
+import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReportePDFService;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
 import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
 import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
@@ -116,6 +118,7 @@ public class Usuario extends Perfil implements Observer {
         Notificacion n = new Notificacion("USUARIO " + this.getNombre() + ": " + mensaje);
         GestorNotificaciones.getInstancia().notificar(evento, n);
     }
+
     //====================GETTERS Y SETTERS=======================//
 
     public double getSaldoTotal() {

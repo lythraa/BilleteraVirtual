@@ -13,17 +13,6 @@ import javafx.stage.Stage;
  */
 public class ContactoController {
 
-    private String vistaOrigen;
-
-
-    /**
-     * Establece la vista desde la cual se abrió esta ventana (admin o usuario).
-     * @param vistaOrigen "admin" o "usuario"
-     */
-    public void setVistaOrigen(String vistaOrigen) {
-        this.vistaOrigen = vistaOrigen;
-    }
-
     @FXML
     private TextField campoCorreo;
     @FXML
@@ -60,10 +49,6 @@ public class ContactoController {
     @FXML
     private void onVolver() {
         Stage stage = (Stage) campoCorreo.getScene().getWindow();
-        if ("admin".equals(vistaOrigen)) {
-            GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Panel Admin");
-        } else {
-            GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Panel Usuario");
-        }
+        GestorVistas.CambiarEscena(stage, "UsuarioController.fxml", "Panel Usuario");
     }
 }

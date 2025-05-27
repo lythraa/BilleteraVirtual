@@ -89,15 +89,6 @@ public class AdministradorController {
     }
 
     /**
-     * Abre la vista de contacto para soporte desde la vista del administrador.
-     */
-    @FXML
-    void onContactenos() {
-        stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.abrirVistaContactoController(stage, "admin");
-    }
-
-    /**
      * Navega a la vista de mandar notificaciones
      */
     @FXML

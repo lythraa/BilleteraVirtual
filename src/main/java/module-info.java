@@ -2,7 +2,8 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.jetbrains.annotations;
-    requires java.desktop;
+    requires org.apache.poi.ooxml;
+    requires org.apache.pdfbox;
 
 
     opens co.edu.uniquindio.poo.billeteravirtual.model to javafx.fxml;
