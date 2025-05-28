@@ -132,42 +132,6 @@ public class GestionarMovimientosController {
     }
 
     @FXML
-    private void onRepetirMovimiento() {
-        Movimiento movimientoSeleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
-        if (movimientoSeleccionado != null) {
-            Movimiento clon = movimientoSeleccionado.clone();
-
-            // Mostrar input para nuevo monto
-            TextInputDialog dialog = new TextInputDialog(String.valueOf(clon.getMonto()));
-            dialog.setTitle("Repetir Movimiento");
-            dialog.setHeaderText("Modificar el monto antes de ejecutar");
-            dialog.setContentText("Nuevo monto:");
-
-            Optional<String> resultado = dialog.showAndWait();
-            resultado.ifPresent(input -> {
-                try {
-                    double nuevoMonto = Double.parseDouble(input);
-                    clon.setMonto(nuevoMonto);
-
-                    // Procesar dependiendo de la estrategia
-                    if (clon.getStrategy() instanceof DepositoStrategy) {
-                        sistemaBilletera.realizarDeposito(usuarioActual, clon.getCuentaDestino(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
-                    } else if (clon.getStrategy() instanceof RetiroStrategy) {
-                        sistemaBilletera.realizarRetiro(usuarioActual, clon.getCuentaOrigen(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
-                    } else if (clon.getStrategy() instanceof TransferenciaStrategy) {
-                        sistemaBilletera.realizarTransferencia(usuarioActual, clon.getCuentaOrigen(), clon.getCuentaDestino(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
-                    }
-
-                } catch (NumberFormatException e) {
-                    mostrarError("El monto ingresado no es válido.");
-                }
-            });
-        } else {
-            mostrarError("Debe seleccionar un movimiento para repetir.");
-        }
-    }
-
-    @FXML
     void onGenerarReporte() {
         List<String> opciones = Arrays.asList("PDF", "Excel");
         ChoiceDialog<String> dialogo = new ChoiceDialog<>("PDF", opciones);

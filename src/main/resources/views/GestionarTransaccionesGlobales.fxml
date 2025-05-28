@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.GestionarTransaccionesGlobalesController">
+   <children>
+       <VBox spacing="20.0" StackPane.alignment="CENTER">
+          <children>
+              <HBox spacing="20.0">
+                 <children>
+                     <Button onAction="#onVolver" styleClass="button" text="Volver" />
+                     <Label styleClass="label-title" text="Historial de Movimientos">
+                         <HBox.margin>
+                             <Insets left="250.0" />
+                         </HBox.margin>
+                     </Label>
+                 </children>
+              </HBox>
+      
+              <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="1150.0" spacing="15.0">
+         <children>
+                     <VBox prefHeight="451.0" prefWidth="1150.0">
+                         <padding>
+                             <Insets top="10" />
+                         </padding>
+                        <children>
+                            <TableView fx:id="tablaMovimientos" prefHeight="356.0" prefWidth="1150.0" styleClass="table-view-custom">
+                                <columns>
+                                    <TableColumn fx:id="columnaId" prefWidth="100.0" text="ID" />
+                                    <TableColumn fx:id="columnaFecha" prefWidth="120.0" text="Fecha" />
+                                    <TableColumn fx:id="columnaMonto" prefWidth="100.0" text="Monto" />
+                                    <TableColumn fx:id="columnaDescripcion" prefWidth="200.0" text="Descripción" />
+                                    <TableColumn fx:id="columnaCategoria" prefWidth="200.0" text="Categoría" />
+                                    <TableColumn fx:id="columnaTipo" prefWidth="200.0" text="Tipo de Movimiento" />
+                                </columns>
+                            </TableView>
+                        </children>
+                     </VBox>
+                     <HBox alignment="BOTTOM_RIGHT" prefHeight="15.0" prefWidth="1150.0">
+                        <children>
+                            <Button onAction="#onRefrescarTabla" styleClass="button" text="Recargar Tabla">
+                                <HBox.margin>
+                                    <Insets right="20.0" />
+                                </HBox.margin>
+                            </Button>
+                            <Button onAction="#onEliminar" styleClass="button" text="Eliminar" />
+                        </children>
+                     </HBox>
+         </children>
+              </VBox>
+          </children>
+       </VBox>
+   </children>
+</StackPane>
