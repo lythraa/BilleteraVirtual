@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
+import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.*;
@@ -10,19 +11,31 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.control.ComboBox;
 
-import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class GestionarMovimientosController {
 
-    private Stage stage;
+    @FXML
+    private ComboBox<String> comboTipoTransaccion;
 
     @FXML
-    private Label lblTitulo;
+    private TextField campoDescripcion;
+
+    @FXML
+    private TextField campoIdReceptor;
+
+    @FXML
+    private Label labelReceptor;
+
+    @FXML
+    private TextField campoMonto;
+
+    @FXML
+    private TextField campoIdEmisor;
 
     @FXML
     private TableView<Movimiento> tablaMovimientos;
@@ -52,6 +65,8 @@ public class GestionarMovimientosController {
     @FXML
     public void initialize() {
         usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        comboTipoTransaccion.setItems(FXCollections.observableArrayList("Transferencia", "Depósito", "Retiro"));
+        comboTipoTransaccion.setOnAction(event -> actualizarCampos());
         configurarColumnas();
         cargarMovimientos();
     }
@@ -120,7 +135,35 @@ public class GestionarMovimientosController {
     private void onRepetirMovimiento() {
         Movimiento movimientoSeleccionado = tablaMovimientos.getSelectionModel().getSelectedItem();
         if (movimientoSeleccionado != null) {
-            // Aquí va la lógica para realizar nuevamente la transacción
+            Movimiento clon = movimientoSeleccionado.clone();
+
+            // Mostrar input para nuevo monto
+            TextInputDialog dialog = new TextInputDialog(String.valueOf(clon.getMonto()));
+            dialog.setTitle("Repetir Movimiento");
+            dialog.setHeaderText("Modificar el monto antes de ejecutar");
+            dialog.setContentText("Nuevo monto:");
+
+            Optional<String> resultado = dialog.showAndWait();
+            resultado.ifPresent(input -> {
+                try {
+                    double nuevoMonto = Double.parseDouble(input);
+                    clon.setMonto(nuevoMonto);
+
+                    // Procesar dependiendo de la estrategia
+                    if (clon.getStrategy() instanceof DepositoStrategy) {
+                        sistemaBilletera.realizarDeposito(usuarioActual, clon.getCuentaDestino(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
+                    } else if (clon.getStrategy() instanceof RetiroStrategy) {
+                        sistemaBilletera.realizarRetiro(usuarioActual, clon.getCuentaOrigen(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
+                    } else if (clon.getStrategy() instanceof TransferenciaStrategy) {
+                        sistemaBilletera.realizarTransferencia(usuarioActual, clon.getCuentaOrigen(), clon.getCuentaDestino(), nuevoMonto, clon.getCategoria(), clon.getDescripcion());
+                    }
+
+                } catch (NumberFormatException e) {
+                    mostrarError("El monto ingresado no es válido.");
+                }
+            });
+        } else {
+            mostrarError("Debe seleccionar un movimiento para repetir.");
         }
     }
 
@@ -150,6 +193,13 @@ public class GestionarMovimientosController {
         });
     }
 
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Resultado del Reporte");
@@ -160,7 +210,85 @@ public class GestionarMovimientosController {
 
     @FXML
     private void onVolver() {
-        stage = (Stage) tablaMovimientos.getScene().getWindow();
+        Stage stage = (Stage) tablaMovimientos.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Panel Usuario");
     }
+
+    @FXML
+    private void onEnviar() {
+        String tipo = (String) comboTipoTransaccion.getValue();
+        String idEmisor = campoIdEmisor.getText();
+        String montoTexto = campoMonto.getText();
+        String descripcion = campoDescripcion.getText();
+        String idReceptor = campoIdReceptor.getText();
+        Usuario usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
+
+        if (tipo == null || idEmisor.isEmpty() || montoTexto.isEmpty()) {
+            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacios", "Por favor complete todos los campos obligatorios.");
+            return;
+        }
+        double monto;
+        try {
+            monto = Double.parseDouble(montoTexto);
+        } catch (NumberFormatException e) {
+            UtilAlerta.mostrarAlertaInformacion("Numero invalido","El monto debe ser un número válido.");
+            return;
+        }
+
+        try {
+            switch (tipo) {
+                case "Transferencia":
+                    if (idReceptor == null || idReceptor.isEmpty()) {
+                        UtilAlerta.mostrarAlertaInformacion("Campo Vacio", "Por favor ingrese el ID del receptor para una transferencia.");
+                        return;
+                    }
+                    //SistemaBilleteraFacade.getInstancia().realizarTransferencia(usuarioActual,);
+                    break;
+
+                case "Depósito":
+                    //SistemaBilleteraFacade.getInstancia().realizarDeposito(idEmisor, monto, descripcion);
+                    break;
+
+                case "Retiro":
+                    //SistemaBilleteraFacade.getInstancia().realizarRetiro(idEmisor, monto, descripcion);
+                    break;
+
+                default:
+                    mostrarAlerta("Tipo de transacción desconocido.");
+                    return;
+            }
+
+            //mostrarAlerta("¡Transacción realizada con éxito!");XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            onLimpiar();
+            onRefrescar();
+
+        } catch (Exception e) {
+            mostrarAlerta("Error al realizar la transacción: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onLimpiar(){
+        comboTipoTransaccion.getSelectionModel().clearSelection();
+        campoIdEmisor.clear();
+        campoIdReceptor.clear();
+        campoMonto.clear();
+        campoDescripcion.clear();
+        campoIdReceptor.setVisible(false);
+        campoIdReceptor.setManaged(false);
+        labelReceptor.setVisible(false);
+        labelReceptor.setManaged(false);
+    }
+
+    private void actualizarCampos() {
+        String tipoSeleccionado = (String) comboTipoTransaccion.getValue();
+        boolean mostrarReceptor = "Transferencia".equalsIgnoreCase(tipoSeleccionado);
+
+        campoIdReceptor.setVisible(mostrarReceptor);
+        campoIdReceptor.setManaged(mostrarReceptor);
+
+        labelReceptor.setVisible(mostrarReceptor);
+        labelReceptor.setManaged(mostrarReceptor);
+    }
+
 }

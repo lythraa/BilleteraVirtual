@@ -150,6 +150,8 @@ public class Movimiento implements Identificable, Cloneable {
         return estrategia;
     }
 
+
+
     /**
      * Obtiene el identificador único del movimiento.
      * @return ID del movimiento.
