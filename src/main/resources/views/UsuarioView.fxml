@@ -6,7 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController">
+<StackPane prefHeight="700.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController">
    <children>
        <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0">
           <children>
@@ -27,8 +28,7 @@
                   </padding>
          <children>
                      <Label fx:id="textoSaldo" prefHeight="35.0" prefWidth="360.0" styleClass="label-subtitle" text="Saldo: " textAlignment="CENTER" wrapText="true" />
-                     <Button maxWidth="Infinity" onAction="#onTransacciones" styleClass="button" text="Realizar Movimiento" />
-                  <Button maxWidth="Infinity" onAction="#onHistorialMovimientos" styleClass="button" text=" Historial de Movimientos" />
+                     <Button maxWidth="Infinity" onAction="#onMovimientos" styleClass="button" text="Movimientos" />
                      <Button maxWidth="Infinity" onAction="#onPresupuestos" styleClass="button" text="Presupuestos" />
                      <Button maxWidth="Infinity" onAction="#onCuentas" styleClass="button" text="Cuentas" />
                      <Button maxWidth="Infinity" onAction="#onEditarPerfil" styleClass="button" text="Editar Perfil" />

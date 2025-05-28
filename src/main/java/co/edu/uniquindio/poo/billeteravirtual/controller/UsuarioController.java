@@ -33,7 +33,9 @@ public class UsuarioController {
      * Actualmente no implementado.
      */
     @FXML
-    void onTransacciones() {
+    void onMovimientos() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "GestionMovimientos.fxml", "Vista Movimientos");
 
     }
 
@@ -81,14 +83,6 @@ public class UsuarioController {
     void onNotificaciones(){
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "Notificaciones.fxml", "Vista Notificaciones");
-    }
-    /**
-     * Boton que genera un reporte de movimientos del usuario
-     */
-    @FXML
-    void onHistorialMovimientos() {
-        stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "HistorialMovimientosUsuario.fxml", "Historial Transacciones");
     }
 
     /**
