@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,10 @@ public class UsuarioController {
     private Label textoSaldo;
     @FXML
     private Label textoHolaUsuario;
+
+    public void onContactenos() {
+        // tu lógica
+    }
 
     /**
      * Acción para mostrar la vista de transacciones.
@@ -70,15 +75,6 @@ public class UsuarioController {
     }
 
     /**
-     * Abre la vista de contacto para que el usuario pueda enviar mensajes al administrador.
-     */
-    @FXML
-    void onContactenos() {
-        stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.abrirVistaContactoController(stage, "admin");
-    }
-
-    /**
      * Abre la vista para recibir las notificaciones del usuario actual.
      */
     @FXML
@@ -90,37 +86,9 @@ public class UsuarioController {
      * Boton que genera un reporte de movimientos del usuario
      */
     @FXML
-    void onGenerarReporte() {
-        List<String> opciones = Arrays.asList("PDF", "Excel");
-        ChoiceDialog<String> dialogo = new ChoiceDialog<>("PDF", opciones);
-        dialogo.setTitle("Generar Reporte");
-        dialogo.setHeaderText("Seleccione el formato del reporte:");
-        dialogo.setContentText("Formato:");
-
-        Optional<String> resultado = dialogo.showAndWait();
-
-        resultado.ifPresent(formato -> {
-            Usuario usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
-            try {
-                if (formato.equals("PDF")) {
-                    SistemaBilleteraFacade.getInstancia().generarReportePDF(usuarioActual);
-                    mostrarAlerta("Reporte generado exitosamente en PDF.");
-                } else {
-                    SistemaBilleteraFacade.getInstancia().generarReporteExcel(usuarioActual);
-                    mostrarAlerta("Reporte generado exitosamente en Excel.");
-                }
-            } catch (Exception e) {
-                mostrarAlerta("Error al generar el reporte: " + e.getMessage());
-            }
-        });
-    }
-
-    private void mostrarAlerta(String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Resultado del Reporte");
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
+    void onHistorialMovimientos() {
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "GestionarMovimientosView.fxml", "Historial Transacciones");
     }
 
     /**

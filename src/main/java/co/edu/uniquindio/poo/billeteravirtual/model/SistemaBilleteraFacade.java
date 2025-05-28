@@ -147,6 +147,24 @@ public class SistemaBilleteraFacade {
         }
     }
 
+    /**
+     * Método para buscar cuentas bancarias en la lista del gestor
+     * @param id o número de la cuenta deseada
+     * @return cuenta encontrada
+     */
+    public CuentaBancaria buscarCuenta(String id){
+        try {
+            for (CuentaBancaria cuenta : getGestorCuentasBancarias().getListaObjetos()) {
+                if (cuenta.getId().equals(id)) {
+                    return cuenta;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Cuenta no encontrada: " + e.getMessage());
+        }
+        return null;
+    }
+
     //TODO: Métodos para alimentar los gráficos de las estadísticas de admins (Almost Done!!!)
 
     //=========================MÉTODOS DE CÁLCULO DE ESTADÍSTICAS===========================//

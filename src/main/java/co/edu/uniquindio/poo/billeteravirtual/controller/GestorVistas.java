@@ -47,12 +47,6 @@ public class GestorVistas {
             Parent root = loader.load();
             Object controller = loader.getController();
 
-            if (controller instanceof ContactoController) {
-                ((ContactoController) controller).setVistaOrigen(vistaOrigen);
-            } else if (controller instanceof EditarPerfilController) {
-                ((EditarPerfilController) controller).setVistaOrigen(vistaOrigen);
-            }
-
             if (configController != null) {
                 configController.accept(controller);
             }
@@ -78,15 +72,4 @@ public class GestorVistas {
         });
     }
 
-    /**
-     * Abre la vista de contacto desde una vista origen dada.
-     *
-     * @param stageActual Stage donde se abrirá la vista.
-     * @param vistaOrigen Nombre o clave de la vista origen.
-     */
-    public static void abrirVistaContactoController(Stage stageActual, String vistaOrigen) {
-        abrirVistaConOrigen("/views/ContactoView.fxml", "Contacto Vista", stageActual, vistaOrigen, controller -> {
-            ((ContactoController) controller).setVistaOrigen(vistaOrigen);
-        });
-    }
 }

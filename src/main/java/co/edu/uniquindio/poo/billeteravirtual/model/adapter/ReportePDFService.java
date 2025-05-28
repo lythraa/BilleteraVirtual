@@ -1,7 +1,10 @@
 package co.edu.uniquindio.poo.billeteravirtual.model.adapter;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.DepositoStrategy;
 import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.RetiroStrategy;
+import co.edu.uniquindio.poo.billeteravirtual.model.builder.TransferenciaStrategy;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -26,9 +29,24 @@ public class ReportePDFService implements ReporteExportable {
         contenido.newLine();
 
         for (Movimiento movimiento : usuario.getHistorialMovimientos()) {
+
+            String tipoMovimiento = "";
+
+            if(movimiento.getEstrategia() instanceof DepositoStrategy){
+                tipoMovimiento = "Deposito";
+            }
+
+            if(movimiento.getEstrategia() instanceof RetiroStrategy){
+                tipoMovimiento = "Retiro";
+            }
+
+            if(movimiento.getEstrategia() instanceof TransferenciaStrategy){
+                tipoMovimiento = "Transferencia";
+            }
+
             String linea = String.format("Fecha: %s | Tipo: %s | Monto: %.2f | Categoria: %s",
                     movimiento.getFecha().toString(),
-                    movimiento.getEstrategia().getClass().getSimpleName(),
+                    tipoMovimiento,
                     movimiento.getMonto(),
                     movimiento.getCategoriaOpcional().getId_Nombre());
             contenido.showText(linea);

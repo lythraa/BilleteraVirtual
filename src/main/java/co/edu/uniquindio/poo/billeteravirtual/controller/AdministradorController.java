@@ -48,7 +48,7 @@ public class AdministradorController {
     @FXML
     void onGestionarTransacciones() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionarTransaccionesView.fxml", "Vista Gestionar Transacciones");
+        GestorVistas.CambiarEscena(stage, "GestionarMovimientosView.fxml", "Vista Gestionar Transacciones");
     }
 
     /**

@@ -33,7 +33,7 @@
                       <Insets bottom="25.0" left="20.0" right="20.0" top="20.0" />
                   </padding>
          <children>
-                     <Button maxWidth="Infinity" onAction="#onGestionarTransacciones" styleClass="button" text="Gestionar Transacciones" />
+                     <Button maxWidth="Infinity" onAction="#onGestionarTransacciones" styleClass="button" text="Ver Transacciones Globales" />
                      <Button maxWidth="Infinity" onAction="#onGestionarUsuarios" styleClass="button" text="Gestionar Usuarios" />
                      <Button maxWidth="Infinity" onAction="#onGestionarCuentasBancarias" styleClass="button" text="Gestionar Cuentas Bancarias" />
                      <Button maxWidth="Infinity" onAction="#onVerEstadisticas" styleClass="button" text="Ver Estadísticas" />
