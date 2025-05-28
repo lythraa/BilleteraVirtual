@@ -88,7 +88,7 @@ public class UsuarioController {
     @FXML
     void onHistorialMovimientos() {
         stage = (Stage) textoHolaUsuario.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "GestionarMovimientosView.fxml", "Historial Transacciones");
+        GestorVistas.CambiarEscena(stage, "HistorialMovimientosUsuario.fxml", "Historial Transacciones");
     }
 
     /**
