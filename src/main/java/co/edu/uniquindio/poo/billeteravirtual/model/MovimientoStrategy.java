@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.builder;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Interfaz que define la estrategia para procesar un movimiento financiero.

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.observer;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 public class Notificacion {
     private String mensaje;

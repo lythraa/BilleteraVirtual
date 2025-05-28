@@ -1,10 +1,10 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorMovimientos;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.DepositoStrategy;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.RetiroStrategy;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.TransferenciaStrategy;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorMovimientos;
+import co.edu.uniquindio.poo.billeteravirtual.model.Movimiento;
+import co.edu.uniquindio.poo.billeteravirtual.model.DepositoStrategy;
+import co.edu.uniquindio.poo.billeteravirtual.model.RetiroStrategy;
+import co.edu.uniquindio.poo.billeteravirtual.model.TransferenciaStrategy;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

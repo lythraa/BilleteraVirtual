@@ -1,6 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility;
-
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Clase base abstracta para la implementación del patrón Chain of Responsibility

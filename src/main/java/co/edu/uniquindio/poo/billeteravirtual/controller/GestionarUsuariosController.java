@@ -2,7 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorUsuarios;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

@@ -2,16 +2,14 @@ package co.edu.uniquindio.poo.billeteravirtual.controller;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
-import co.edu.uniquindio.poo.billeteravirtual.model.SistemaBilleteraFacade;
-import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.CuentaBancaria;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.ComboBox;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,16 +24,16 @@ public class GestionarMovimientosController {
     private TextField campoDescripcion;
 
     @FXML
-    private TextField campoIdReceptor;
+    private TextField campoIdCuentaDestino;
 
     @FXML
-    private Label labelReceptor;
+    private Label labelIdCuentaDestino;
 
     @FXML
     private TextField campoMonto;
 
     @FXML
-    private TextField campoIdEmisor;
+    private TextField campoIdCuentaOrigen;
 
     @FXML
     private TableView<Movimiento> tablaMovimientos;
@@ -58,6 +56,9 @@ public class GestionarMovimientosController {
     @FXML
     private TableColumn<Movimiento, String> columnaDestino;
 
+    @FXML
+    private TextField campoCategoria;
+
     private ObservableList<Movimiento> movimientosObservable = FXCollections.observableArrayList();
 
     private Usuario usuarioActual;
@@ -65,10 +66,18 @@ public class GestionarMovimientosController {
     @FXML
     public void initialize() {
         usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
+
         comboTipoTransaccion.setItems(FXCollections.observableArrayList("Transferencia", "Depósito", "Retiro"));
         comboTipoTransaccion.setOnAction(event -> actualizarCampos());
+
         configurarColumnas();
         cargarMovimientos();
+
+        // Inicialmente oculta campo destino
+        campoIdCuentaDestino.setVisible(false);
+        campoIdCuentaDestino.setManaged(false);
+        labelIdCuentaDestino.setVisible(false);
+        labelIdCuentaDestino.setManaged(false);
     }
 
     private void configurarColumnas() {
@@ -87,13 +96,9 @@ public class GestionarMovimientosController {
             return new SimpleStringProperty(tipo);
         });
 
-        columnaFecha.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getFecha().toString())
-        );
+        columnaFecha.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getFecha().toString()));
 
-        columnaMonto.setCellValueFactory(c ->
-                new SimpleStringProperty(String.valueOf(c.getValue().getMonto()))
-        );
+        columnaMonto.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getMonto())));
 
         columnaDescripcion.setCellValueFactory(c -> {
             String desc = c.getValue().getDescripcionOpcional();
@@ -157,13 +162,6 @@ public class GestionarMovimientosController {
         });
     }
 
-    private void mostrarError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Resultado del Reporte");
@@ -180,41 +178,46 @@ public class GestionarMovimientosController {
 
     @FXML
     private void onEnviar() {
-        String tipo = (String) comboTipoTransaccion.getValue();
-        String idEmisor = campoIdEmisor.getText();
+        String tipo = comboTipoTransaccion.getValue();
+        String idCuentaOrigen = campoIdCuentaOrigen.getText();
         String montoTexto = campoMonto.getText();
         String descripcion = campoDescripcion.getText();
-        String idReceptor = campoIdReceptor.getText();
+        String idCuentaDestino = campoIdCuentaDestino.getText();
+        String categoriaTexto = campoCategoria.getText();
         Usuario usuarioActual = (Usuario) GestorSesion.getInstance().getPerfilActual();
+        CuentaBancaria cuentaBancariaOrigen = SistemaBilleteraFacade.getInstancia().buscarCuenta(idCuentaOrigen);
+        CuentaBancaria cuentaBancariaDestino = SistemaBilleteraFacade.getInstancia().buscarCuenta(idCuentaDestino);
+        Categoria categoria = usuarioActual.buscarCategoria(categoriaTexto);
 
-        if (tipo == null || idEmisor.isEmpty() || montoTexto.isEmpty()) {
-            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacios", "Por favor complete todos los campos obligatorios.");
+        if (tipo == null || idCuentaOrigen.isEmpty() || montoTexto.isEmpty()) {
+            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacíos", "Por favor complete todos los campos obligatorios.");
             return;
         }
+
         double monto;
         try {
             monto = Double.parseDouble(montoTexto);
         } catch (NumberFormatException e) {
-            UtilAlerta.mostrarAlertaInformacion("Numero invalido","El monto debe ser un número válido.");
+            UtilAlerta.mostrarAlertaInformacion("Número inválido", "El monto debe ser un número válido.");
             return;
         }
 
         try {
             switch (tipo) {
                 case "Transferencia":
-                    if (idReceptor == null || idReceptor.isEmpty()) {
-                        UtilAlerta.mostrarAlertaInformacion("Campo Vacio", "Por favor ingrese el ID del receptor para una transferencia.");
+                    if (idCuentaDestino == null || idCuentaDestino.isEmpty()) {
+                        UtilAlerta.mostrarAlertaInformacion("Campo vacío", "Por favor ingrese el ID de la cuenta destino para la transferencia.");
                         return;
                     }
-                    //SistemaBilleteraFacade.getInstancia().realizarTransferencia(usuarioActual,);
+                    SistemaBilleteraFacade.getInstancia().realizarTransferencia(usuarioActual, cuentaBancariaOrigen, cuentaBancariaDestino, monto, categoria, descripcion);
                     break;
 
                 case "Depósito":
-                    //SistemaBilleteraFacade.getInstancia().realizarDeposito(idEmisor, monto, descripcion);
+                    SistemaBilleteraFacade.getInstancia().realizarDeposito(usuarioActual, cuentaBancariaOrigen, monto, categoria, descripcion);
                     break;
 
                 case "Retiro":
-                    //SistemaBilleteraFacade.getInstancia().realizarRetiro(idEmisor, monto, descripcion);
+                    SistemaBilleteraFacade.getInstancia().realizarRetiro(usuarioActual, cuentaBancariaOrigen, monto, categoria, descripcion);
                     break;
 
                 default:
@@ -222,7 +225,7 @@ public class GestionarMovimientosController {
                     return;
             }
 
-            //mostrarAlerta("¡Transacción realizada con éxito!");XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            mostrarAlerta("¡Transacción realizada con éxito!");
             onLimpiar();
             onRefrescar();
 
@@ -232,27 +235,28 @@ public class GestionarMovimientosController {
     }
 
     @FXML
-    private void onLimpiar(){
+    private void onLimpiar() {
         comboTipoTransaccion.getSelectionModel().clearSelection();
-        campoIdEmisor.clear();
-        campoIdReceptor.clear();
+        campoIdCuentaOrigen.clear();
+        campoIdCuentaDestino.clear();
         campoMonto.clear();
         campoDescripcion.clear();
-        campoIdReceptor.setVisible(false);
-        campoIdReceptor.setManaged(false);
-        labelReceptor.setVisible(false);
-        labelReceptor.setManaged(false);
+        campoCategoria.clear();
+
+        campoIdCuentaDestino.setVisible(false);
+        campoIdCuentaDestino.setManaged(false);
+        labelIdCuentaDestino.setVisible(false);
+        labelIdCuentaDestino.setManaged(false);
     }
 
     private void actualizarCampos() {
-        String tipoSeleccionado = (String) comboTipoTransaccion.getValue();
-        boolean mostrarReceptor = "Transferencia".equalsIgnoreCase(tipoSeleccionado);
+        String tipoSeleccionado = comboTipoTransaccion.getValue();
+        boolean mostrarDestino = "Transferencia".equalsIgnoreCase(tipoSeleccionado);
 
-        campoIdReceptor.setVisible(mostrarReceptor);
-        campoIdReceptor.setManaged(mostrarReceptor);
+        campoIdCuentaDestino.setVisible(mostrarDestino);
+        campoIdCuentaDestino.setManaged(mostrarDestino);
 
-        labelReceptor.setVisible(mostrarReceptor);
-        labelReceptor.setManaged(mostrarReceptor);
+        labelIdCuentaDestino.setVisible(mostrarDestino);
+        labelIdCuentaDestino.setManaged(mostrarDestino);
     }
-
 }

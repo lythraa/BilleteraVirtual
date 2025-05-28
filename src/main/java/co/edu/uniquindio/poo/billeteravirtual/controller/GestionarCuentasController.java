@@ -1,8 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
+import co.edu.uniquindio.poo.billeteravirtual.model.CuentaBancaria;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorUsuarios;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -60,11 +59,15 @@ public class GestionarCuentasController {
 
     private ObservableList<CuentaBancaria> listaObservableCuentas;
 
+    /**
+     * Método para regresar a la pantalla anterior
+     */
     @FXML
     private void onVolver() {
         Stage stage = (Stage) campoNumeroCuenta.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Panel Administrador");
     }
+
 
     @FXML
     void onAgregar() {

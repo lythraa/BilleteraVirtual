@@ -1,7 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility;
-
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Validador de la cadena de responsabilidad que verifica

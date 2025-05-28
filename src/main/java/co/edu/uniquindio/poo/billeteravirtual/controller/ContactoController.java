@@ -37,7 +37,6 @@ public class ContactoController {
 
         UtilAlerta.mostrarAlertaInformacion("Solicitud enviada", "¡Gracias! Tu solicitud ha sido enviada.");
 
-        // Limpiar campos después del envío
         campoCorreo.clear();
         campoAsunto.clear();
         campoMensaje.clear();
@@ -49,6 +48,6 @@ public class ContactoController {
     @FXML
     private void onVolver() {
         Stage stage = (Stage) campoCorreo.getScene().getWindow();
-        GestorVistas.CambiarEscena(stage, "UsuarioController.fxml", "Panel Usuario");
+        GestorVistas.CambiarEscena(stage, "UsuarioView.fxml", "Panel Usuario");
     }
 }

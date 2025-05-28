@@ -1,6 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
-
-import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Interfaz que define las operaciones básicas que una cuenta bancaria debe implementar.

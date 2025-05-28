@@ -1,8 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.builder;
-
-import co.edu.uniquindio.poo.billeteravirtual.model.Categoria;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
-import co.edu.uniquindio.poo.billeteravirtual.model.Identificable;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.time.LocalDate;
 

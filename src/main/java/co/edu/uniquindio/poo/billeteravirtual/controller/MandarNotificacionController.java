@@ -1,12 +1,9 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorNotificaciones;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -54,9 +51,13 @@ public class MandarNotificacionController {
             eventoFinal = campoEnCasoCrearEvento.getText().trim();
 
             if (eventoFinal.isEmpty()) {
-                UtilAlerta.mostrarAlertaAdvertencia("Campo Vacio","Debes escribir el nombre del nuevo evento.");
+                UtilAlerta.mostrarAlertaAdvertencia("Campo Vacío", "Debes escribir el nombre del nuevo evento.");
                 return;
             }
+
+            GestorNotificaciones.getInstancia().registrarEvento(eventoFinal);
+
+            // Agrega al ComboBox si no está ya
             if (!comboEventos.getItems().contains(eventoFinal)) {
                 comboEventos.getItems().add(comboEventos.getItems().size() - 1, eventoFinal);
             }
@@ -67,13 +68,14 @@ public class MandarNotificacionController {
 
         String mensaje = campoMensaje.getText().trim();
         if (eventoFinal == null || eventoFinal.isEmpty() || mensaje.isEmpty()) {
-            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacios","Debes seleccionar un evento y escribir un mensaje.");
+            UtilAlerta.mostrarAlertaAdvertencia("Campos Vacíos", "Debes seleccionar un evento y escribir un mensaje.");
             return;
         }
 
         Administrador administrador = (Administrador) GestorSesion.getInstance().getPerfilActual();
         administrador.enviarNotificacion(eventoFinal, mensaje);
 
+        // Limpieza de campos
         campoMensaje.clear();
         campoEnCasoCrearEvento.clear();
         campoEnCasoCrearEvento.setVisible(false);
@@ -81,9 +83,12 @@ public class MandarNotificacionController {
         comboEventos.getSelectionModel().clearSelection();
     }
 
+
     @FXML
     void initialize() {
-        comboEventos.getItems().addAll("usuarios", "reportes", OPCION_NUEVO_EVENTO);
+        comboEventos.getItems().addAll(GestorNotificaciones.getInstancia().obtenerEventos());
+        comboEventos.getItems().add(OPCION_NUEVO_EVENTO);
+
         assert listaSolicitudes != null : "fx:id=\"listaSolicitudes\" was not injected: check your FXML file 'MandarNotificacion.fxml'.";
         assert campoMensaje != null : "fx:id=\"campoMensaje\" was not injected: check your FXML file 'MandarNotificacion.fxml'.";
         assert comboEventos != null : "fx:id=\"comboEventos\" was not injected: check your FXML file 'MandarNotificacion.fxml'.";

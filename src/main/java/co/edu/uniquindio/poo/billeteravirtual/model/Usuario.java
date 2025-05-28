@@ -1,14 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExportable;
-import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReportePDFService;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.Observer;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario extends Perfil implements Observer {
 
@@ -17,6 +10,7 @@ public class Usuario extends Perfil implements Observer {
     private ArrayList<Presupuesto> listaPresupuestos;
     private ArrayList<CuentaBancaria> listaCuentasBancarias;
     private ArrayList<Categoria> listaCategorias;
+    private List<Notificacion> historialNotificaciones;
 
     /**
      * Constructor público de la clase Usuario que hereda de Perfil.
@@ -37,6 +31,8 @@ public class Usuario extends Perfil implements Observer {
         listaPresupuestos = new ArrayList<>();
         listaCuentasBancarias = new ArrayList<>();
         listaCategorias = new ArrayList<>();
+        historialNotificaciones = new ArrayList<>();
+
     }
 
     /**
@@ -107,6 +103,7 @@ public class Usuario extends Perfil implements Observer {
     @Override
     public void recibirNotificacion(Notificacion notificacion) {
         System.out.println("Usuario " + this.getNombre() + " recibió: " + notificacion.getMensaje());
+        historialNotificaciones.add(notificacion);
     }
 
     public void agregarCuenta(CuentaBancaria cuentaNueva){
@@ -161,6 +158,8 @@ public class Usuario extends Perfil implements Observer {
     public void setListaCategorias(ArrayList<Categoria> listaCategorias) {
         this.listaCategorias = listaCategorias;
     }
-
+    public List<Notificacion> getHistorialNotificaciones() {
+        return historialNotificaciones;
+    }
 }
 

@@ -1,7 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
-
-import co.edu.uniquindio.poo.billeteravirtual.model.Identificable;
-import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 public class CuentaBancaria implements Identificable, ICuentaBancaria {
     private String id;

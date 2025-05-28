@@ -1,15 +1,12 @@
 package co.edu.uniquindio.poo.billeteravirtual.app;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
+import co.edu.uniquindio.poo.billeteravirtual.model.CuentaBancaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.Nullable;
 
 public class App extends Application {
     @Override

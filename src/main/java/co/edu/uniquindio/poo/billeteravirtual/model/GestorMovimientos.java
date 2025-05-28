@@ -1,5 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.gestores;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.util.ArrayList;
 

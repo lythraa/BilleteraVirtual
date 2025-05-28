@@ -1,7 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.gestores;
-import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancariaProxy;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.util.ArrayList;
 

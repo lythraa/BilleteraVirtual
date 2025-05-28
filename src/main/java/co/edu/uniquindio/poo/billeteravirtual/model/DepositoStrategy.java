@@ -1,7 +1,6 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.builder;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 
 /**
  * Estrategia concreta que representa un movimiento de tipo depósito.

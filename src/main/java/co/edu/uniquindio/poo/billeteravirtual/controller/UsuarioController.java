@@ -25,7 +25,8 @@ public class UsuarioController {
     private Label textoHolaUsuario;
 
     public void onContactenos() {
-        // tu lógica
+        stage = (Stage) textoHolaUsuario.getScene().getWindow();
+        GestorVistas.CambiarEscena(stage, "ContactoView.fxml", "Vista Contacto");
     }
 
     /**

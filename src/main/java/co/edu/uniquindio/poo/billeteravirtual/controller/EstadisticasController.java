@@ -47,6 +47,9 @@ public class EstadisticasController {
 
     private SistemaBilleteraFacade fachada = SistemaBilleteraFacade.getInstancia();
 
+    /**
+     * Método para inicializar datos
+     */
     @FXML
     public void initialize() {
         cargarChartMovimientosPorCategoria();
@@ -54,12 +57,18 @@ public class EstadisticasController {
         mostrarSaldoPromedioGeneral();
     }
 
+    /**
+     * Método para regresar a la pantalla anterior
+     */
     @FXML
     public void onVolver(){
         Stage stage = (Stage) labelSaldoPromedio.getScene().getWindow();
         GestorVistas.CambiarEscena(stage, "AdministradorView.fxml", "Vista Administrador");
     }
 
+    /**
+     * Método para cargar estadísticas por categoria
+     */
     private void cargarChartMovimientosPorCategoria() {
         chartMovimientosPorCategoria.getData().clear();
         Map<String, Double> datos = fachada.obtenerMovimientosPorCategoria();
@@ -70,6 +79,9 @@ public class EstadisticasController {
         }
     }
 
+    /**
+     * Método apra cargar estadísticas de usuarios con mas movimientos
+     */
     private void cargarChartUsuariosConMasMovimientos() {
         chartUsuariosConMasMovimientos.getData().clear();
         Map<String, Integer> datos = fachada.obtenerUsuariosConMasMovimientos(5); // top 5
@@ -84,6 +96,9 @@ public class EstadisticasController {
         chartUsuariosConMasMovimientos.getData().add(series);
     }
 
+    /**
+     * Método para mostrar el saldo promedio del saldo de todos los usuarios
+     */
     private void mostrarSaldoPromedioGeneral() {
         double saldo = fachada.calcularSaldoPromedioUsuarios();
         labelSaldoPromedio.setText("$ " + String.format("%,.2f", saldo));

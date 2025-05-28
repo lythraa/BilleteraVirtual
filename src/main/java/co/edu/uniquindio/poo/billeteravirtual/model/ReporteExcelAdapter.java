@@ -1,7 +1,5 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.adapter;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -9,6 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ReporteExcelAdapter implements ReporteExportable {
+    /**
+     * Implementación propia del método exportar reporte para hojas de cálculo
+     * @param usuario usuario en sesión
+     * @param rutaDestino ruta del pc a la cual se descargará el archivo
+     * @throws IOException si algo sale mal
+     */
     @Override
     public void exportarReporte(Usuario usuario, String rutaDestino) throws IOException {
         Workbook workbook = new XSSFWorkbook();

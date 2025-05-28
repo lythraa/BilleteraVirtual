@@ -1,8 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility;
-
-import co.edu.uniquindio.poo.billeteravirtual.app.UtilAlerta;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorCuentasBancarias;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Validador concreto dentro de la cadena de responsabilidad que verifica si la cuenta bancaria

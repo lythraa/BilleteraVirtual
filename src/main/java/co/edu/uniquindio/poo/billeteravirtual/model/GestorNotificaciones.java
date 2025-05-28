@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.observer;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,10 @@ public class GestorNotificaciones {
                 .add(obs);
     }
 
+    public void registrarEvento(String evento) {
+        suscriptoresPorEvento.computeIfAbsent(evento, k -> new ArrayList<>());
+    }
+
     public void eliminar(String evento, Observer obs) {
         List<Observer> lista = suscriptoresPorEvento.get(evento);
         if (lista != null) lista.remove(obs);
@@ -41,4 +45,15 @@ public class GestorNotificaciones {
     public Set<String> obtenerEventos() {
         return suscriptoresPorEvento.keySet();
     }
+
+    public Set<String> obtenerEventosPorUsuario(Observer obs) {
+        Set<String> eventosSuscritos = new HashSet<>();
+        for (Map.Entry<String, List<Observer>> entry : suscriptoresPorEvento.entrySet()) {
+            if (entry.getValue().contains(obs)) {
+                eventosSuscritos.add(entry.getKey());
+            }
+        }
+        return eventosSuscritos;
+    }
+
 }

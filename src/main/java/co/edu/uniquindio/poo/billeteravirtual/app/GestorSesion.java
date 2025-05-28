@@ -3,8 +3,8 @@ package co.edu.uniquindio.poo.billeteravirtual.app;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorAdministradores;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.GestorUsuarios;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorAdministradores;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorUsuarios;
 
 import java.util.ArrayList;
 import java.util.List;

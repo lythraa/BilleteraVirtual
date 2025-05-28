@@ -1,10 +1,6 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.proxy;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.app.GestorSesion;
-import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import co.edu.uniquindio.poo.billeteravirtual.model.Perfil;
-import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
-import co.edu.uniquindio.poo.billeteravirtual.model.exception.*;
 
 
 /**

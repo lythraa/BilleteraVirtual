@@ -1,22 +1,12 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExcelAdapter;
-import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReporteExportable;
-import co.edu.uniquindio.poo.billeteravirtual.model.adapter.ReportePDFService;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.DirectorMovimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.gestores.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collector;
 
 /**
  * Fachada que simplifica la interacción con los diferentes gestores

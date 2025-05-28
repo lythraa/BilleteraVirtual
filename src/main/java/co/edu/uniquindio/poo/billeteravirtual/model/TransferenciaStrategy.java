@@ -1,7 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.builder;
-
-import co.edu.uniquindio.poo.billeteravirtual.model.ChainOfResponsibility.*;
-import co.edu.uniquindio.poo.billeteravirtual.model.proxy.CuentaBancaria;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
 /**
  * Estrategia concreta que representa un movimiento de tipo transferencia.

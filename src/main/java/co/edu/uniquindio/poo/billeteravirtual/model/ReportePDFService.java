@@ -1,10 +1,5 @@
-package co.edu.uniquindio.poo.billeteravirtual.model.adapter;
+package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.DepositoStrategy;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.Movimiento;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.RetiroStrategy;
-import co.edu.uniquindio.poo.billeteravirtual.model.builder.TransferenciaStrategy;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -12,6 +7,12 @@ import java.io.IOException;
 
 public class ReportePDFService implements ReporteExportable {
 
+    /**
+     * Implementación propia método para exportar reportes en pdf
+     * @param usuario usuario en sesión
+     * @param rutaDestino ruta del pc a la cual se descargará el archivo
+     * @throws IOException
+     */
     @Override
     public void exportarReporte(Usuario usuario, String rutaDestino) throws IOException {
         PDDocument documento = new PDDocument();

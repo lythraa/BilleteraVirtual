@@ -6,12 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.MandarNotificacionController">
+<StackPane prefHeight="700.0" prefWidth="1200.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.NotificacionesController">
    <children>
-   
+
        <VBox spacing="20.0" StackPane.alignment="CENTER">
       <children>
-      
+
               <!-- Título -->
               <HBox spacing="20.0">
          <children>
@@ -26,39 +26,40 @@
                      </Label>
          </children>
               </HBox>
-      
+
               <!-- Contenido principal -->
               <HBox alignment="CENTER" spacing="30.0">
          <children>
-         
+
                      <!-- Lado izquierdo: Checkboxes para suscripciones -->
-                     <VBox prefHeight="569.0" prefWidth="350.0" spacing="15.0" styleClass="formulario-box">
+             <VBox prefHeight="569.0" prefWidth="350.0" spacing="15.0" styleClass="formulario-box">
+                 <padding>
+                     <Insets bottom="20.0" left="20.0" top="20.0" />
+                 </padding>
+                 <children>
+                     <Label styleClass="label-subtitle" text="Eventos disponibles">
                          <padding>
-                             <Insets bottom="20.0" left="20.0" top="20.0" />
+                             <Insets bottom="10.0" />
                          </padding>
-            <children>
-                            <Label styleClass="label-subtitle" text="Eventos disponibles">
-                                <padding>
-                                    <Insets bottom="10.0" />
-                                </padding>
-                            </Label>
-            
-                            <!-- VBox contenedor dinámico de CheckBoxes -->
-                            <VBox fx:id="contenedorEventos" spacing="10.0" />
-                        <CheckBox mnemonicParsing="false" text="CheckBox" />
-            
-                            <HBox alignment="CENTER">
-                                <VBox.margin>
-                                    <Insets top="20.0" />
-                                </VBox.margin>
-               <children>
-                                   <Button onAction="#onGuardarSuscripciones" styleClass="button" text="Guardar Suscripciones" />
-               </children>
-                            </HBox>
-            </children>
+                     </Label>
+
+                     <!-- Aquí van tus checks -->
+                     <VBox fx:id="contenedorEventos" spacing="10.0" styleClass="label-small">
                      </VBox>
-         
-                     <!-- Lado derecho: Notificaciones recibidas -->
+
+                     <HBox alignment="CENTER">
+                         <VBox.margin>
+                             <Insets top="20.0" />
+                         </VBox.margin>
+                         <children>
+                             <Button onAction="#onGuardarSuscripciones" styleClass="button" text="Guardar Suscripciones" />
+                         </children>
+                     </HBox>
+                 </children>
+             </VBox>
+
+
+             <!-- Lado derecho: Notificaciones recibidas -->
                      <VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="795.0" spacing="15.0">
             <children>
                             <Label styleClass="label-subtitle" text="Notificaciones Recibidas">
@@ -66,12 +67,17 @@
                                     <Insets bottom="10.0" top="10.0" />
                                 </padding>
                             </Label>
-            
-                            <ListView fx:id="listaNotificaciones" prefHeight="505.0" prefWidth="795.0" styleClass="table-view-custom" />
+
+                <TableView fx:id="tablaNotificaciones" prefHeight="200" prefWidth="400">
+                    <columns>
+                        <TableColumn fx:id="colMensaje" text="Mensaje" prefWidth="380"/>
+                    </columns>
+                </TableView>
+
             </children>
                      </VBox>
          </children>
-      
+
               </HBox>
       </children>
        </VBox>

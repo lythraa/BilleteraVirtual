@@ -1,9 +1,5 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.GestorNotificaciones;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.Notificacion;
-import co.edu.uniquindio.poo.billeteravirtual.model.observer.Observer;
-
 /**
  * Clase que representa un administrador del sistema.
  */
