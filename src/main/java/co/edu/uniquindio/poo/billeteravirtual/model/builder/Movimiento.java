@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * Implementa el patrón Builder para facilitar la creación de instancias complejas.
  * Incluye información de cuentas de origen y destino, monto, fecha, categoría, descripción y estrategia de procesamiento.
  */
-public class Movimiento implements Identificable {
+public class Movimiento implements Identificable, Cloneable {
 
     private final CuentaBancaria cuentaBancariaOrigen;
     private final CuentaBancaria cuentaBancariaDestino;
@@ -100,6 +100,15 @@ public class Movimiento implements Identificable {
         public Movimiento build() {
             if (estrategia == null) throw new IllegalStateException("Estrategia requerida");
             return new Movimiento(this);
+        }
+    }
+
+    @Override
+    public Movimiento clone() {
+        try {
+            return (Movimiento) super.clone(); // copia superficial (profundiza si es necesario)
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(); // no debería pasar si implementas Cloneable
         }
     }
 
